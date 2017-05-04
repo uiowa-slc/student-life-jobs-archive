@@ -23,3 +23,5 @@ if(Director::isLive()) {
 }
 
 Authenticator::set_default_authenticator('SAMLAuthenticator');
+
+SSViewer::set_theme('division-subtheme');
