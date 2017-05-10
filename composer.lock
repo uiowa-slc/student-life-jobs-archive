@@ -461,12 +461,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/StudentLifeMarketingAndDesign/division-project.git",
-                "reference": "188c2f1936f26b3fae53b155a920283c461f4d72"
+                "reference": "bc3c1b2e594e9681cbd2770c240b57f1dbb0bd70"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/StudentLifeMarketingAndDesign/division-project/zipball/188c2f1936f26b3fae53b155a920283c461f4d72",
-                "reference": "188c2f1936f26b3fae53b155a920283c461f4d72",
+                "url": "https://api.github.com/repos/StudentLifeMarketingAndDesign/division-project/zipball/bc3c1b2e594e9681cbd2770c240b57f1dbb0bd70",
+                "reference": "bc3c1b2e594e9681cbd2770c240b57f1dbb0bd70",
                 "shasum": ""
             },
             "require": {
@@ -502,7 +502,7 @@
                 "thisisbd/silverstripe-maintenance-mode": "*",
                 "unclecheese/betterbuttons": "1.3.*",
                 "unclecheese/display-logic": "*",
-                "unclecheese/eventcalendar": "*",
+                "unclecheese/eventcalendar": "1.*",
                 "undefinedoffset/sortablegridfield": "*",
                 "unisolutions/silverstripe-copybutton": "*"
             },
@@ -512,7 +512,7 @@
                 "source": "https://github.com/StudentLifeMarketingAndDesign/division-project/tree/4.0.x",
                 "issues": "https://github.com/StudentLifeMarketingAndDesign/division-project/issues"
             },
-            "time": "2017-05-09 21:09:50"
+            "time": "2017-05-10 14:11:44"
         },
         {
             "name": "md/rss-display",
@@ -2148,7 +2148,7 @@
         },
         {
             "name": "unclecheese/eventcalendar",
-            "version": "dev-master",
+            "version": "1.0.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/unclecheese/silverstripe-event-calendar.git",
