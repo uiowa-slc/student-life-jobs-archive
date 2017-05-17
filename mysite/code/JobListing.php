@@ -18,8 +18,8 @@ class JobListing extends Topic {
         $self =& $this;
         $parent = $self->Parent();
 		$departments = $parent instanceof Blog
-                ? $parent->Tags()
-                : BlogTag::get();
+                ? $parent->Departments()
+                : JobListingDepartment::get();
 
 		$departmentField = TagField::create(
                     'Departments',
