@@ -1,0 +1,21 @@
+.job-list{
+	margin: 0;
+}
+
+.job-list__item{
+	list-style-type: none;
+}
+
+
+.apply__container{
+	text-align: center;
+}
+.apply__button{
+	font-size: rem-calc(24);
+	padding: rem-calc(25) rem-calc(19);
+	display: inline-block;
+}
+
+.apply__content{
+	margin-top: rem-calc(20);
+}

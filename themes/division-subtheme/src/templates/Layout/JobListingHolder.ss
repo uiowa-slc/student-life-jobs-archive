@@ -78,9 +78,10 @@ $BlockArea(BeforeContent)
         </div>
        <hr />
       <% end_if %>
-      <% include JobListingHolderFeaturedTopics %>
-      <hr />
+     
       <% include JobListingHolderAllTopics %>
+      <hr />
+      <% include JobListingHolderFeaturedTopics %>
     $BlockArea(AfterContentConstrained)
     $Form
     <% if $ShowChildPages %>

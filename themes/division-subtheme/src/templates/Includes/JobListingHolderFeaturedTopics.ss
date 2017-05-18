@@ -1,5 +1,7 @@
+
 <h2>You might like:</h2>
   <ul class="featured-topic-grid row large-up-2">
+
   <% loop $BlogPosts.Sort('RAND()').Limit(4) %>
     <li class="column column-block">
       <a href="$Link">
