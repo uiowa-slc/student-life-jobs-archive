@@ -67,6 +67,22 @@ $BlockArea(BeforeContent)
               <p>No jobs are currently listed.</p>
           <% end_if %>           
         <% end_with %>
+      <% else_if $CurrentDepartment %>
+        <% with $CurrentDepartment %>
+          $Image
+          <h2>$Title</h2>
+          $Content
+          <h4>Jobs listed under {$Title}: </h4>
+           <% if $JobListings %>
+              <ul class="fa-ul"> 
+                <% loop $JobListings %>
+                  <li><i class="fa-li fa fa-file" aria-hidden="true"></i><a href="$Link">$Title</a></li>
+                <% end_loop %>
+              </ul>
+            <% else %>
+              <p>No jobs are currently listed.</p>
+          <% end_if %>           
+        <% end_with %>
       <% end_if %>
 
       <% if not $BackgroundImage %>
