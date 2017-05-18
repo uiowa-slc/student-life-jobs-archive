@@ -6,6 +6,10 @@ class JobListingHolder extends TopicHolder {
 
 	);
 
+    private static $has_many = array(
+        'Departments' => 'JobListingDepartment',
+    );
+
 	private static $allowed_children = array('JobListing');
 
     public function getLumberjackTitle() {

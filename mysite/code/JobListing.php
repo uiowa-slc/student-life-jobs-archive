@@ -55,26 +55,16 @@ class JobListing extends Topic {
         return Permission::checkMember($member, 'ADMIN');
     }
 
-    // public function onAfterWrite()
-    // {
-    //     parent::onAfterWrite();
+    public function onAfterWrite()
+    {
+        parent::onAfterWrite();
 
-    //     foreach ($this->Categories() as $category) {
-    //         /**
-    //          * @var BlogCategory $category
-    //          */
-    //         $category->BlogID = $this->ParentID;
-    //         $category->write();
-    //     }
-
-    //     foreach ($this->Tags() as $tag) {
-    //         /**
-    //          * @var BlogTag $tag
-    //          */
-    //         $tag->BlogID = $this->ParentID;
-    //         $tag->write();
-    //     }
-    // }
+        foreach ($this->Departments() as $department) {
+            
+            $department->JobListingHolderID = $this->ParentID;
+            $department->write();
+        }
+    }
 
 }
 

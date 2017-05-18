@@ -20,6 +20,10 @@ class JobListingDepartment extends DataObject implements CategorisationObject
         'Title' => 'Varchar(255)',
     );
 
+    private static $has_one = array(
+        'JobListingHolder' => 'JobListingHolder',
+    );
+
     private static $belongs_many_many = array(
         'JobListings' => 'JobListing',
     );
