@@ -21,7 +21,7 @@ class JobListingDepartment extends DataObject implements CategorisationObject
     );
 
     private static $has_one = array(
-        'JobListingHolder' => 'JobListingHolder',
+        'Blog' => 'JobListingHolder',
     );
 
     private static $belongs_many_many = array(

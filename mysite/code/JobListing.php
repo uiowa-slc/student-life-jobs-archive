@@ -61,7 +61,7 @@ class JobListing extends Topic {
 
         foreach ($this->Departments() as $department) {
             
-            $department->JobListingHolderID = $this->ParentID;
+            $department->BlogID = $this->ParentID;
             $department->write();
         }
     }

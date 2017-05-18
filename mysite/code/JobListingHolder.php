@@ -35,7 +35,9 @@ class JobListingHolder_Controller extends TopicHolder_Controller{
 	private static $allowed_actions = array(
         'department',
     );
-
+    private static $url_handlers = array(
+        'department/$Department!/$Rss' => 'department',
+    );
     public function department(){
         $department = $this->getCurrentDepartment();
 
@@ -69,5 +71,16 @@ class JobListingHolder_Controller extends TopicHolder_Controller{
         return null;
     }
 
-
+    /** 
+     * Returns true if the $Rss sub-action for categories/tags has been set to "rss"
+     */
+    private function isRSS() 
+    {
+        $rss = $this->request->param('Rss');
+        if(is_string($rss) && strcasecmp($rss, "rss") == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
