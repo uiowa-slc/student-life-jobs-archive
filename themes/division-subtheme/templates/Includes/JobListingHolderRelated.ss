@@ -1,0 +1,1 @@
+<% if $Related %> <h2>You might also try:</h2><ul class="featured-topic-grid row large-up-2"> <% loop $Related %> <li class="column column-block"><a href="$Link"><h3><i class="fa fa-file-o fa-lg fa-fw"></i>$Title</h3></a></li> <% end_loop %> </ul> <% end_if %>

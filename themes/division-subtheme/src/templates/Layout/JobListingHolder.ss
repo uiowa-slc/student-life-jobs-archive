@@ -57,9 +57,9 @@ $BlockArea(BeforeContent)
       <% else_if $CurrentCategory %>
         <% with $CurrentCategory %>
           $Image
-          <h2>$Title</h2>
+          <h2>Category: $Title</h2>
           $Content
-          <h4>Jobs listed under {$Title}: </h4>
+          <h4>Jobs listed under "{$Title}": </h4>
            <% if $BlogPosts %>
               <ul class="fa-ul"> 
                 <% loop $BlogPosts %>
@@ -88,7 +88,7 @@ $BlockArea(BeforeContent)
         <% end_with %>
       <% end_if %>
 
-      <% if not $BackgroundImage %>
+      <% if not $BackgroundImage || not $IsFilterActive %>
         <div class="topic-search__container row">
           <div class="large-9 columns large-centered">
             <h2 class="text-center">Search for a job below:</h2>
