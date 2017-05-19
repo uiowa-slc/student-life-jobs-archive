@@ -20,7 +20,7 @@ class JobListingHolder extends TopicHolder {
 		$fields = parent::getCMSFields();
 		$fields->removeByName('TopicQuestions');
         $self =& $this;
-        
+
         $departments = GridField::create(
             'Departments',
             _t('Blog.Departments', 'Departments'),
@@ -39,8 +39,6 @@ class JobListingHolder extends TopicHolder {
 	}
 
 
-
-
 }
 
 
@@ -57,16 +55,16 @@ class JobListingHolder_Controller extends TopicHolder_Controller{
     public function ThreeColumnedListings($column){
         $total = $this->getBlogPosts()->Count;
         $perColumn = floor($total / 3);
-
+        $allPosts = $this->getBlogPosts()->sort('Title ASC');
         switch ($column){
             case 1:
-                $posts = $this->getBlogPosts()->Limit(3);
+                $posts = $allPosts->Limit(3);
                 break;
             case 2:
-                $posts = $this->getBlogPosts()->Limit(3, 3 + $perColumn);
+                $posts = $allPosts->Limit(3, 3 + $perColumn);
                 break;
             case 3:
-                $posts = $this->getBlogPosts()->Limit(9999, 6 + $perColumn);
+                $posts = $allPosts->Limit(9999, 6 + $perColumn);
 
         }
 
