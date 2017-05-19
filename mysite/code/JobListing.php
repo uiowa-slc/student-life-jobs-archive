@@ -49,9 +49,14 @@ class JobListing extends Topic {
 		$fields->removeByName('IsFeatured');
 		$fields->removeByName('SummaryQuestions');
 		$fields->removeByName('Tags');
+		$fields->removeByName('Tags');
+
 		$fields->removeByNaMe('ExternalURL');
 		$fields->removeByName('Content');
 		$fields->removeByName('LayoutType');
+
+
+		$fields->renameField('Title', 'Job title');
 
 		$fields->addFieldToTab('Root.Main', TextField::create('PayRate','Rate of pay'));
 		$fields->addFieldToTab('Root.Main', TextField::create('Location','Location of position (physical location, not department)'));

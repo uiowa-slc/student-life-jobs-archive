@@ -33,13 +33,17 @@ class JobListingDepartment extends DataObject implements CategorisationObject
     );
 
     
-    public function JobListing()
+    public function JobListings()
     {
         $jobListings = parent::JobListings();
 
         $this->extend("updateGetJobListings", $jobListings);
 
         return $jobListings;
+    }
+
+    public function BlogPosts(){
+        return $this->JobListings();
     }
 
     /**

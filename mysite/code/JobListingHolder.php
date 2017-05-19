@@ -19,6 +19,22 @@ class JobListingHolder extends TopicHolder {
 	public function getCMSFields(){
 		$fields = parent::getCMSFields();
 		$fields->removeByName('TopicQuestions');
+        $self =& $this;
+        
+        $departments = GridField::create(
+            'Departments',
+            _t('Blog.Departments', 'Departments'),
+            $self->Departments(),
+            GridFieldCategorisationConfig::create(15, $self->Departments()->sort('Title'), 'JobListingDepartment', 'Departments', 'BlogPosts')
+        );
+
+        /**
+         * @var FieldList $fields
+         */
+        $fields->addFieldsToTab('Root.Categorisation', array(
+            $departments
+        ));
+
 		return $fields;
 	}
 
@@ -90,7 +106,7 @@ class JobListingHolder_Controller extends TopicHolder_Controller{
     }
 
     /** 
-     * Returns true if the $Rss sub-action for categories/tags has been set to "rss"
+     * Returns true if the $Rss sub-action for categories/departments has been set to "rss"
      */
     private function isRSS() 
     {
