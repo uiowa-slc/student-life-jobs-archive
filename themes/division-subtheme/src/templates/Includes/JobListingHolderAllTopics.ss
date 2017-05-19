@@ -15,10 +15,13 @@
           <div class="column column-block">
             <h3>$Title</h3>
             <% if $BlogPosts %>
-                <ul class="job-list fa-ul">
-                <% loop $BlogPosts %>
-                  <li class="job-list__item"><i class="fa fa-file" aria-hidden="true"></i> <a href="$Link">$Title.LimitCharacters(20)</a></li>
+              <ul class="job-list">
+              <% loop $BlogPosts.Limit(5) %>
+                  <li class="job-list__item"><i class="fa fa-file" aria-hidden="true"></i><a href="$Link">$Title.LimitCharacters(20)</a></li>
                 <% end_loop %>
+                <% if $BlogPosts.Count > 5 %>
+                 <li class="job-list__item"><a href="$Up.Link">See more...</a></li>
+                <% end_if %>
                 </ul>
               <% else %>
                 <p>No jobs are currently listed.</p>
@@ -31,15 +34,18 @@
     <h2 class="job-list__heading">Job listings by department:</h2>
       <% loop $Departments.Sort('Title ASC') %>
         <h3>$Title</h3>
-        <% if $JobListings %>
-          <ul class="job-list fa-ul"> 
-            <% loop $JobListings %>
-              <li class="job-list__item"><i class="fa fa-file" aria-hidden="true"></i> <a href="$Link">$Title.LimitCharacters(20)</a></li>
-            <% end_loop %>
-          </ul>
-        <% else %>
-          <p>No jobs are currently listed.</p>
-        <% end_if %>
+            <% if $JobListings %>
+              <ul class="job-list">
+              <% loop $JobListings.Limit(5) %>
+                  <li class="job-list__item"><i class="fa fa-file" aria-hidden="true"></i><a href="$Link">$Title</a></li>
+                <% end_loop %>
+                <% if $JobListings.Count > 5 %>
+                  <li class="job-list__item"><a href="$Up.Link">See more...</a></li>
+                <% end_if %>
+                </ul>
+              <% else %>
+                <p>No jobs are currently listed.</p>
+            <% end_if %>
       <% end_loop %>
   </div>
   <div class="tabs-panel" id="panel3">

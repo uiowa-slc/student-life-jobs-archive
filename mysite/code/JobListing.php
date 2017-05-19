@@ -114,7 +114,9 @@ class JobListing extends Topic {
 			}
 
 		}
+		$thisEntry = $entries->filter(array('ID' => $this->ID))->First();
 
+		$entries->remove($thisEntry);
 		if($entries->count() > 1){
 			$entries->removeDuplicates();
 		}

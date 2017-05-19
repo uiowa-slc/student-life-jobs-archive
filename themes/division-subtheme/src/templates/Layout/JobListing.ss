@@ -60,6 +60,13 @@ $Header
 			<% include JobListingDeptsCategories %>
 			<% include JobListingHolderRelated %>
 			<% include JobListingStatement %>
+			<h2>More job listings:</h2>
+			<% with $SearchForm %>
+	        	<% include TopicSearchForm %>
+	        <% end_with %>
+			<% with $Parent %>
+			<% include JobListingHolderAllTopics %>
+			<% end_with %>
 			$BlockArea(AfterContentConstrained)
 			$Form
 

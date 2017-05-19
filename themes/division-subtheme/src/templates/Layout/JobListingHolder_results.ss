@@ -25,11 +25,11 @@ $BlockArea(BeforeContent)
         <% if $Query %>
           <h2>Search results for "<em>{$Query}</em>"</h2>
           <% if $Results %>
-          <ul class="large-block-grid-2">
+          <ul class="job-list">
               <% loop $Results %>
-                <li>
-                  <h3><i class="fa fa-file-text-o fa-lg fa-fw"></i><a href="$Link">$Title</a></h3>
-                  <p>$Content.LimitCharacters(100)</p>
+                <li class="job-list__item">
+                  <h3><i class="fa fa-file"></i> <a href="$Link">$Title</a></h3>
+
                 </li>
               <% end_loop %>
           </ul>
@@ -37,14 +37,14 @@ $BlockArea(BeforeContent)
             <p>No results found for "<em>{$Query}</em>."</p>
           <% end_if %>
         <% else %>
-
+          <p>No search term specified, please type one in below:</p>
         <% end_if %>
         <hr />
         <% with $SearchForm %>
         <% include TopicSearchForm %>
         <% end_with %>
 
-        <% include JobListingHolderFeaturedTopics %>
+        <% include JobListingHolderAllTopics %>
     </div>
     $BlockArea(AfterContentConstrained)
     $Form

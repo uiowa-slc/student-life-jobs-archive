@@ -78,7 +78,7 @@ $BlockArea(BeforeContent)
           <h4>Jobs listed under {$Title}: </h4>
            <% if $JobListings %>
               <ul class="fa-ul"> 
-                <% loop $JobListings %>
+                <% loop $JobListings.Limit(5) %>
                   <li><i class="fa-li fa fa-file" aria-hidden="true"></i><a href="$Link">$Title</a></li>
                 <% end_loop %>
               </ul>
