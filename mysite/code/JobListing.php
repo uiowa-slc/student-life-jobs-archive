@@ -44,19 +44,21 @@ class JobListing extends Topic {
                     ->setShouldLazyLoad(true);
 
 		$fields->addFieldToTab("blog-admin-sidebar", $departmentField);
-
-		$fields->removeByName('TopicQuestions');
+		$fields->removeByName('Authors');
+		$fields->removeByName('Questions');
+		$fields->removeByName('IsFeatured');
+		$fields->removeByName('SummaryQuestions');
 		$fields->removeByName('Tags');
 		$fields->removeByNaMe('ExternalURL');
 		$fields->removeByName('Content');
-
+		$fields->removeByName('LayoutType');
 
 		$fields->addFieldToTab('Root.Main', TextField::create('PayRate','Rate of pay'));
 		$fields->addFieldToTab('Root.Main', TextField::create('Location','Location of position (physical location, not department)'));
 		$fields->addFieldToTab('Root.Main', TextField::create('NextStepLink','Next step link (please include http://)'));
 		$fields->addFieldToTab('Root.Main', TextField::create('NextStepTitle','Next step link title (default: Learn more and apply)'));
-		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('BasicJobFunction','Basic job function')->setRows(2));
-		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('LearningOutcomes','What you will learn')->setRows(2));
+		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('BasicJobFunction','Basic job function'));
+		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('LearningOutcomes','What you will learn'));
 
 		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('Content','Additional content or instructions needed in order to apply'));
 

@@ -18,12 +18,10 @@ class JobListingHolder extends TopicHolder {
 
 	public function getCMSFields(){
 		$fields = parent::getCMSFields();
-		//$fields->addFieldToTab("Root.Settings", new CheckboxField('ExpandAllTopicsByDefault', 'Expand all topics by default'));
-
 		$fields->removeByName('TopicQuestions');
 		return $fields;
-
 	}
+
 
 
 
@@ -35,9 +33,29 @@ class JobListingHolder_Controller extends TopicHolder_Controller{
 	private static $allowed_actions = array(
         'department',
     );
+
     private static $url_handlers = array(
         'department/$Department!/$Rss' => 'department',
     );
+
+    public function ThreeColumnedListings($column){
+        $total = $this->getBlogPosts()->Count;
+        $perColumn = floor($total / 3);
+
+        switch ($column){
+            case 1:
+                $posts = $this->getBlogPosts()->Limit(3);
+                break;
+            case 2:
+                $posts = $this->getBlogPosts()->Limit(3, 3 + $perColumn);
+                break;
+            case 3:
+                $posts = $this->getBlogPosts()->Limit(9999, 6 + $perColumn);
+
+        }
+
+        return $posts; 
+    }
     public function department(){
         $department = $this->getCurrentDepartment();
 
