@@ -1,9 +1,7 @@
 $Header
 <main class="main-content__container" id="main-content__container">
-<% if $IsFilterActive %>
-  
-<% else %>
-   <% if $BackgroundImage %>
+
+   <% if $BackgroundImage && not $IsFilterActive %>
     <div class="background-image" data-interchange="[$BackgroundImage.CroppedFocusedImage(600,400).URL, small], [$BackgroundImage.CroppedFocusedImage(1600,500).URL, medium]">
         <div class="column row">
           <div class="background-image__header background-image__header--has-content">
@@ -19,15 +17,24 @@ $Header
     </div>
   <% end_if %>
 
-<% end_if %>
   <!-- Background Image Feature -->
 
   $Breadcrumbs
 
-<% if not $BackgroundImage || not $IsFilterActive %>
+<% if not $BackgroundImage || $IsFilterActive %>
   <div class="column row">
     <div class="main-content__header">
+    <% if $IsFilterActive %>
+      <% if $CurrentCategory %>
+        <h1>Category: $CurrentCategory.Title</h1>
+      <% else_if $CurrentDepartment %>
+        <h1>Department: $CurrentDepartment.Title</h1>
+      <% end_if %>
+      
+    <% else %>
       <h1>$Title</h1>
+    <% end_if %>
+      
     </div>
   </div>
 <% end_if %>
@@ -41,25 +48,10 @@ $BlockArea(BeforeContent)
     <div class="main-content__text">
       $Content
     </div>
-      <% if $CurrentTag %>
-        <% with $CurrentTag %>
-          <h2>Jobs tagged with "<em>$Title</em>":</h2>
-            <ul>
-            <% loop $PaginatedList %>
-              <li>
-                <h3><i class="fa fa-file-o fa-lg fa-fw" aria-hidden="true"></i><a href="$Link">$Title</a></h3>
-                <p>$Content.LimitCharacters(100)</p>
-              </li>
-            <% end_loop %>
-            </ul>
-        <% end_with %>
-        <hr />
-      <% else_if $CurrentCategory %>
+      <% if $CurrentCategory %>
         <% with $CurrentCategory %>
-          $Image
-          <h2>Category: $Title</h2>
           $Content
-          <h4>Jobs listed under "{$Title}": </h4>
+          <h2>Jobs listed under "{$Title}": </h2>
            <% if $BlogPosts %>
               <ul class="fa-ul"> 
                 <% loop $BlogPosts %>
@@ -72,10 +64,8 @@ $BlockArea(BeforeContent)
         <% end_with %>
       <% else_if $CurrentDepartment %>
         <% with $CurrentDepartment %>
-          $Image
-          <h2>$Title</h2>
           $Content
-          <h4>Jobs listed under {$Title}: </h4>
+          <h2>Jobs listed under {$Title}: </h2>
            <% if $JobListings %>
               <ul class="fa-ul"> 
                 <% loop $JobListings.Limit(5) %>
@@ -88,7 +78,7 @@ $BlockArea(BeforeContent)
         <% end_with %>
       <% end_if %>
 
-      <% if not $BackgroundImage || not $IsFilterActive %>
+      <% if not $BackgroundImage || $IsFilterActive %>
         <div class="topic-search__container row">
           <div class="large-9 columns large-centered">
             <h2 class="text-center">Search for a job below:</h2>
