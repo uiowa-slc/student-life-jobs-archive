@@ -17,7 +17,7 @@
             <% if $BlogPosts %>
                 <ul class="job-list fa-ul">
                 <% loop $BlogPosts %>
-                  <li class="job-list__item"><i class="fa fa-file" aria-hidden="true"></i> <a href="$Link">$Title</a></li>
+                  <li class="job-list__item"><i class="fa fa-file" aria-hidden="true"></i> <a href="$Link">$Title.LimitCharacters(20)</a></li>
                 <% end_loop %>
                 </ul>
               <% else %>
@@ -29,12 +29,12 @@
   </div>
   <div class="tabs-panel" id="panel2">
     <h2 class="job-list__heading">Job listings by department:</h2>
-      <% loop $Departments %>
+      <% loop $Departments.Sort('Title ASC') %>
         <h3>$Title</h3>
         <% if $JobListings %>
           <ul class="job-list fa-ul"> 
             <% loop $JobListings %>
-              <li class="job-list__item"><i class="fa fa-file" aria-hidden="true"></i> <a href="$Link">$Title</a></li>
+              <li class="job-list__item"><i class="fa fa-file" aria-hidden="true"></i> <a href="$Link">$Title.LimitCharacters(20)</a></li>
             <% end_loop %>
           </ul>
         <% else %>
@@ -48,21 +48,21 @@
         <div class="column large-4">
           <ul class="job-list fa-ul">
             <% loop $ThreeColumnedListings(1) %>
-              <li class="job-list__item"><i class="fa fa-file" aria-hidden="true"></i> <a href="$Link">$Title</a></li>
+              <li class="job-list__item"><i class="fa fa-file" aria-hidden="true"></i> <a href="$Link">$Title.LimitCharacters(20)</a></li>
             <% end_loop %>
           </ul>
         </div> 
         <div class="column large-4">
           <ul class="job-list fa-ul">
           <% loop $ThreeColumnedListings(2) %>
-            <li class="job-list__item"><i class="fa fa-file" aria-hidden="true"></i> <a href="$Link">$Title</a></li>
+            <li class="job-list__item"><i class="fa fa-file" aria-hidden="true"></i> <a href="$Link">$Title.LimitCharacters(20)</a></li>
           <% end_loop %>
           </ul>
         </div>
         <div class="column large-4">
           <ul>
           <% loop $ThreeColumnedListings(3) %>
-            <li class="job-list__item"><i class="fa fa-file" aria-hidden="true"></i> <a href="$Link">$Title</a></li>
+            <li class="job-list__item"><i class="fa fa-file" aria-hidden="true"></i> <a href="$Link">$Title.LimitCharacters(20)</a></li>
           <% end_loop %>
           </ul>
         </div> 

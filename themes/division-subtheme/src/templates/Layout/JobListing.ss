@@ -57,8 +57,8 @@ $Header
 					</ul>
 				<% end_if %>
 			</div>
-			<% include TagsCategories %>
-			<% include JobListingHolderFeaturedTopics %>
+			<% include JobListingDeptsCategories %>
+			<% include JobListingHolderRelated %>
 			<% include JobListingStatement %>
 			$BlockArea(AfterContentConstrained)
 			$Form

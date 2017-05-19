@@ -87,7 +87,12 @@ class JobListingHolder_Controller extends TopicHolder_Controller{
 
         return null;
     }
-
+    public function IsFilterActive(){
+        if($this->getCurrentCategory() || $this->getCurrentDepartment() || $this->getCurrentTag()){
+            return true;
+        }
+        return false;
+    }
     public function getCurrentDepartment()
     {
         /**

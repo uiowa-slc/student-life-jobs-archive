@@ -1,10 +1,10 @@
 $Header
 <main class="main-content__container" id="main-content__container">
-
-  <!-- Background Image Feature -->
-  <% if $BackgroundImage %>
+<% if $IsFilterActive %>
+  
+<% else %>
+   <% if $BackgroundImage %>
     <div class="background-image" data-interchange="[$BackgroundImage.CroppedFocusedImage(600,400).URL, small], [$BackgroundImage.CroppedFocusedImage(1600,500).URL, medium]">
-      <%-- <% if $LayoutType == "MainImage" %> --%>
         <div class="column row">
           <div class="background-image__header background-image__header--has-content">
             <h1 class="background-image__title text-center">$Title</h1>
@@ -16,12 +16,15 @@ $Header
             </div>           
           </div>
         </div>
-      <%-- <% end_if %> --%>
     </div>
   <% end_if %>
+
+<% end_if %>
+  <!-- Background Image Feature -->
+
   $Breadcrumbs
 
-<% if not $BackgroundImage %>
+<% if not $BackgroundImage || not $IsFilterActive %>
   <div class="column row">
     <div class="main-content__header">
       <h1>$Title</h1>
@@ -33,7 +36,7 @@ $BlockArea(BeforeContent)
 
 <div class="row">
 
-  <article role="main" class="main-content main-content--with-padding <% if $Children || $Menu(2) || $SidebarBlocks ||  $SidebarView.Widgets %>main-content--with-sidebar<% else %>main-content--full-width<% end_if %>">
+  <article role="main" class="main-content <% if not $IsFilterActive %>main-content--with-padding<% end_if %> <% if $Children || $Menu(2) || $SidebarBlocks ||  $SidebarView.Widgets %>main-content--with-sidebar<% else %>main-content--full-width<% end_if %>">
     $BlockArea(BeforeContentConstrained)
     <div class="main-content__text">
       $Content
