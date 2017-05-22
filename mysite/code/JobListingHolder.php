@@ -19,6 +19,7 @@ class JobListingHolder extends TopicHolder {
 	public function getCMSFields(){
 		$fields = parent::getCMSFields();
 		$fields->removeByName('TopicQuestions');
+		$fields->removeByName('Tags');
         $self =& $this;
 
         $departments = GridField::create(

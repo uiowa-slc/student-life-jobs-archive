@@ -20,7 +20,7 @@
                   <li class="job-list__item"><i class="fa fa-file" aria-hidden="true"></i><a href="$Link">$Title.LimitCharacters(20)</a></li>
                 <% end_loop %>
                 <% if $BlogPosts.Count > 5 %>
-                 <li class="job-list__item"><a href="$Up.Link">See more...</a></li>
+                 <li class="job-list__item"><a href="$Link">See more...</a></li>
                 <% end_if %>
                 </ul>
               <% else %>
@@ -40,7 +40,9 @@
                   <li class="job-list__item"><i class="fa fa-file" aria-hidden="true"></i><a href="$Link">$Title</a></li>
                 <% end_loop %>
                 <% if $JobListings.Count > 5 %>
-                  <li class="job-list__item"><a href="$Up.Link">See more...</a></li>
+                  <li class="job-list__item"><a href="$Link">See more...</a></li>
+                <% else %>
+                  <li class="job-list__item"><a href="$Link">Learn more about $Title</a></li>
                 <% end_if %>
                 </ul>
               <% else %>

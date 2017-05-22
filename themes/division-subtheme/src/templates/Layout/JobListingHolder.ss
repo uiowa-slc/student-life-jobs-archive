@@ -43,7 +43,7 @@ $BlockArea(BeforeContent)
 
 <div class="row">
 
-  <article role="main" class="main-content <% if not $IsFilterActive %>main-content--with-padding<% end_if %> <% if $Children || $Menu(2) || $SidebarBlocks ||  $SidebarView.Widgets %>main-content--with-sidebar<% else %>main-content--full-width<% end_if %>">
+  <article role="main" class="main-content main-content--with-padding <% if $Children || $Menu(2) || $SidebarBlocks ||  $SidebarView.Widgets %>main-content--with-sidebar<% else %>main-content--full-width<% end_if %>">
     $BlockArea(BeforeContentConstrained)
     <div class="main-content__text">
       $Content
@@ -55,7 +55,7 @@ $BlockArea(BeforeContent)
            <% if $BlogPosts %>
               <ul class="fa-ul"> 
                 <% loop $BlogPosts %>
-                  <li><i class="fa-li fa fa-file" aria-hidden="true"></i><a href="$Link">$Title</a></li>
+                  <li><h3><i class="fa-li fa fa-file" aria-hidden="true"></i><a href="$Link">$Title</a></h3></li>
                 <% end_loop %>
               </ul>
             <% else %>
@@ -69,7 +69,7 @@ $BlockArea(BeforeContent)
            <% if $JobListings %>
               <ul class="fa-ul"> 
                 <% loop $JobListings.Limit(5) %>
-                  <li><i class="fa-li fa fa-file" aria-hidden="true"></i><a href="$Link">$Title</a></li>
+                  <li><h3><i class="fa-li fa fa-file" aria-hidden="true"></i><a href="$Link">$Title</a></h3></li>
                 <% end_loop %>
               </ul>
             <% else %>

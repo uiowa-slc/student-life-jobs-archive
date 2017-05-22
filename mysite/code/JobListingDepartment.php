@@ -18,6 +18,7 @@ class JobListingDepartment extends DataObject implements CategorisationObject
 
     private static $db = array(
         'Title' => 'Varchar(255)',
+        'Content' => 'HTMLText'
     );
 
     private static $has_one = array(
@@ -52,7 +53,8 @@ class JobListingDepartment extends DataObject implements CategorisationObject
     public function getCMSFields()
     {
         $fields = new FieldList(
-            TextField::create('Title', _t('JobListingDepartment.Title', 'Title'))
+            TextField::create('Title', _t('JobListingDepartment.Title', 'Title')),
+            HTMLEditorField::create('Content', 'Description of department')
         );
 
         $this->extend('updateCMSFields', $fields);
@@ -67,6 +69,7 @@ class JobListingDepartment extends DataObject implements CategorisationObject
      */
     public function getLink()
     {
+        
         return Controller::join_links($this->Blog()->Link(), 'department', $this->URLSegment);
     }
 

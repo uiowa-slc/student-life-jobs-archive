@@ -461,12 +461,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/StudentLifeMarketingAndDesign/division-project.git",
-                "reference": "88f29b72e4e6c580cfb0bca9623591aa116532a6"
+                "reference": "9f00e2827d19c91722aaad8207362cfd6374f442"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/StudentLifeMarketingAndDesign/division-project/zipball/88f29b72e4e6c580cfb0bca9623591aa116532a6",
-                "reference": "88f29b72e4e6c580cfb0bca9623591aa116532a6",
+                "url": "https://api.github.com/repos/StudentLifeMarketingAndDesign/division-project/zipball/9f00e2827d19c91722aaad8207362cfd6374f442",
+                "reference": "9f00e2827d19c91722aaad8207362cfd6374f442",
                 "shasum": ""
             },
             "require": {
@@ -511,7 +511,7 @@
                 "source": "https://github.com/StudentLifeMarketingAndDesign/division-project/tree/2.0.x-topicholder",
                 "issues": "https://github.com/StudentLifeMarketingAndDesign/division-project/issues"
             },
-            "time": "2017-05-19 04:26:26"
+            "time": "2017-05-22 13:43:19"
         },
         {
             "name": "md/rss-display",
@@ -697,16 +697,16 @@
         },
         {
             "name": "onelogin/php-saml",
-            "version": "2.10.6",
+            "version": "2.10.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/onelogin/php-saml.git",
-                "reference": "d7f3d9f9c58d215ee6d75736a85c2692f6fbe45b"
+                "reference": "b41f731803f303879f50fa76276908088197731c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/onelogin/php-saml/zipball/d7f3d9f9c58d215ee6d75736a85c2692f6fbe45b",
-                "reference": "d7f3d9f9c58d215ee6d75736a85c2692f6fbe45b",
+                "url": "https://api.github.com/repos/onelogin/php-saml/zipball/b41f731803f303879f50fa76276908088197731c",
+                "reference": "b41f731803f303879f50fa76276908088197731c",
                 "shasum": ""
             },
             "require": {
@@ -747,7 +747,7 @@
                 "onelogin",
                 "saml"
             ],
-            "time": "2017-05-17 23:53:40"
+            "time": "2017-05-19 10:32:03"
         },
         {
             "name": "ramsey/array_column",

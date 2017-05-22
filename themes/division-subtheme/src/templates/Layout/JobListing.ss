@@ -24,9 +24,9 @@ $Header
 			<div class="main-content__text">
 				<div class="job-single__basic-info">
 				<% if $PayRate %><p><span class="job-single__descriptor">Rate of pay:</span> $PayRate</p><% end_if %>
-				<% if $Location %><p><span class="job-single__descriptor">Location:</span> $Location</p><% end_if %>
+				<% if $Location %><p><span class="job-single__descriptor">Work location:</span> $Location</p><% end_if %>
 				</div>
-			
+				<% include JobListingDeptsCategories %>
 				<% if $BasicJobFunction %>
 		
 						<h2>Basic job function</h2>
@@ -39,7 +39,7 @@ $Header
 						$LearningOutcomes
 		
 				<% end_if %>
-		
+				
 				<% if $NextStepLink %>
 					<div class="apply__container">
 						<a href="$NextStepLink" class="button apply__button"><% if $NextStepTitle %>$NextStepTitle<% else %>Next step<% end_if %></a>
@@ -57,7 +57,7 @@ $Header
 					</ul>
 				<% end_if %>
 			</div>
-			<% include JobListingDeptsCategories %>
+			
 			<% include JobListingHolderRelated %>
 			<% include JobListingStatement %>
 			<h2>More job listings:</h2>
