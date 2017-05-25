@@ -461,12 +461,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/StudentLifeMarketingAndDesign/division-project.git",
-                "reference": "8f685ee1cae45e158b304c60095e1032ace4fcc5"
+                "reference": "8a14716d6c191d023f5b4fd221864eaf5249c1b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/StudentLifeMarketingAndDesign/division-project/zipball/8f685ee1cae45e158b304c60095e1032ace4fcc5",
-                "reference": "8f685ee1cae45e158b304c60095e1032ace4fcc5",
+                "url": "https://api.github.com/repos/StudentLifeMarketingAndDesign/division-project/zipball/8a14716d6c191d023f5b4fd221864eaf5249c1b6",
+                "reference": "8a14716d6c191d023f5b4fd221864eaf5249c1b6",
                 "shasum": ""
             },
             "require": {
@@ -481,6 +481,7 @@
                 "php": ">=5.3.2",
                 "sheadawson/quickaddnew": "*",
                 "sheadawson/silverstripe-blocks": "1.1.1",
+                "silverstripe-australia/addressable": "*",
                 "silverstripe-australia/gridfieldextensions": "1.4.*",
                 "silverstripe-themes/simple": "*",
                 "silverstripe/activedirectory": "3.*",
@@ -511,7 +512,7 @@
                 "source": "https://github.com/StudentLifeMarketingAndDesign/division-project/tree/2.0.x-topicholder",
                 "issues": "https://github.com/StudentLifeMarketingAndDesign/division-project/issues"
             },
-            "time": "2017-05-25 20:50:04"
+            "time": "2017-05-25 20:53:44"
         },
         {
             "name": "md/rss-display",
@@ -876,6 +877,55 @@
                 "widgets"
             ],
             "time": "2016-11-08 22:48:10"
+        },
+        {
+            "name": "silverstripe-australia/addressable",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/silverstripe-australia/silverstripe-addressable.git",
+                "reference": "2dbd6f7013561e4135850ee81999ece22ca73498"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/silverstripe-australia/silverstripe-addressable/zipball/2dbd6f7013561e4135850ee81999ece22ca73498",
+                "reference": "2dbd6f7013561e4135850ee81999ece22ca73498",
+                "shasum": ""
+            },
+            "require": {
+                "silverstripe/framework": "3.*"
+            },
+            "replace": {
+                "ajshort/silverstripe-addressable": "self.version"
+            },
+            "type": "silverstripe-module",
+            "extra": {
+                "installer-name": "addressable",
+                "branch-alias": {
+                    "dev-master": "1.2.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Andrew Short",
+                    "email": "andrewjshort@gmail.com"
+                },
+                {
+                    "name": "Marcus Nyeholt",
+                    "email": "nyeholt@silverstripe.com.au"
+                }
+            ],
+            "description": "SilverStripe addressable and geocoding module",
+            "keywords": [
+                "addressable",
+                "geocoding",
+                "silverstripe"
+            ],
+            "time": "2017-01-18 23:38:23"
         },
         {
             "name": "silverstripe-australia/gridfieldextensions",
