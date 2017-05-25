@@ -461,12 +461,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/StudentLifeMarketingAndDesign/division-project.git",
-                "reference": "9f00e2827d19c91722aaad8207362cfd6374f442"
+                "reference": "8f685ee1cae45e158b304c60095e1032ace4fcc5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/StudentLifeMarketingAndDesign/division-project/zipball/9f00e2827d19c91722aaad8207362cfd6374f442",
-                "reference": "9f00e2827d19c91722aaad8207362cfd6374f442",
+                "url": "https://api.github.com/repos/StudentLifeMarketingAndDesign/division-project/zipball/8f685ee1cae45e158b304c60095e1032ace4fcc5",
+                "reference": "8f685ee1cae45e158b304c60095e1032ace4fcc5",
                 "shasum": ""
             },
             "require": {
@@ -511,7 +511,7 @@
                 "source": "https://github.com/StudentLifeMarketingAndDesign/division-project/tree/2.0.x-topicholder",
                 "issues": "https://github.com/StudentLifeMarketingAndDesign/division-project/issues"
             },
-            "time": "2017-05-22 13:43:19"
+            "time": "2017-05-25 20:50:04"
         },
         {
             "name": "md/rss-display",
@@ -1736,12 +1736,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-userforms.git",
-                "reference": "6fd952c737b9517f45c50a592f50aad7a4a2f65f"
+                "reference": "ec2b012eedc92c45493259350f7c248502250f76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-userforms/zipball/6fd952c737b9517f45c50a592f50aad7a4a2f65f",
-                "reference": "6fd952c737b9517f45c50a592f50aad7a4a2f65f",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-userforms/zipball/ec2b012eedc92c45493259350f7c248502250f76",
+                "reference": "ec2b012eedc92c45493259350f7c248502250f76",
                 "shasum": ""
             },
             "require": {
@@ -1792,7 +1792,7 @@
                 "silverstripe",
                 "userforms"
             ],
-            "time": "2017-05-15 06:03:51"
+            "time": "2017-05-24 06:31:25"
         },
         {
             "name": "silverstripe/widgets",
