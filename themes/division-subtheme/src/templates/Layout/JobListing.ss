@@ -61,7 +61,7 @@ $Header
 			<% include JobListingHolderRelated %>
 			<% include JobListingStatement %>
 			<h2>More job listings:</h2>
-			<% with $SearchForm %>
+			<% with $TopicSearchForm %>
 	        	<% include TopicSearchForm %>
 	        <% end_with %>
 			<% with $Parent %>

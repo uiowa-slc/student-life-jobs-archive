@@ -45,11 +45,12 @@ $BlockArea(BeforeContent)
           <p>No search term specified, please type one in below:</p>
         <% end_if %>
         <hr />
-        <% with $SearchForm %>
-        <% include TopicSearchForm %>
+        <% with $TopicSearchForm %>
+          <% include TopicSearchForm %>
         <% end_with %>
-
-        <% include JobListingHolderAllTopics %>
+        <% with $Holder %>
+          <% include JobListingHolderAllTopics %>
+        <% end_with %>
     </div>
     $BlockArea(AfterContentConstrained)
     $Form
