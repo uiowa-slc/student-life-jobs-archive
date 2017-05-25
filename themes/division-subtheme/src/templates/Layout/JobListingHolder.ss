@@ -55,7 +55,14 @@ $BlockArea(BeforeContent)
            <% if $BlogPosts %>
               <ul class="fa-ul"> 
                 <% loop $BlogPosts %>
-                  <li><h3><i class="fa-li fa fa-file" aria-hidden="true"></i><a href="$Link">$Title</a></h3></li>
+                  <li class="job-list__item">
+                    <a href="$Link">
+                      <h3><i class="fa fa-file" aria-hidden="true"></i> $Title</h3>
+                      <p class="bloglistitem__category">
+                        <% loop $Departments.Limit(1) %><span href="$URL" class="bloglistitem__category">$Title</span><% end_loop %>
+                      </p>
+                    </a>
+                  </li>
                 <% end_loop %>
               </ul>
             <% else %>
@@ -67,9 +74,16 @@ $BlockArea(BeforeContent)
           $Content
           <h2>Jobs listed under {$Title}: </h2>
            <% if $JobListings %>
-              <ul class="fa-ul"> 
+              <ul class="job-list"> 
                 <% loop $JobListings.Limit(5) %>
-                  <li><h3><i class="fa-li fa fa-file" aria-hidden="true"></i><a href="$Link">$Title</a></h3></li>
+                  <li class="job-list__item">
+                    <a href="$Link">
+                      <h3><i class="fa fa-file" aria-hidden="true"></i> $Title</h3>
+                      <p class="bloglistitem__category">
+                        <% loop $Categories.Limit(1) %><span href="$URL" class="bloglistitem__category">$Title</span><% end_loop %>
+                      </p>
+                    </a>
+                  </li>
                 <% end_loop %>
               </ul>
             <% else %>

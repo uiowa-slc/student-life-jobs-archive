@@ -1,6 +1,15 @@
 
 .job-list{
 	margin: 0;
+	&--three-columns{
+		@include breakpoint(medium) {
+			column-count: 2;
+		}
+		@include breakpoint(large) {
+			display: block;
+			column-count: 3;
+		}
+	}
 }
 
 .job-list__heading{
@@ -14,7 +23,11 @@
 	list-style-type: none;
 	margin-bottom: rem-calc(6);
 	i{
-		display: inline-block;
+		display: none;
+		@include breakpoint(medium) {
+			display: inline-block;
+		}
+		
 		padding-right: rem-calc(2);
 	}
 	a{
@@ -27,15 +40,15 @@
 
 }
 
-.tabs-title> a.job-single__filter-tab{
-	text-transform: uppercase;
-	color: $yellow;
-	font-family: $header-font-family;
-	@include breakpoint(medium) {
-		font-size: rem-calc(18);
-		letter-spacing: 0.8px;
-	}
-}
+// .tabs-title> a.job-single__filter-tab{
+// 	text-transform: uppercase;
+// 	color: $yellow;
+// 	font-family: $header-font-family;
+// 	@include breakpoint(medium) {
+// 		font-size: rem-calc(18);
+// 		letter-spacing: 0.8px;
+// 	}
+// }
 
 .job-single__basic-info{
 	font-size: rem-calc(22);

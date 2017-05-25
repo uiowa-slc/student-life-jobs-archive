@@ -54,18 +54,19 @@ class JobListingHolder_Controller extends TopicHolder_Controller{
     );
 
     public function ThreeColumnedListings($column){
-        $total = $this->getBlogPosts()->Count;
-        $perColumn = ceil($total / 3);
+        $total = $this->getBlogPosts()->Count();
+        $perColumn = floor($total / 3);
+        //echo $perColumn.' ';
         $allPosts = $this->getBlogPosts()->sort('Title ASC');
         switch ($column){
             case 1:
-                $posts = $allPosts->Limit(3);
+                $posts = $allPosts->Limit($perColumn);
                 break;
             case 2:
-                $posts = $allPosts->Limit(3, 3 + $perColumn);
+                $posts = $allPosts->Limit($perColumn, $perColumn + $column);
                 break;
             case 3:
-                $posts = $allPosts->Limit(9999, 6 + $perColumn);
+                $posts = $allPosts->Limit(9999, $perColumn * 2 + $column);
 
         }
 

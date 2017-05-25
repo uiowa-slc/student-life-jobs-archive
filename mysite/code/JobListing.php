@@ -48,10 +48,12 @@ class JobListing extends Topic {
 		$fields->removeByName('Questions');
 		$fields->removeByName('IsFeatured');
 		$fields->removeByName('SummaryQuestions');
+		$fields->removeByName('ExternalURL');
+
 		$fields->removeByName('Tags');
 		$fields->removeByName('Tags');
 
-		$fields->removeByNaMe('ExternalURL');
+		
 		$fields->removeByName('Content');
 		$fields->removeByName('LayoutType');
 
@@ -59,7 +61,7 @@ class JobListing extends Topic {
 		$fields->renameField('Title', 'Job title');
 
 		$fields->addFieldToTab('Root.Main', TextField::create('PayRate','Rate of pay'));
-		$fields->addFieldToTab('Root.Main', TextField::create('Location','Location of position (physical location, not department)'));
+		$fields->addFieldToTab('Root.Main', TextField::create('Location','Work location (physical location, not department)'));
 		$fields->addFieldToTab('Root.Main', TextField::create('NextStepLink','Next step link (please include http://)'));
 		$fields->addFieldToTab('Root.Main', TextField::create('NextStepTitle','Next step link title (default: Learn more and apply)'));
 		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('BasicJobFunction','Basic job function'));

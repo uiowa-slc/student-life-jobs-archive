@@ -28,8 +28,13 @@ $BlockArea(BeforeContent)
           <ul class="job-list">
               <% loop $Results %>
                 <li class="job-list__item">
-                  <h3><i class="fa fa-file"></i> <a href="$Link">$Title</a></h3>
-
+                  <a href="$Link">
+                    <h3><i class="fa fa-file"></i> $Title</h3>
+                    <p class="bloglistitem__category">
+                      <% loop $Categories.Limit(1) %><span href="$URL" class="bloglistitem__category">$Title</span><% end_loop %>
+                      <% loop $Departments.Limit(1) %><span href="$URL" class="bloglistitem__category">$Title</span><% end_loop %>
+                    </p>
+                  </a>
                 </li>
               <% end_loop %>
           </ul>
