@@ -40,6 +40,10 @@
 
 }
 
+.featured-topic-list{
+
+}
+
 // .tabs-title> a.job-single__filter-tab{
 // 	text-transform: uppercase;
 // 	color: $yellow;
@@ -50,6 +54,35 @@
 // 	}
 // }
 
+.job-single__byline-cat{
+	color: #545454;
+	text-transform: uppercase;
+	font-style: normal;
+	font-size: rem-calc(12);
+	letter-spacing: 1px;
+	line-height: 1;
+	margin-right: 15px;
+	@include breakpoint(xxlarge) {
+		margin-right: 0;
+	}
+	& a {
+		border-bottom: 1px solid transparent;
+		padding-bottom: 1px;
+		position: relative;
+		transition: all .2s ease-in-out;
+		&:hover, &:focus {
+			color: #545454;
+			border-bottom-color: #ddd;
+		}
+	}
+	& a:not(:first-of-type):before {
+		content: "·";
+		display: inline-block;
+		position: absolute;
+		left: -11px;
+		top: 0;
+	}
+}
 .job-single__basic-info{
 	font-size: rem-calc(22);
 	p{ margin: 0}

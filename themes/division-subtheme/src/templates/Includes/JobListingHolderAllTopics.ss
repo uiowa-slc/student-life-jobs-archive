@@ -9,18 +9,18 @@
 
 <div class="tabs-content" data-tabs-content="example-tabs">
   <div class="tabs-panel is-active" id="panel1">
-    <h2 class="job-list__heading">Job listings by category:</h2>
+    <h2 class="topic-list__heading">Job listings by category:</h2>
       <div class="row small-up-2 large-up-3"> 
         <% loop $AllCats.Sort('Title ASC') %>
           <div class="column column-block">
             <h3>$Title</h3>
             <% if $BlogPosts %>
-              <ul class="job-list">
+              <ul class="topic-list">
               <% loop $BlogPosts.Limit(5) %>
-                  <li class="job-list__item"><i class="fa fa-file" aria-hidden="true"></i> <a href="$Link">$Title.LimitCharacters(20)</a></li>
+                  <li class="topic-list__item"><i class="fa fa-file" aria-hidden="true"></i> <a href="$Link">$Title.LimitCharacters(20)</a></li>
                 <% end_loop %>
                 <% if $BlogPosts.Count > 5 %>
-                 <li class="job-list__item"><a class="topic-list__see-more" href="$Link">See more...</a></li>
+                 <li class="topic-list__item"><a class="topic-list__see-more" href="$Link">See more...</a></li>
                 <% end_if %>
                 </ul>
               <% else %>
@@ -31,18 +31,18 @@
       </div>
   </div>
   <div class="tabs-panel" id="panel2">
-    <h2 class="job-list__heading">Job listings by department:</h2>
+    <h2 class="topic-list__heading">Job listings by department:</h2>
       <% loop $Departments.Sort('Title ASC') %>
         <h3>$Title</h3>
             <% if $JobListings %>
-              <ul class="job-list">
+              <ul class="topic-list">
               <% loop $JobListings.Limit(5) %>
-                  <li class="job-list__item"><i class="fa fa-file" aria-hidden="true"></i> <a href="$Link">$Title</a></li>
+                  <li class="topic-list__item"><i class="fa fa-file" aria-hidden="true"></i> <a href="$Link">$Title</a></li>
                 <% end_loop %>
                 <% if $JobListings.Count > 5 %>
-                  <li class="job-list__item"><a href="$Link" class="topic-list__see-more">See more...</a></li>
+                  <li class="topic-list__item"><a href="$Link" class="topic-list__see-more">See more...</a></li>
                 <% else %>
-                  <li class="job-list__item"><a href="$Link" class="topic-list__see-more">Learn more about $Title</a></li>
+                  <li class="topic-list__item"><a href="$Link" class="topic-list__see-more">Learn more about $Title</a></li>
                 <% end_if %>
                 </ul>
               <% else %>
@@ -51,12 +51,12 @@
       <% end_loop %>
   </div>
   <div class="tabs-panel" id="panel3">
-    <h2 class="job-list__heading">All jobs by title:</h2>
-      <ul class="job-list job-list--three-columns">
+    <h2 class="topic-list__heading">All jobs by title:</h2>
+      <ul class="topic-list topic-list--three-columns">
         <% loop $TopicsByLetter %>
-          <li class="job-list__item"><h4>$Letter</h4></li>
+          <li class="topic-list__item"><h4>$Letter</h4></li>
           <% loop $Topics %>
-            <li class="job-list__item"><i class="fa fa-file" aria-hidden="true"></i> <a href="$Link">$Title.LimitCharacters(20)</a></li>
+            <li class="topic-list__item"><i class="fa fa-file" aria-hidden="true"></i> <a href="$Link">$Title.LimitCharacters(20)</a></li>
           <% end_loop %>
         <% end_loop %>
       </ul>

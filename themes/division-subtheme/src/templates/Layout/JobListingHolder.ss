@@ -53,18 +53,27 @@ $BlockArea(BeforeContent)
           $Content
           <h2>Jobs listed under "{$Title}": </h2>
            <% if $BlogPosts %>
-              <ul class="fa-ul"> 
-                <% loop $BlogPosts %>
-                  <li class="job-list__item">
-                    <a href="$Link">
-                      <h3><i class="fa fa-file" aria-hidden="true"></i> $Title</h3>
-                      <p class="bloglistitem__category">
-                        <% loop $Departments.Limit(1) %><span href="$URL" class="bloglistitem__category">$Title</span><% end_loop %>
-                      </p>
-                    </a>
-                  </li>
-                <% end_loop %>
-              </ul>
+            <ul class="featured-topic-list row large-up-2">
+
+            <% loop $BlogPosts %>
+              <li class="featured-topic-list__item column column-block">
+
+                <a href="$Link">
+                <div class="row collapse">
+                  <div class="featured-topic-list__icon-container show-for-large large-1 columns"><i class="fa fa-file-o fa-lg fa-fw"></i></div>
+                  <div class="large-11 columns featured-topic-list__heading-container"><h3 class="job-list__heading">$Title</h3>
+
+                  <p class="bloglistitem__category">
+                  <% loop $Categories.Limit(1) %><span href="$URL" class="bloglistitem__category">$Title</span><% end_loop %>
+                  <% loop $Departments.Limit(1) %><span href="$URL" class="bloglistitem__category">$Title</span><% end_loop %>
+                </p></div>
+
+                </div>
+
+                </a>
+              </li>
+            <% end_loop %>
+            </ul>
             <% else %>
               <p>No jobs are currently listed.</p>
           <% end_if %>           
@@ -74,16 +83,24 @@ $BlockArea(BeforeContent)
           $Content
           <h2>Jobs listed under {$Title}: </h2>
            <% if $JobListings %>
-              <ul class="job-list"> 
+              <ul class="featured-topic-list row large-up-2">
                 <% loop $JobListings.Limit(5) %>
-                  <li class="job-list__item">
-                    <a href="$Link">
-                      <h3><i class="fa fa-file" aria-hidden="true"></i> $Title</h3>
-                      <p class="bloglistitem__category">
-                        <% loop $Categories.Limit(1) %><span href="$URL" class="bloglistitem__category">$Title</span><% end_loop %>
-                      </p>
-                    </a>
-                  </li>
+                <li class="featured-topic-list__item column column-block">
+
+                  <a href="$Link">
+                  <div class="row collapse">
+                    <div class="featured-topic-list__icon-container show-for-large large-1 columns"><i class="fa fa-file-o fa-lg fa-fw"></i></div>
+                    <div class="large-11 columns featured-topic-list__heading-container"><h3 class="job-list__heading">$Title</h3>
+
+                    <p class="bloglistitem__category">
+                    <% loop $Categories.Limit(1) %><span href="$URL" class="bloglistitem__category">$Title</span><% end_loop %>
+                    <% loop $Departments.Limit(1) %><span href="$URL" class="bloglistitem__category">$Title</span><% end_loop %>
+                  </p></div>
+
+                  </div>
+
+                  </a>
+                </li>
                 <% end_loop %>
               </ul>
             <% else %>
