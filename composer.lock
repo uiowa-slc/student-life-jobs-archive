@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "32acd8c563e1b7993172a4d52cd07a27",
-    "content-hash": "d4466e94a3e549eac4e380cf9de42a68",
+    "hash": "90cd885ea42f9ccae1951aebdf45e662",
+    "content-hash": "076fa21521c0c4482d11f804ae785acd",
     "packages": [
         {
             "name": "asyncphp/doorman",
@@ -457,16 +457,16 @@
         },
         {
             "name": "md/division-project",
-            "version": "dev-2.0.x-topicholder",
+            "version": "2.0.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/StudentLifeMarketingAndDesign/division-project.git",
-                "reference": "b9d9a4a96602b05419e0b6bbf801e5202ff4e682"
+                "reference": "6355d103b61d874dd538fb19a050d8fee1665624"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/StudentLifeMarketingAndDesign/division-project/zipball/b9d9a4a96602b05419e0b6bbf801e5202ff4e682",
-                "reference": "b9d9a4a96602b05419e0b6bbf801e5202ff4e682",
+                "url": "https://api.github.com/repos/StudentLifeMarketingAndDesign/division-project/zipball/6355d103b61d874dd538fb19a050d8fee1665624",
+                "reference": "6355d103b61d874dd538fb19a050d8fee1665624",
                 "shasum": ""
             },
             "require": {
@@ -512,7 +512,7 @@
                 "source": "https://github.com/StudentLifeMarketingAndDesign/division-project/tree/2.0.x-topicholder",
                 "issues": "https://github.com/StudentLifeMarketingAndDesign/division-project/issues"
             },
-            "time": "2017-05-30 13:47:15"
+            "time": "2017-05-30 15:30:26"
         },
         {
             "name": "md/rss-display",
@@ -2627,9 +2627,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "md/division-project": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

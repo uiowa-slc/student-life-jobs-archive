@@ -3,7 +3,7 @@
 class JobListingHolder extends TopicHolder {
 
 	private static $db = array(
-
+		'MoreInfoText' => 'HTMLText'
 	);
 
     private static $has_many = array(
@@ -29,13 +29,12 @@ class JobListingHolder extends TopicHolder {
             GridFieldCategorisationConfig::create(15, $self->Departments()->sort('Title'), 'JobListingDepartment', 'Departments', 'BlogPosts')
         );
 
-        /**
-         * @var FieldList $fields
-         */
+
         $fields->addFieldsToTab('Root.Categorisation', array(
             $departments
         ));
 
+        $fields->addFieldToTab('Root.Main', HTMLEditorField::create('MoreInfoText', 'Text to display under each "Apply now" button'));
 		return $fields;
 	}
 

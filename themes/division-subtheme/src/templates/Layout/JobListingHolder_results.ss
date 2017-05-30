@@ -25,9 +25,9 @@ $BlockArea(BeforeContent)
         <% if $Query %>
           <h2>Search results for "<em>{$Query}</em>"</h2>
           <% if $Results %>
-          <ul class="job-list">
+          <ul class="topic-list">
               <% loop $Results %>
-                <li class="job-list__item">
+                <li class="topic-list__item">
                   <a href="$Link">
                     <h3><i class="fa fa-file"></i> $Title</h3>
                     <p class="bloglistitem__category">

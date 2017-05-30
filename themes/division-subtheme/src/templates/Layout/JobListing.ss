@@ -6,7 +6,7 @@ $Header
 		<% include FeaturedImage %>
 	<% end_if %>
 	$Breadcrumbs
-
+	<%-- <p><a href="{$Parent.Link}"><i class="fa fa-chevron-left" aria-hidden="true"></i> <span>See all job listings</span></a></p> --%>
 	<% if not $BackgroundImage %>
 		<div class="column row">
 			<div class="main-content__header">
@@ -58,7 +58,11 @@ $Header
 					<div class="apply__container">
 						<a href="$NextStepLink" class="button apply__button" target="_blank"><% if $NextStepTitle %>$NextStepTitle<% else %>Next step<% end_if %></a>
 						<div class="apply__content">
+							<% if $Content %>
 							$Content
+							<% else_if $Parent.MoreInfoText %>
+							$Parent.MoreInfoText 
+							<% end_if %>
 						</div>
 					</div>
 				<% end_if %>
