@@ -461,12 +461,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/StudentLifeMarketingAndDesign/division-project.git",
-                "reference": "6ff4c5971e52d56d715a4c8380365151d67bf49e"
+                "reference": "b9d9a4a96602b05419e0b6bbf801e5202ff4e682"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/StudentLifeMarketingAndDesign/division-project/zipball/6ff4c5971e52d56d715a4c8380365151d67bf49e",
-                "reference": "6ff4c5971e52d56d715a4c8380365151d67bf49e",
+                "url": "https://api.github.com/repos/StudentLifeMarketingAndDesign/division-project/zipball/b9d9a4a96602b05419e0b6bbf801e5202ff4e682",
+                "reference": "b9d9a4a96602b05419e0b6bbf801e5202ff4e682",
                 "shasum": ""
             },
             "require": {
@@ -512,7 +512,7 @@
                 "source": "https://github.com/StudentLifeMarketingAndDesign/division-project/tree/2.0.x-topicholder",
                 "issues": "https://github.com/StudentLifeMarketingAndDesign/division-project/issues"
             },
-            "time": "2017-05-26 21:15:52"
+            "time": "2017-05-30 13:47:15"
         },
         {
             "name": "md/rss-display",
@@ -2123,16 +2123,16 @@
         },
         {
             "name": "unclecheese/eventcalendar",
-            "version": "1.0.21",
+            "version": "1.0.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/unclecheese/silverstripe-event-calendar.git",
-                "reference": "b38b28be6a9f1ca58ce51f8441c00d4cb925cd3f"
+                "reference": "18e246239db9163d84884a577e137684a5102f0e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/unclecheese/silverstripe-event-calendar/zipball/b38b28be6a9f1ca58ce51f8441c00d4cb925cd3f",
-                "reference": "b38b28be6a9f1ca58ce51f8441c00d4cb925cd3f",
+                "url": "https://api.github.com/repos/unclecheese/silverstripe-event-calendar/zipball/18e246239db9163d84884a577e137684a5102f0e",
+                "reference": "18e246239db9163d84884a577e137684a5102f0e",
                 "shasum": ""
             },
             "require": {
@@ -2163,7 +2163,7 @@
                 "events",
                 "silverstripe"
             ],
-            "time": "2017-05-09 21:44:56"
+            "time": "2017-05-30 02:20:42"
         },
         {
             "name": "undefinedoffset/silverstripe-nocaptcha",
