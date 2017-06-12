@@ -60,12 +60,15 @@ $Header
 						<div class="apply__content">
 							<% if $Content %>
 							$Content
-							<% else_if $Parent.MoreInfoText %>
-							$Parent.MoreInfoText 
+							<% else_if $NextStepDomain == "hireahawk.com" %>
+							<p><a href="work-on-campus/hire-a-hawk/">Learn more about how to apply for a job through Hire-A-Hawk with these instructions.</a></p>
 							<% end_if %>
 						</div>
 					</div>
+					<hr />
+					<p>Jobs listed on this website do not reflect current openings. To view availability and apply for this position, <a href="$NextStepLink" target="_blank">visit this website</a>.</p>
 				<% end_if %>
+			
 				<% if $Links %>
 					<h2>Additional information:</h2>
 					<ul>

@@ -34,7 +34,7 @@ class JobListingHolder extends TopicHolder {
             $departments
         ));
 
-        $fields->addFieldToTab('Root.Main', HTMLEditorField::create('MoreInfoText', 'Text to display under each "Apply now" button'));
+        // $fields->addFieldToTab('Root.Main', HTMLEditorField::create('MoreInfoText', 'Text to display under each "Apply now" button'));
 		return $fields;
 	}
 

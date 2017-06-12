@@ -124,6 +124,17 @@ class JobListing extends Topic {
 		}
 		return $entries;
 	}
+
+	public function NextStepDomain(){
+		$url = $this->NextStepLink;
+
+		$parsedUrl = parse_url($url);
+		if(isset($parsedUrl['host'])){
+			$domain = $parsedUrl['host'];
+			return $domain;
+		}
+		
+	}
 }
 
 
