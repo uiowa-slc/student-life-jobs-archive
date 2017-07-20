@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "scripts": {
     "start": "cd division-project && bower install && npm install && npm start",
-    "build": "cd division-project && bower install && npm install && npm start"
+    "build": "cd division-project && bower install && npm install && npm run-script build"
   },
   "dependencies": {
     "babel-preset-es2015": "^6.24.0"
