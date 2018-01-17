@@ -23,6 +23,7 @@ class JobListing extends Topic {
 
 	);
 
+	private static $default_sort = 'Title ASC';
 
 	public function getCMSFields(){
 		

@@ -84,7 +84,7 @@ $BlockArea(BeforeContent)
           <h2>Jobs listed under {$Title}: </h2>
            <% if $JobListings %>
               <ul class="featured-topic-list row large-up-2">
-                <% loop $JobListings.Limit(5) %>
+                <% loop $JobListings %>
                 <li class="featured-topic-list__item column column-block">
 
                   <a href="$Link">
