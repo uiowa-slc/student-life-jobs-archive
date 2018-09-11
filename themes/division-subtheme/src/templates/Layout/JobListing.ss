@@ -53,7 +53,39 @@ $Header
 						$LearningOutcomes
 		
 				<% end_if %>
-				
+				<% if $Responsibilities %>
+
+						<h2>Responsibilities</h2>
+						$Responsibilities
+
+					<% end_if %> 
+				<% if $Qualifications %>
+
+						<h2>Qualifications</h2>
+						$Qualifications
+
+				<% end_if %> 
+
+				<% if $WorkHours %>
+
+						<h2>Work Hours</h2>
+						$WorkHours
+
+				<% end_if %> 
+
+				<% if $Location %>
+
+						<h2>Location</h2>
+						$Location
+
+				<% end_if %> 
+
+				<% if $TrainingRequirements %>
+
+						<h2>Training Requirements</h2>
+						$TrainingRequirements
+
+				<% end_if %> 
 				<% if $NextStepLink %>
 					<div class="apply__container">
 						<a href="$NextStepLink" class="button apply__button" target="_blank"><% if $NextStepTitle %>$NextStepTitle<% else %>Next step<% end_if %></a>
