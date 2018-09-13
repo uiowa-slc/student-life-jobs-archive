@@ -8,7 +8,7 @@ class JobListing extends Topic {
 		'LearningOutcomes' => 'HTMLText',
 		'NextStepTitle' => 'HTMLText',
 		'NextStepLink' => 'HTMLText',
-		'Location' => 'HTMLText',
+		'Location' => 'Text',
 		'Qualifications' => 'HTMLText',
 		'Responsibilities' => 'HTMLText',
 		'WorkHours' => 'HTMLText',
@@ -67,19 +67,21 @@ class JobListing extends Topic {
 
 		$fields->addFieldToTab('Root.Main', TextField::create('PayRate','Rate of pay'));
 		$fields->addFieldToTab('Root.Main', TextField::create('Location','Work location (physical location, not department)'));
-		$fields->addFieldToTab('Root.Main', TextField::create('Qualifications', 'Job Qualifications'));
-		$fields->addFieldToTab('Root.Main', TextField::create('Responsibilities', 'Work Responsibilities'));
-		
-		$fields->addFieldToTab('Root.Main', TextField::create('TrainingRequirements', 'Training Requirements'));
-		;
+
 		$fields->addFieldToTab('Root.Main', TextField::create('NextStepLink','Next step link (please include http://)'));
 		$fields->addFieldToTab('Root.Main', TextField::create('NextStepTitle','Next step link title (default: Learn more and apply)'));
+
+
 		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('LearningOutcomes','What you will learn'));
+
 		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('BasicJobFunction','Basic job function'));
+
 		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('Responsibilities'));
-		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('WorkHours'));
+
 		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('Qualifications', 'Job Qualifications'));
-		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('Location'));
+
+		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('WorkHours'));
+
 		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('TrainingRequirements'));
 
 		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('Content','Additional content or instructions needed in order to apply'));

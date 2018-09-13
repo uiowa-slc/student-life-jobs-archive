@@ -40,19 +40,19 @@ $Header
 				<% if $PayRate %><p><span class="job-single__descriptor">Rate of pay:</span> $PayRate</p><% end_if %>
 				<% if $Location %><p><span class="job-single__descriptor">Work location:</span> $Location</p><% end_if %>
 				</div>
-				
+					<% if $LearningOutcomes %>
+			
+						<h2>What you will learn</h2>
+						$LearningOutcomes
+		
+				<% end_if %>			
 				<% if $BasicJobFunction %>
 		
 						<h2>Basic job function</h2>
 						$BasicJobFunction
 
 				<% end_if %>
-				<% if $LearningOutcomes %>
-			
-						<h2>What you will learn</h2>
-						$LearningOutcomes
-		
-				<% end_if %>
+
 				<% if $Responsibilities %>
 
 						<h2>Responsibilities</h2>
