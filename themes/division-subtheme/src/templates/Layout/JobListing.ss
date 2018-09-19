@@ -71,14 +71,7 @@ $Header
 						<h2>Work hours</h2>
 						$WorkHours
 
-				<% end_if %> 
-
-				<% if $Location %>
-
-						<h2>Location</h2>
-						$Location
-
-				<% end_if %> 
+				<% end_if %>  
 
 				<% if $TrainingRequirements %>
 
