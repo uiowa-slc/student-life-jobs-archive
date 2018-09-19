@@ -68,7 +68,7 @@ $Header
 
 				<% if $WorkHours %>
 
-						<h2>Work Hours</h2>
+						<h2>Work hours</h2>
 						$WorkHours
 
 				<% end_if %> 
@@ -82,7 +82,7 @@ $Header
 
 				<% if $TrainingRequirements %>
 
-						<h2>Training Requirements</h2>
+						<h2>Training requirements</h2>
 						$TrainingRequirements
 
 				<% end_if %> 
