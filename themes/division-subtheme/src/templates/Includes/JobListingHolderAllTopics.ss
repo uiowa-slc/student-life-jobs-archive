@@ -10,7 +10,7 @@
 <div class="tabs-content" data-tabs-content="example-tabs">
   <div class="tabs-panel is-active" id="panel1">
     <h2 class="topic-list__heading">Job listings by category:</h2>
-      <div class="row small-up-2 large-up-3"> 
+      <div class="row small-up-2 large-up-3">
         <% loop $AllCats.Sort('Title ASC') %>
           <div class="column column-block">
             <h3>$Title</h3>
@@ -54,7 +54,7 @@
     <h2 class="topic-list__heading">All jobs by title:</h2>
       <ul class="topic-list topic-list--three-columns">
         <% loop $TopicsByLetter %>
-          <li class="topic-list__item"><h4>$Letter</h4></li>
+          <li class="topic-list__item"><h3>$Letter</h3></li>
           <% loop $Topics %>
             <li class="topic-list__item"><i class="fa fa-file" aria-hidden="true"></i> <a href="$Link">$Title.LimitCharacters(20)</a></li>
           <% end_loop %>
