@@ -78,7 +78,7 @@ class JobListing extends Topic {
 
 		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('Responsibilities'));
 
-		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('Qualifications', 'Job Qualifications'));
+		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('Qualifications', 'Qualifications'));
 
 		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('WorkHours'));
 
