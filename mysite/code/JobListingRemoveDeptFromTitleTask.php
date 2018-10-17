@@ -1,5 +1,7 @@
 <?php
 
+use SilverStripe\Dev\BuildTask;
+
 class JobListingRemoveDeptFromTitleTask extends BuildTask{
 
 	protected $title = 'Job Listings - remove "IMU - "ish text from titles ';

@@ -1,6 +1,13 @@
 <?php
 
-if (!class_exists("Widget")) {
+use SilverStripe\Widgets\Model\Widget;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Blog\Model\Blog;
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\NumericField;
+use SilverStripe\Core\Convert;
+
+if (!class_exists(Widget::class)) {
     return;
 }
 
@@ -47,7 +54,7 @@ class JobDepartmentsWidget extends Widget
     {
         $this->beforeUpdateCMSFields(function (FieldList $fields) {
             $fields[] = DropdownField::create(
-                'BlogID', _t('BlogDepartmentsWidget.Blog', 'Blog'), Blog::get()->map()
+                'BlogID', _t('BlogDepartmentsWidget.Blog', Blog::class), Blog::get()->map()
             );
 
             $fields[] = NumericField::create(
@@ -95,6 +102,3 @@ class JobDepartmentsWidget extends Widget
     }
 }
 
-class JobDepartmentsWidget_Controller extends Widget_Controller
-{
-}

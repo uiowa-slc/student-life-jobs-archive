@@ -1,5 +1,14 @@
 <?php
 
+use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Control\Controller;
+use SilverStripe\Blog\Model\Blog;
+use SilverStripe\Security\Permission;
+use SilverStripe\ORM\DataObject;
+use SilverStripe\Blog\Model\CategorisationObject;
+
 /**
  * A department for keyword descriptions of a job listing location.
  *
@@ -29,9 +38,9 @@ class JobListingDepartment extends DataObject implements CategorisationObject
         'JobListings' => 'JobListing',
     );
 
-    private static $extensions = array(
-        'URLSegmentExtension',
-    );
+    // private static $extensions = array(
+    //     'URLSegmentExtension',
+    // );
 
     
     public function JobListings()
@@ -98,7 +107,7 @@ class JobListingDepartment extends DataObject implements CategorisationObject
      *
      * @return bool
      */
-    public function canCreate($member = null)
+    public function canCreate($member = null, $context = Array())
     {
         $extended = $this->extendedCan(__FUNCTION__, $member);
 

@@ -1,5 +1,12 @@
 <?php
 
+use SilverStripe\Blog\Model\Blog;
+use SilverStripe\TagField\TagField;
+use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+use SilverStripe\Security\Permission;
+use SilverStripe\ORM\ArrayList;
+
 class JobListing extends Topic {
 
 	private static $db = array (
@@ -152,12 +159,4 @@ class JobListing extends Topic {
 		}
 		
 	}
-}
-
-
-class JobListing_Controller extends Topic_Controller{
-
-	
-
-
 }
