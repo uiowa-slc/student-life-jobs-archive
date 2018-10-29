@@ -55,7 +55,7 @@ class JobListing extends Topic {
                     ->setCanCreate($self->canCreateDepartments())
                     ->setShouldLazyLoad(true);
 
-		$fields->addFieldToTab("blog-admin-sidebar", $departmentField);
+		// $fields->addFieldToTab("blog-admin-sidebar", $departmentField);
 		$fields->removeByName('Authors');
 		$fields->removeByName('Questions');
 		$fields->removeByName('IsFeatured');
