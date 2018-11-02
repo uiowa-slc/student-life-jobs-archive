@@ -45,9 +45,7 @@ $BlockArea(BeforeContent)
           <p>No search term specified, please type one in below:</p>
         <% end_if %>
         <hr />
-        <% with $TopicSearchForm %>
-          <% include TopicSearchForm %>
-        <% end_with %>
+        $TopicSearchForm
         <% with $Holder %>
           <% include JobListingHolderAllTopics %>
         <% end_with %>

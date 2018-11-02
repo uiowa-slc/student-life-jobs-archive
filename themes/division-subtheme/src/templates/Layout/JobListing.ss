@@ -41,13 +41,13 @@ $Header
 				<% if $Location %><p><span class="job-single__descriptor">Work location:</span> $Location</p><% end_if %>
 				</div>
 					<% if $LearningOutcomes %>
-			
+
 						<h2>What you will learn</h2>
 						$LearningOutcomes
-		
-				<% end_if %>			
+
+				<% end_if %>
 				<% if $BasicJobFunction %>
-		
+
 						<h2>Basic job function</h2>
 						$BasicJobFunction
 
@@ -58,27 +58,27 @@ $Header
 						<h2>Responsibilities</h2>
 						$Responsibilities
 
-					<% end_if %> 
+					<% end_if %>
 				<% if $Qualifications %>
 
 						<h2>Qualifications</h2>
 						$Qualifications
 
-				<% end_if %> 
+				<% end_if %>
 
 				<% if $WorkHours %>
 
 						<h2>Work hours</h2>
 						$WorkHours
 
-				<% end_if %>  
+				<% end_if %>
 
 				<% if $TrainingRequirements %>
 
 						<h2>Training requirements</h2>
 						$TrainingRequirements
 
-				<% end_if %> 
+				<% end_if %>
 				<% if $NextStepLink %>
 					<div class="apply__container">
 						<a href="$NextStepLink" class="button apply__button" target="_blank"><% if $NextStepTitle %>$NextStepTitle<% else %>Next step<% end_if %></a>
@@ -93,7 +93,7 @@ $Header
 					<hr />
 					<p>Jobs listed on this website do not reflect current openings. To view availability and apply for this position, <a href="$NextStepLink" target="_blank">visit this website</a>.</p>
 				<% end_if %>
-			
+
 				<% if $Links %>
 					<h2>Additional information:</h2>
 					<ul>
@@ -105,13 +105,11 @@ $Header
 				<% include JobListingDeptsCategories %>
 
 			</div>
-			
+
 			<% include JobListingHolderRelated %>
-			
+
 			<h2>More job listings:</h2>
-			<% with $TopicSearchForm %>
-	        	<% include TopicSearchForm %>
-	        <% end_with %>
+			$TopicSearchForm
 			<% with $Parent %>
 			<% include JobListingHolderAllTopics %>
 			<% end_with %>

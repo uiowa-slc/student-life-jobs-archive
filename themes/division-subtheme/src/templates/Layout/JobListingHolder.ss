@@ -2,7 +2,7 @@ $Header
 <main class="main-content__container" id="main-content__container">
 
    <% if $BackgroundImage && not $IsFilterActive %>
-    <div class="background-image" data-interchange="[$BackgroundImage.CroppedFocusedImage(600,400).URL, small], [$BackgroundImage.CroppedFocusedImage(1600,500).URL, medium]">
+    <div class="background-image" data-interchange="[$BackgroundImage.FocusFill(600,400).URL, small], [$BackgroundImage.FocusFill(1600,500).URL, medium]">
         <div class="column row">
           <div class="background-image__header background-image__header--has-content">
             <h1 class="background-image__title text-center">$Title</h1>
@@ -11,7 +11,7 @@ $Header
                 <h2 class="text-center">Search for a job below:</h2>
                 $TopicSearchForm
               </div>
-            </div>           
+            </div>
           </div>
         </div>
     </div>
@@ -30,11 +30,11 @@ $Header
       <% else_if $CurrentDepartment %>
         <h1>Department: $CurrentDepartment.Title</h1>
       <% end_if %>
-      
+
     <% else %>
       <h1>$Title</h1>
     <% end_if %>
-      
+
     </div>
   </div>
 <% end_if %>
@@ -76,7 +76,7 @@ $BlockArea(BeforeContent)
             </ul>
             <% else %>
               <p>No jobs are currently listed.</p>
-          <% end_if %>           
+          <% end_if %>
         <% end_with %>
       <% else_if $CurrentDepartment %>
         <% with $CurrentDepartment %>
@@ -105,7 +105,7 @@ $BlockArea(BeforeContent)
               </ul>
             <% else %>
               <p>No jobs are currently listed.</p>
-          <% end_if %>           
+          <% end_if %>
         <% end_with %>
       <% end_if %>
 
@@ -118,7 +118,7 @@ $BlockArea(BeforeContent)
         </div>
        <hr />
       <% end_if %>
-    
+
 
       <% include JobListingHolderAllTopics %>
       <% include JobListingStatement %>

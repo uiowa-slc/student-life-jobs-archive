@@ -38,11 +38,11 @@ class JobListingDepartment extends DataObject implements CategorisationObject
         'JobListings' => 'JobListing',
     );
 
-    // private static $extensions = array(
-    //     'URLSegmentExtension',
-    // );
+    private static $extensions = array(
+        'JobURLSegmentExtension',
+    );
 
-    
+
     public function JobListings()
     {
         $jobListings = parent::JobListings();
@@ -78,7 +78,7 @@ class JobListingDepartment extends DataObject implements CategorisationObject
      */
     public function getLink()
     {
-        
+
         return Controller::join_links($this->Blog()->Link(), 'department', $this->URLSegment);
     }
 
