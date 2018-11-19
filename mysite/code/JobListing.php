@@ -37,7 +37,7 @@ class JobListing extends Topic {
 	private static $default_sort = 'Title ASC';
 
 	public function getCMSFields(){
-		
+
 		$fields = parent::getCMSFields();
 
         $self =& $this;
@@ -65,12 +65,14 @@ class JobListing extends Topic {
 		$fields->removeByName('Tags');
 		$fields->removeByName('Tags');
 
-		
+
 		$fields->removeByName('Content');
 		$fields->removeByName('LayoutType');
 
 
 		$fields->renameField('Title', 'Job title');
+
+        $fields->addFieldToTab('Root.PostOptions', $departmentField);
 
 		$fields->addFieldToTab('Root.Main', TextField::create('PayRate','Rate of pay'));
 		$fields->addFieldToTab('Root.Main', TextField::create('Location','Work location (physical location, not department)'));
@@ -119,7 +121,7 @@ class JobListing extends Topic {
         parent::onAfterWrite();
 
         foreach ($this->Departments() as $department) {
-            
+
             $department->BlogID = $this->ParentID;
             $department->write();
         }
@@ -157,6 +159,6 @@ class JobListing extends Topic {
 			$domain = $parsedUrl['host'];
 			return $domain;
 		}
-		
+
 	}
 }
