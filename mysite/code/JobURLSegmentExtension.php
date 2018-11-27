@@ -1,6 +1,7 @@
 <?php
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\View\Parsers\URLSegmentFilter;
+use SilverStripe\ORM\DataList;
 /**
  * Adds URLSegment functionality to Tags & Categories.
  *
