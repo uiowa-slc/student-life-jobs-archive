@@ -23,19 +23,15 @@ $Header
 			$BlockArea(BeforeContentConstrained)
 			<div class="main-content__text">
 			<div class="content">
-				<div class="blogmeta clearfix">
-					<div class="blogmeta__byline clearfix">
-					<p>
-						<% loop $Departments.Limit(1) %><a href="$Link" class="topic-single__byline-cat">$Title</a><% end_loop %>
-					</p>
-					</div>
-					<ul class="blogmeta__social">
-						<li><a href="javascript:window.open('http://www.facebook.com/sharer/sharer.php?u=$AbsoluteLink', '_blank', 'width=400,height=500');void(0);"  title="Share on Facebook"><img src="{$ThemeDir}/dist/images/icon_facebook.png" alt="Share on Facebook"></a>
-						</li>
-						<li><a href="https://twitter.com/intent/tweet?text=$AbsoluteLink" title="Share on Twitter" target="_blank"><img src="{$ThemeDir}/dist/images/icon_twitter.png" alt="Share on Twitter"></a></li>
-						<li><a href="javascript:window.open('https://www.linkedin.com/cws/share?url=$AbsoluteLink', '_blank', 'width=400,height=500');void(0);" title="Share on LinkedIn" target="_blank"><img src="{$ThemeDir}/dist/images/icon_linkedin.png" alt="share on linkedid"></a></li>
-					</ul>
-				</div>
+				<div class="blogmeta">
+                    <% loop $Departments.Limit(1) %><a href="$Link" class="topic-single__byline-cat">$Title</a><% end_loop %>
+                    <ul class="social-icons">
+                        <li><a href="javascript:window.open('http://www.facebook.com/sharer/sharer.php?u=$AbsoluteLink', '_blank', 'width=400,height=500');void(0);"  title="Share on Facebook"><img src="{$ThemeDir}/dist/images/icon_facebook.png" alt="Share on Facebook"></a>
+                        </li>
+                        <li><a href="https://twitter.com/intent/tweet?text=$AbsoluteLink" title="Share on Twitter" target="_blank"><img src="{$ThemeDir}/dist/images/icon_twitter.png" alt="Share on Twitter"></a></li>
+                        <li><a href="javascript:window.open('https://www.linkedin.com/cws/share?url=$AbsoluteLink', '_blank', 'width=400,height=500');void(0);" title="Share on LinkedIn" target="_blank"><img src="{$ThemeDir}/dist/images/icon_linkedin.png" alt="share on linkedid"></a></li>
+                    </ul>
+                </div>
 				<div class="job-single__basic-info">
 				<% if $PayRate %><p><span class="job-single__descriptor">Rate of pay:</span> $PayRate</p><% end_if %>
 				<% if $Location %><p><span class="job-single__descriptor">Work location:</span> $Location</p><% end_if %>
