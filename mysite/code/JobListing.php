@@ -42,6 +42,20 @@ class JobListing extends Topic {
 
         $self =& $this;
         $parent = $self->Parent();
+
+        $fields->removeByName('Categories');
+
+        $categories = $parent instanceof Blog
+                ? $parent->Categories()
+                : BlogCategory::get();
+
+        $catField = TagField::create(
+                        'Categories',
+                        _t(__CLASS__ . '.Categories', 'Categories'),
+                        $categories,
+                        $this->Categories()
+                    )->setShouldLazyLoad(false)->setCanCreate(true);
+
 		$departments = $parent instanceof Blog
                 ? $parent->Departments()
                 : JobListingDepartment::get();
@@ -53,7 +67,7 @@ class JobListing extends Topic {
                     $self->Departments()
                 )
                     ->setCanCreate($self->canCreateDepartments())
-                    ->setShouldLazyLoad(true);
+                    ->setShouldLazyLoad(false);
 
 		// $fields->addFieldToTab("blog-admin-sidebar", $departmentField);
 		$fields->removeByName('Authors');
@@ -72,6 +86,7 @@ class JobListing extends Topic {
 
 		$fields->renameField('Title', 'Job title');
 
+		$fields->addFieldToTab('Root.PostOptions', $catField);
         $fields->addFieldToTab('Root.PostOptions', $departmentField);
 
 		$fields->addFieldToTab('Root.Main', TextField::create('PayRate','Rate of pay'));
@@ -81,19 +96,19 @@ class JobListing extends Topic {
 		$fields->addFieldToTab('Root.Main', TextField::create('NextStepTitle','Next step link title (default: Learn more and apply)'));
 
 
-		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('LearningOutcomes','What you will learn'));
+		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('LearningOutcomes','What you will learn')->addExtraClass('stacked'));
 
-		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('BasicJobFunction','Basic job function'));
+		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('BasicJobFunction','Basic job function')->addExtraClass('stacked'));
 
-		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('Responsibilities'));
+		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('Responsibilities')->addExtraClass('stacked'));
 
-		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('Qualifications', 'Qualifications'));
+		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('Qualifications', 'Qualifications')->addExtraClass('stacked'));
 
-		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('WorkHours'));
+		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('WorkHours')->addExtraClass('stacked'));
 
-		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('TrainingRequirements'));
+		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('TrainingRequirements')->addExtraClass('stacked'));
 
-		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('Content','Additional content or instructions needed in order to apply'));
+		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('Content','Additional content or instructions needed in order to apply')->addExtraClass('stacked'));
 
 		return $fields;
 
