@@ -14,5 +14,3 @@ Member::set_password_validator($validator);
 if(Director::isLive()) {
 	Director::forceSSL();
 }
-
-define('JOBFEED_BASE', 'https://apps-test.housing.uiowa.edu/seo/feed/');

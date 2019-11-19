@@ -1,18 +1,5 @@
 $Header
-
-
-<% loop $Categories %>
-<p>$Title</p>
-<ul>
-  <% loop $JobListings %>
-    <li><a href="$Link">$Title</a></li>
-  <% end_loop %>
-</ul>
-<% end_loop %>
 <main class="main-content__container" id="main-content__container">
-
-
-<%-- 
 
    <% if $BackgroundImage && not $IsFilterActive %>
     <div class="background-image" data-interchange="[$BackgroundImage.FocusFill(600,400).URL, small], [$BackgroundImage.FocusFill(1600,500).URL, medium]">
@@ -65,10 +52,10 @@ $BlockArea(BeforeContent)
         <% with $CurrentCategory %>
           $Content
           <h2>Jobs listed under "{$Title}": </h2>
-           <% if $Jobs %>
+           <% if $BlogPosts %>
             <ul class="featured-topic-list row large-up-2">
 
-            <% loop $Jobs %>
+            <% loop $BlogPosts %>
               <li class="featured-topic-list__item column column-block">
 
                 <a href="$Link">
@@ -151,4 +138,4 @@ $BlockArea(BeforeContent)
 </div>
 $BlockArea(AfterContent)
 
- --%></main>
+</main>

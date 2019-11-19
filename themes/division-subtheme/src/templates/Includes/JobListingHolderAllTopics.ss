@@ -11,7 +11,7 @@
   <div class="tabs-panel is-active" id="panel1">
     <h2 class="topic-list__heading">Job listings by category:</h2>
       <div class="row small-up-2 large-up-3">
-        <% loop $Categories.Sort('Title ASC') %>
+        <% loop $AllCats.Sort('Title ASC') %>
           <div class="column column-block">
             <h3>$Title</h3>
             <% if $BlogPosts %>
