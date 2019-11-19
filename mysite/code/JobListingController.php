@@ -1,4 +1,4 @@
 <?php
-class JobListingController extends TopicController{
+class JobListingController extends PageController{
 	
 }
