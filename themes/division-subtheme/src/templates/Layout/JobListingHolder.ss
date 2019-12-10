@@ -1,20 +1,16 @@
 $Header
 
 
-<% loop $Categories %>
+<%-- <% loop $Categories %>
 <p>$Title</p>
 <ul>
   <% loop $JobListings %>
     <li><a href="$Link">$Title</a></li>
   <% end_loop %>
 </ul>
-<% end_loop %>
+<% end_loop %> --%>
 <main class="main-content__container" id="main-content__container">
-
-
-<%-- 
-
-   <% if $BackgroundImage && not $IsFilterActive %>
+   <% if $BackgroundImage && not $FilterTitle %>
     <div class="background-image" data-interchange="[$BackgroundImage.FocusFill(600,400).URL, small], [$BackgroundImage.FocusFill(1600,500).URL, medium]">
         <div class="column row">
           <div class="background-image__header background-image__header--has-content">
@@ -34,16 +30,12 @@ $Header
 
   $Breadcrumbs
 
-<% if not $BackgroundImage || $IsFilterActive %>
+<% if not $BackgroundImage || $FilterType %>
+
   <div class="column row">
     <div class="main-content__header">
-    <% if $IsFilterActive %>
-      <% if $CurrentCategory %>
-        <h1>Category: $CurrentCategory.Title</h1>
-      <% else_if $CurrentDepartment %>
-        <h1>Department: $CurrentDepartment.Title</h1>
-      <% end_if %>
-
+    <% if $FilterType %>
+        <h1>{$FilterType}: $FilterTitle</h1>
     <% else %>
       <h1>$Title</h1>
     <% end_if %>
@@ -61,14 +53,12 @@ $BlockArea(BeforeContent)
     <div class="main-content__text">
       $Content
     </div>
-      <% if $CurrentCategory %>
-        <% with $CurrentCategory %>
-          $Content
-          <h2>Jobs listed under "{$Title}": </h2>
-           <% if $Jobs %>
+      <% if $FilterType %>
+        <h2>Jobs listed under "{$FilterTitle}": </h2>
+           <% if $FilteredList %>
             <ul class="featured-topic-list row large-up-2">
 
-            <% loop $Jobs %>
+            <% loop $FilteredList %>
               <li class="featured-topic-list__item column column-block">
 
                 <a href="$Link">
@@ -90,39 +80,11 @@ $BlockArea(BeforeContent)
             <% else %>
               <p>No jobs are currently listed.</p>
           <% end_if %>
-        <% end_with %>
-      <% else_if $CurrentDepartment %>
-        <% with $CurrentDepartment %>
-          $Content
-          <h2>Jobs listed under {$Title}: </h2>
-           <% if $JobListings %>
-              <ul class="featured-topic-list row large-up-2">
-                <% loop $JobListings %>
-                <li class="featured-topic-list__item column column-block">
+        <% end_if %>
 
-                  <a href="$Link">
-                  <div class="row collapse">
-                    <div class="featured-topic-list__icon-container show-for-large large-1 columns"><i class="fa fa-file-o fa-lg fa-fw featured-topic-list__icon"></i></div>
-                    <div class="large-11 columns featured-topic-list__heading-container"><h3 class="topic-list__heading">$Title</h3>
 
-                    <p class="bloglistitem__category">
-                    <% loop $Categories.Limit(1) %><span href="$URL" class="bloglistitem__category">$Title</span><% end_loop %>
-                    <% loop $Departments.Limit(1) %><span href="$URL" class="bloglistitem__category">$Title</span><% end_loop %>
-                  </p></div>
 
-                  </div>
-
-                  </a>
-                </li>
-                <% end_loop %>
-              </ul>
-            <% else %>
-              <p>No jobs are currently listed.</p>
-          <% end_if %>
-        <% end_with %>
-      <% end_if %>
-
-      <% if not $BackgroundImage || $IsFilterActive %>
+      <% if not $BackgroundImage || $FilterType %>
         <div class="topic-search__container row">
           <div class="large-9 columns large-centered">
             <h2 class="text-center">Search for a job below:</h2>
@@ -151,4 +113,4 @@ $BlockArea(BeforeContent)
 </div>
 $BlockArea(AfterContent)
 
- --%></main>
+</main>

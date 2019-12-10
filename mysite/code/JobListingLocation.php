@@ -29,7 +29,11 @@ class JobListingLocation extends JobListingCategorisationObject
     public function listingFeedURL(){
        return JOBFEED_BASE.'positions.json?location_id='.$this->ID;
     }
-
+    public function Parent(){
+        $holder = JobListingHolder::get()->First();
+        //echo 'hello'
+        return $holder;
+    }
     /**
      * Returns a relative URL for the tag link.
      *

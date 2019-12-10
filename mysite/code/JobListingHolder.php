@@ -47,7 +47,7 @@ feed/categories.json
 feed/locations.json */
 
 
-    public function Jobs($open = true){
+    public function JobListings($open = true){
 
         $feedURL = JOBFEED_BASE.'positions.json';
 
@@ -70,6 +70,28 @@ feed/locations.json */
 
     }
 
+    public function ActiveJobListings($open = true){
+
+        $feedURL = JOBFEED_BASE.'positions.json?open=true';
+
+        $jobList = new ArrayList();
+        $jobFeed = $this->getJson($feedURL);
+
+
+        if (isset($jobFeed['positions'])) {
+            $jobArray = $jobFeed['positions'];
+            foreach ($jobArray as $job) {
+                if (isset($job)) {
+                    $jobObj = new JobListing();
+
+                    $jobList->push($jobObj->parseFromFeed($job['position']));
+                }
+            }
+            //print_r($jobList);
+            return $jobList;
+        }
+
+    }
     public function Departments(){
         $feedURL = JOBFEED_BASE.'departments.json';
 
@@ -124,7 +146,7 @@ feed/locations.json */
         $locationList = new ArrayList();
         $locationFeed= $this->getJson($feedURL);
 
-        print_r($locationFeed);
+       // print_r($locationFeed);
 
         if (isset($locationFeed['locations'])) {
             $locationArray = $locationFeed['locations'];
@@ -155,11 +177,11 @@ feed/locations.json */
         $feedURL = JOBFEED_BASE.'positions.json?id='.$id;
 
         $jobFeed = $this->getJson($feedURL);
-        // print_r($jobFeed);
+        //print_r($feedURL);
         if(isset($jobFeed['positions'][0])){
             $job = $jobFeed['positions'][0]['position'];
         }
-        print_r($job);
+        //print_r($job);
         if (isset($job)) {
             $jobObj = new JobListing();
             $parsedJob  = $jobObj->parseFromFeed($job);

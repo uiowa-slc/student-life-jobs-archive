@@ -1,15 +1,20 @@
 <?php
+use SilverStripe\CMS\Controllers\ContentController;
+use SilverStripe\View\ArrayData;
+
 class JobListingHolderController extends PageController{
 	
 	private static $allowed_actions = array(
         'show',
         'department',
+        'category'
     );
 
-    private static $url_handlers = array(
-        'show/$ID' => 'show',
-        'department/$Department!/$Rss' => 'department',
-    );
+    // private static $url_handlers = array(
+    //     'show/$ID' => 'show',
+    //     'department/$ID' => 'department',
+    //     'category/$ID' => 'category'
+    // );
 //  You can query positions with parameters, like so…
 
 // feed/positions.json (all positions)
@@ -37,93 +42,124 @@ class JobListingHolderController extends PageController{
 // Catering Lead, University Housing and Dining, Iowa Memorial Union, Catering, open
 // Aquatic Equipment Technician I, Recreational Services, CRWC, Aquatics, open
 // Dining Associate, University Housing and Dining, Burge Residence Hall, Food Service, closed
-    public function ThreeColumnedListings($column){
-        $total = $this->getBlogPosts()->Count();
-        $perColumn = floor($total / 3);
-        //echo $perColumn.' ';
-        $allPosts = $this->getBlogPosts()->sort('Title ASC');
-        switch ($column){
-            case 1:
-                $posts = $allPosts->Limit($perColumn);
-                break;
-            case 2:
-                $posts = $allPosts->Limit($perColumn, $perColumn + $column);
-                break;
-            case 3:
-                $posts = $allPosts->Limit(9999, $perColumn * 2 + $column);
-
-        }
-
-        return $posts; 
-    }
 
 
     public function show(){
-
-
         $id = $this->urlParams['ID'];
 
         if (!is_numeric($id)) {
-            return $this->httpError( 404);
+            //return $this->httpError( 404);
         }
 
         $job = $this->singleJob($id);
 
-        print_r($job);
-
+        // print_r($job);
         return $this->customise($job)->renderWith(array('JobListing', 'Page'));  
-
-
-
     }
+
     public function department(){
+        // $department = new JobListingDepartment();
+        // $department->ID = 8;
+        // $department->Title = 'Test';
         $department = $this->getCurrentDepartment();
 
-        if ($department) {
-            $this->jobListings = $department->JobListings();
+        //print_r($department);
 
-            if($this->isRSS()) {
-            	return $this->rssFeed($this->jobListings, $department->getLink());
-            } else {
-            	return $this->render();
-            }
+        if ($department) {
+
+            $data = new ArrayData([
+                'FilterType' => 'Department',
+                'FilterTitle' => $department->Title,
+                'FilteredList' => $department->JobListings()
+            ]);
+        
+            return $this->customise($data)->renderWith(array('JobListingHolder', 'Page'));
         }
 
-        $this->httpError(404, 'Not Found');
+        //=$this->httpError(404, 'Not Found');
+
+        return null;
+    }
+    public function category(){
+        // $department = new JobListingDepartment();
+        // $department->ID = 8;
+        // $department->Title = 'Test';
+        $category = $this->getCurrentCategory();
+
+        //print_r($department);
+
+        if ($category) {
+
+            $data = new ArrayData([
+                'FilterType' => 'Category',
+                'FilterTitle' => $category->Title,
+                'FilteredList' => $category->JobListings()
+            ]);
+        
+            return $this->customise($data)->renderWith(array('JobListingHolder', 'Page'));
+        }
+
+        //=$this->httpError(404, 'Not Found');
+
+        return null;
+    }
+    public function location(){
+        // $department = new JobListingDepartment();
+        // $department->ID = 8;
+        // $department->Title = 'Test';
+        $location = $this->getCurrentLocation();
+
+        //print_r($department);
+
+        if ($location) {
+
+            $data = new ArrayData([
+                'FilterType' => 'Location',
+                'FilterTitle' => $location->Title,
+                'FilteredList' => $location->JobListings()
+            ]);
+        
+            return $this->customise($data)->renderWith(array('JobListingHolder', 'Page'));
+        }
+
+        //=$this->httpError(404, 'Not Found');
 
         return null;
     }
     public function IsFilterActive(){
-        // if($this->getCurrentCategory() || $this->getCurrentDepartment() || $this->getCurrentTag()){
-        //     return true;
-        // }
-        // return false;
+        if($this->getCurrentCategory() || $this->getCurrentDepartment()){
+            return true;
+        }
+        return false;
     }
     public function getCurrentDepartment()
     {
-        /**
-         * @var Blog $dataRecord
-         */
-        $dataRecord = $this->dataRecord;
-        $department = $this->request->param('Department');
-        if ($department) {
-            return $dataRecord->Departments()
-                ->filter('URLSegment', array($department, rawurlencode($department)))
-                ->first();
+        $depID = $this->request->param('ID');
+        if (is_numeric($depID)) {
+            $dep = JobListingDepartment::getByID($depID);
+            return $dep;
         }
-        return null;
     }
-
-    /** 
-     * Returns true if the $Rss sub-action for categories/departments has been set to "rss"
-     */
-    public function isRSS() 
+    public function getCurrentCategory()
     {
-        $rss = $this->request->param('Rss');
-        if(is_string($rss) && strcasecmp($rss, "rss") == 0) {
-            return true;
-        } else {
-            return false;
+
+        $catID = $this->request->param('ID');
+        if (is_numeric($catID)) {
+            $cat = JobListingCategory::getByID($catID);
+            return $cat;
         }
+    }
+    public function getCurrentLocation()
+    {
+
+        $locID = $this->request->param('ID');
+        if (is_numeric($locID)) {
+            $loc = JobListingLocation::getByID($locID);
+            return $loc;
+        }
+    }
+    protected function init() {
+        parent::init();
+
     }
 }

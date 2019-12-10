@@ -29,16 +29,34 @@ class JobListingCategory extends JobListingCategorisationObject
     public function listingFeedURL(){
        return JOBFEED_BASE.'positions.json?category_id='.$this->ID;
     }
-
+    public function Parent(){
+        $holder = JobListingHolder::get()->First();
+        //echo 'hello'
+        return $holder;
+    }
     /**
      * Returns a relative URL for the tag link.
      *
      * @return string
+
      */
     public function Link()
     {
         $holder = JobListingHolder::get()->First();
-        return Controller::join_links($holder, 'category', $this->ID);
+        return $holder->Link('category/'.$this->ID);
+    }
+
+
+    public static function getByID($id){
+        //TODO: Request categories.json?id=xx from Mark P
+        $holder = JobListingHolder::get()->First();
+        $cats = $holder->Categories();
+
+        foreach($cats as $cat){
+            if($cat->ID == $id){
+                return $cat;
+            }
+        }
     }
 
 

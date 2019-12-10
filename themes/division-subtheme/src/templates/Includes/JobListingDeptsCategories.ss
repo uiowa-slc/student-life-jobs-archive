@@ -1,14 +1,16 @@
-<% if $Categories.exists || $Tags.exists %>
+
+<% if $Category.exists || $Department.exists %>
+
 	<div class="blog-post-meta">
-		<% if $Categories.exists %>
+		<% if $Category.exists %>
 			<p class="tags">Category:
-			<% loop $Categories %>
+			<% with $Category %>
 				<a href="$Link">$Title</a><% if not Last %><% else %><% end_if %>
-			<% end_loop %>
+			<% end_with %>
 			</p>
 		<% end_if %>
 
-		<% if $Departments.exists %>
+		<% if $Department.exists %>
 			<p class="tags">Department:
 			<% loop $Departments %>
 				<a href="$Link">$Title</a><% if not Last %><% else %><% end_if %>

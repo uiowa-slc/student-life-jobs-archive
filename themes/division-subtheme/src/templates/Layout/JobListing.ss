@@ -22,6 +22,7 @@ $Header
 		<article role="main" class="main-content main-content--with-padding <% if $Children || $Menu(2) || $SidebarBlocks ||  $SidebarView.Widgets %>main-content--with-sidebar<% else %>main-content--full-width<% end_if %>">
 			$BlockArea(BeforeContentConstrained)
 			<div class="main-content__text">
+
 			<div class="content">
 				<div class="blogmeta">
                     <% loop $Departments.Limit(1) %><a href="$Link" class="topic-single__byline-cat">$Title</a><% end_loop %>
@@ -98,8 +99,27 @@ $Header
 					<% end_loop %>
 					</ul>
 				<% end_if %>
-				<% include JobListingDeptsCategories %>
 
+				<% if $Category.exists || $Department.exists %>
+
+					<div class="blog-post-meta">
+						<% if $Category.exists %>
+							<p class="tags">Category:
+							<% with $Category %>
+								<a href="$Link">$Title</a><% if not Last %><% else %><% end_if %>
+							<% end_with %>
+							</p>
+						<% end_if %>
+
+						<% if $Department.exists %>
+							<p class="tags">Department:
+							<% with $Department %>
+								<a href="$Link">$Title</a><% if not Last %><% else %><% end_if %>
+							<% end_with %>
+							</p>
+						<% end_if %>
+					</div>
+				<% end_if %>
 			</div>
 
 			<% include JobListingHolderRelated %>

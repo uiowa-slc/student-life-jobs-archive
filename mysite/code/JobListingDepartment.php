@@ -29,7 +29,11 @@ class JobListingDepartment extends JobListingCategorisationObject
     public function listingFeedURL(){
        return JOBFEED_BASE.'positions.json?department_id='.$this->ID;
     }
-
+    public function Parent(){
+        $holder = JobListingHolder::get()->First();
+        //echo 'hello'
+        return $holder;
+    }
     /**
      * Returns a relative URL for the tag link.
      *
@@ -38,8 +42,19 @@ class JobListingDepartment extends JobListingCategorisationObject
     public function getLink()
     {
 
-        return Controller::join_links($this->JobListing()->Link(), 'department', $this->URLSegment);
+        $holder = JobListingHolder::get()->First();
+        return $holder->Link('department/'.$this->ID);
     }
 
+    public static function getByID($id){
+        //TODO: Request categories.json?id=xx from Mark P
+        $holder = JobListingHolder::get()->First();
+        $deps = $holder->Departments();
 
+        foreach($deps as $dep){
+            if($dep->ID == $id){
+                return $dep;
+            }
+        }
+    }
 }

@@ -21,6 +21,7 @@ class JobListing extends Page {
 		'Responsibilities' => 'HTMLText',
 		'WorkHours' => 'HTMLText',
 		'TrainingRequirements' => 'HTMLText',
+		'CategoryID' => 'Int'
 	);
 
 	private static $defaults = array(
@@ -37,87 +38,41 @@ class JobListing extends Page {
 
 	private static $default_sort = 'Title ASC';
 
-	public function getCMSFields(){
+    /**
+     * Returns a list of breadcrumbs for the current page.
+     *
+     * @param int $maxDepth The maximum depth to traverse.
+     * @param boolean|string $stopAtPageType ClassName of a page to stop the upwards traversal.
+     * @param boolean $showHidden Include pages marked with the attribute ShowInMenus = 0
+     *
+     * @return ArrayList
+    */
 
-		$fields = parent::getCMSFields();
+    public function Parent(){
+    	$holder = JobListingHolder::get()->First();
+    	//echo 'hello'
+    	return $holder;
+    }
 
-        $self =& $this;
-        $parent = $self->Parent();
+    // public function getBreadcrumbItems($maxDepth = 20, $stopAtPageType = false, $showHidden = false)
+    // {
+    //     // $page = $this;
+    //     // $pages = array();
 
-        $fields->removeByName('Categories');
+    //     // while ($page
+    //     //     && $page->exists()
+    //     //     && (!$maxDepth || count($pages) < $maxDepth)
+    //     //     && (!$stopAtPageType || $page->ClassName != $stopAtPageType)
+    //     // ) {
+    //     //     if ($showHidden || $page->ShowInMenus || ($page->ID == $this->ID)) {
+    //     //         $pages[] = $page;
+    //     //     }
 
-        $categories = $parent instanceof Blog
-                ? $parent->Categories()
-                : BlogCategory::get();
+    //     //     $page = $page->Parent();
+    //     // }
 
-        $catField = TagField::create(
-                        'Categories',
-                        _t(__CLASS__ . '.Categories', 'Categories'),
-                        $categories,
-                        $this->Categories()
-                    )->setShouldLazyLoad(false)->setCanCreate(true);
-
-		$departments = $parent instanceof Blog
-                ? $parent->Departments()
-                : JobListingDepartment::get();
-
-		$departmentField = TagField::create(
-                    'Departments',
-                    _t('JobListing.Departments', 'Departments'),
-                    $departments,
-                    $self->Departments()
-                )
-                    ->setCanCreate($self->canCreateDepartments())
-                    ->setShouldLazyLoad(false);
-
-		// $fields->addFieldToTab("blog-admin-sidebar", $departmentField);
-		$fields->removeByName('Authors');
-		$fields->removeByName('Questions');
-		$fields->removeByName('IsFeatured');
-		$fields->removeByName('SummaryQuestions');
-		$fields->removeByName('ExternalURL');
-
-		$fields->removeByName('Tags');
-		$fields->removeByName('Tags');
-
-
-		$fields->removeByName('Content');
-		$fields->removeByName('LayoutType');
-
-
-		$fields->renameField('Title', 'Job title');
-
-		$fields->addFieldToTab('Root.PostOptions', $catField);
-        $fields->addFieldToTab('Root.PostOptions', $departmentField);
-
-		$fields->addFieldToTab('Root.Main', TextField::create('PayRate','Rate of pay'));
-		$fields->addFieldToTab('Root.Main', TextField::create('Location','Work location (physical location, not department)'));
-
-		$fields->addFieldToTab('Root.Main', TextField::create('NextStepLink','Next step link (please include http://)'));
-		$fields->addFieldToTab('Root.Main', TextField::create('NextStepTitle','Next step link title (default: Learn more and apply)'));
-
-
-		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('LearningOutcomes','What you will learn')->addExtraClass('stacked'));
-
-		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('BasicJobFunction','Basic job function')->addExtraClass('stacked'));
-
-		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('Responsibilities')->addExtraClass('stacked'));
-
-		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('Qualifications', 'Qualifications')->addExtraClass('stacked'));
-
-		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('WorkHours')->addExtraClass('stacked'));
-
-		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('TrainingRequirements')->addExtraClass('stacked'));
-
-		$fields->addFieldToTab('Root.Main', HTMLEditorField::create('Content','Additional content or instructions needed in order to apply')->addExtraClass('stacked'));
-
-		return $fields;
-
-	}
-
-
-
-
+    //     // return new ArrayList(array_reverse($pages));
+    // }
 
                 // "id": 4,
                 // "title": "Dishwasher",
@@ -159,7 +114,8 @@ class JobListing extends Page {
     public function Link($action = null)
     {
         $holder = JobListingHolder::get()->First();
-        return Controller::join_links($holder, 'show', $this->ID);
+
+        return $holder->Link('show/'.$this->ID);
     }
 
 	public function parseFromFeed($rawJob) {
@@ -167,7 +123,24 @@ class JobListing extends Page {
 		$this->ID = $rawJob['id'];
 		$this->Title = $rawJob['title'];
 
+
+		if(isset($rawJob['category_id'])){
+			$this->Category = new JobListingCategory();
+			$this->Category = $this->Category->getByID($rawJob['category_id']);
+
+		}
+		if(isset($rawJob['department_id'])){
+			$this->Department = new JobListingDepartment();
+			$this->Department = $this->Department->getByID($rawJob['department_id']);
+		}
+
+		if(isset($rawJob['training_requirements'])) $this->TrainingRequirements = $rawJob['training_requirements'];
+		if(isset($rawJob['responsibilities'])) $this->Responsibilities = $rawJob['responsibilities'];
+		if(isset($rawJob['qualifications'])) $this->Qualifications = $rawJob['qualifications'];
+		if(isset($rawJob['basic_job_function'])) $this->BasicJobFunction = $rawJob['basic_job_function'];
+		if(isset($rawJob['what_you_will_learn'])) $this->LearningOutcomes = $rawJob['what_you_will_learn'];
 		if(isset($rawJob['work_location'])) $this->Location = $rawJob['work_location'];
+		if(isset($rawJob['work_hours'])) $this->WorkHours = $rawJob['work_hours'];
 		if(isset($rawJob['rate_of_pay'])) $this->PayRate = $rawJob['rate_of_pay'];
 		if(isset($rawJob['active'])) $this->Active = $rawJob['active'];
 		
@@ -175,33 +148,6 @@ class JobListing extends Page {
 
 	}
 
-	 public function canCreateDepartments($member = null)
-    {
-        $member = $this->getMember($member);
-
-        $parent = $this->Parent();
-
-        if (!$parent || !$parent->exists() || !($parent instanceof Blog)) {
-            return false;
-        }
-
-        if ($parent->isEditor($member)) {
-            return true;
-        }
-
-        return Permission::checkMember($member, 'ADMIN');
-    }
-
-    public function onAfterWrite()
-    {
-        parent::onAfterWrite();
-
-        foreach ($this->Departments() as $department) {
-
-            $department->BlogID = $this->ParentID;
-            $department->write();
-        }
-    }
 	public function Related(){
 		// $holder = $this->Parent();
 		// $tags = $this->Categories()->limit(6);
