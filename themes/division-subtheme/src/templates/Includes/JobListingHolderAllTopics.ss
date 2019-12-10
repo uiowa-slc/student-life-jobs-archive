@@ -2,7 +2,7 @@
 <ul class="tabs" data-tabs id="example-tabs">
 <%-- KEEP WEIRD LI SPACING BELOW, PLEASE: --%>
   <li class="tabs-title is-active"><a class="job-single__filter-tab" href="#panel1" aria-selected="true">Category</a></li><li class="tabs-title">
-  <a class="job-single__filter-tab" href="#panel2">Department</a></li><li class="tabs-title"><a class="job-single__filter-tab" href="#panel3">All open jobs by title</a>
+  <a class="job-single__filter-tab" href="#panel2">Department</a></li><li class="tabs-title"><a class="job-single__filter-tab" href="#panel3">Currently hiring</a>
   </li><li class="tabs-title"><a class="job-single__filter-tab" href="#panel4">All jobs by title</a>
   </li>
 </ul>
@@ -52,7 +52,7 @@
       <% end_loop %>
   </div>
   <div class="tabs-panel" id="panel3">
-    <h2 class="topic-list__heading">All open jobs by title:</h2>
+    <h2 class="topic-list__heading">Currently hiring jobs by title:</h2>
       <ul class="topic-list topic-list--three-columns">
           <% loop $ActiveJobListings %>
             <li class="topic-list__item"><i class="fa fa-file" aria-hidden="true"></i> <a href="$Link">$Title.LimitCharacters(20)</a></li>
