@@ -15,6 +15,10 @@ class JobListingHolderController extends PageController{
     //     'department/$ID' => 'department',
     //     'category/$ID' => 'category'
     // );
+
+// https://apps-test.housing.uiowa.edu/seo/feed/positions.json
+
+    
 //  You can query positions with parameters, like so…
 
 // feed/positions.json (all positions)
