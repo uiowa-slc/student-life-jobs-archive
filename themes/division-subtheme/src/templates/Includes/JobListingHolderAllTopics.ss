@@ -17,7 +17,7 @@
             <% if $BlogPosts %>
               <ul class="topic-list">
               <% loop $BlogPosts.Limit(5) %>
-                  <li class="topic-list__item"><i class="fa fa-file" aria-hidden="true"></i> <a href="$Link">$Title.LimitCharacters(20)</a></li>
+                  <li class="topic-list__item"><a href="$Link">$Title.LimitCharacters(20)</a></li>
                 <% end_loop %>
                 <% if $BlogPosts.Count > 5 %>
                  <li class="topic-list__item"><a class="topic-list__see-more" href="$Link">See more...</a></li>
@@ -37,7 +37,7 @@
             <% if $JobListings %>
               <ul class="topic-list">
               <% loop $JobListings.Limit(5) %>
-                  <li class="topic-list__item"><i class="fa fa-file" aria-hidden="true"></i> <a href="$Link">$Title</a></li>
+                  <li class="topic-list__item"><a href="$Link">$Title</a></li>
                 <% end_loop %>
                 <% if $JobListings.Count > 5 %>
                   <li class="topic-list__item"><a href="$Link" class="topic-list__see-more">See more...</a></li>
@@ -56,7 +56,7 @@
         <% loop $TopicsByLetter %>
           <li class="topic-list__item"><h3>$Letter</h3></li>
           <% loop $Topics %>
-            <li class="topic-list__item"><i class="fa fa-file" aria-hidden="true"></i> <a href="$Link">$Title.LimitCharacters(20)</a></li>
+            <li class="topic-list__item"><a href="$Link">$Title.LimitCharacters(20)</a></li>
           <% end_loop %>
         <% end_loop %>
       </ul>
