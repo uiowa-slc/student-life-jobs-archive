@@ -29,7 +29,7 @@ $BlockArea(BeforeContent)
               <% loop $Results %>
                 <li class="topic-list__item">
                   <a href="$Link">
-                    <h3><i class="fa fa-file"></i> $Title</h3>
+                    <h3>$Title</h3>
                     <p class="bloglistitem__category">
                       <% loop $Categories.Limit(1) %><span href="$URL" class="bloglistitem__category">$Title</span><% end_loop %>
                       <% loop $Departments.Limit(1) %><span href="$URL" class="bloglistitem__category">$Title</span><% end_loop %>
@@ -45,7 +45,7 @@ $BlockArea(BeforeContent)
           <p>No search term specified, please type one in below:</p>
         <% end_if %>
         <hr />
-        $TopicSearchForm
+        $TopicSearchFormSized
         <% with $Holder %>
           <% include JobListingHolderAllTopics %>
         <% end_with %>

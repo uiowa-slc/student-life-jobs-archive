@@ -9,7 +9,7 @@ $Header
             <div class="topic-search__container row">
               <div class="large-9 columns large-centered">
                 <h2 class="text-center">Search for a job below:</h2>
-                $TopicSearchForm
+                $TopicSearchFormSized
               </div>
             </div>
           </div>
@@ -113,7 +113,7 @@ $BlockArea(BeforeContent)
         <div class="topic-search__container row">
           <div class="large-9 columns large-centered">
             <h2 class="text-center">Search for a job below:</h2>
-            $TopicSearchForm
+            $TopicSearchFormSized
           </div>
         </div>
        <hr />
