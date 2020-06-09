@@ -1,0 +1,21 @@
+<article class="topic-content">
+  <% if $Content %>
+
+    <div class="main-content__text">
+    $Content
+    </div>
+
+    <h2 class="topic-related-header" style="margin-bottom: 0;">Positions listed under &ldquo;{$Title}&rdquo;:</h2>
+
+
+  <% end_if %>
+
+  <% if $FilterList %>
+    <% loop $FilterList.Sort('LastEdited') %>
+
+        <% include JobCard %>
+    <% end_loop %>
+  <% else %>
+      <p style="margin-top: 20px;">Nothing is currently listed under this category.</p>
+  <% end_if %>
+</article>

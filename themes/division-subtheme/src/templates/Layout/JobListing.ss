@@ -122,14 +122,14 @@ $Header
 				<% end_if %>
 			</div>
 
-			<% include JobListingHolderRelated %>
+<%-- 			<% include JobListingRelated %>
 
 			<h2>More job listings:</h2>
-			$TopicSearchForm
+
 			<% with $Parent %>
 			<% include JobListingHolderAllTopics %>
 			<% end_with %>
-			<% include JobListingStatement %>
+			<% include JobListingStatement %> --%>
 			$BlockArea(AfterContentConstrained)
 			$Form
 

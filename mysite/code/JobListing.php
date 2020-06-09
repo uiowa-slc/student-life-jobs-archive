@@ -7,36 +7,37 @@ use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use SilverStripe\Security\Permission;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\Control\Controller;
+use SilverStripe\Core\Environment;
 class JobListing extends Page {
 
-	private static $db = array (
-		'PayRate' => 'Text',
-		'Active' => 'Boolean',
-		'BasicJobFunction' => 'HTMLText',
-		'LearningOutcomes' => 'HTMLText',
-		'NextStepTitle' => 'HTMLText',
-		'NextStepLink' => 'HTMLText',
-		'Location' => 'Text',
-		'Qualifications' => 'HTMLText',
-		'Responsibilities' => 'HTMLText',
-		'WorkHours' => 'HTMLText',
-		'TrainingRequirements' => 'HTMLText',
-		'CategoryID' => 'Int'
-	);
+    private static $db = array (
+        'PayRate' => 'Text',
+        'Active' => 'Boolean',
+        'BasicJobFunction' => 'HTMLText',
+        'LearningOutcomes' => 'HTMLText',
+        'NextStepTitle' => 'HTMLText',
+        'NextStepLink' => 'HTMLText',
+        'Location' => 'Text',
+        'Qualifications' => 'HTMLText',
+        'Responsibilities' => 'HTMLText',
+        'WorkHours' => 'HTMLText',
+        'TrainingRequirements' => 'HTMLText',
+        'CategoryID' => 'Int'
+    );
 
-	private static $defaults = array(
-		'NextStepTitle' => 'Learn more and apply'
-	);
+    private static $defaults = array(
+        'NextStepTitle' => 'Learn more and apply'
+    );
 
-	private static $many_many = array(
+    private static $many_many = array(
         'Departments' => 'JobListingDepartment',
-	);
+    );
 
-	private static $belongs_many_many = array(
+    private static $belongs_many_many = array(
 
-	);
+    );
 
-	private static $default_sort = 'Title ASC';
+    private static $default_sort = 'Title ASC';
 
     /**
      * Returns a list of breadcrumbs for the current page.
@@ -49,9 +50,9 @@ class JobListing extends Page {
     */
 
     public function Parent(){
-    	$holder = JobListingHolder::get()->First();
-    	//echo 'hello'
-    	return $holder;
+        $holder = JobListingHolder::get()->First();
+        //echo 'hello'
+        return $holder;
     }
 
     // public function getBreadcrumbItems($maxDepth = 20, $stopAtPageType = false, $showHidden = false)
@@ -97,90 +98,114 @@ class JobListing extends Page {
                 // "active": true
 
 
-/*		'PayRate' => 'Text',
-		'Active' => 'Boolean',
-		'BasicJobFunction' => 'HTMLText',
-		'LearningOutcomes' => 'HTMLText',
-		'NextStepTitle' => 'HTMLText',
-		'NextStepLink' => 'HTMLText',
-		'Location' => 'Text',
-		'Qualifications' => 'HTMLText',
-		'Responsibilities' => 'HTMLText',
-		'WorkHours' => 'HTMLText',
-		'TrainingRequirements' => 'HTMLText',
+/*      'PayRate' => 'Text',
+        'Active' => 'Boolean',
+        'BasicJobFunction' => 'HTMLText',
+        'LearningOutcomes' => 'HTMLText',
+        'NextStepTitle' => 'HTMLText',
+        'NextStepLink' => 'HTMLText',
+        'Location' => 'Text',
+        'Qualifications' => 'HTMLText',
+        'Responsibilities' => 'HTMLText',
+        'WorkHours' => 'HTMLText',
+        'TrainingRequirements' => 'HTMLText',
 
-		*/
+        */
+    // public function Link($action = null) {
+    //     $relativeLink = $this->RelativeLink($action);
+    //     $link = Controller::join_links(Director::baseURL(), $relativeLink);
+    //     $this->extend('updateLink', $link, $action, $relativeLink);
+    //     if(strpos($link, '?stage=Live') !== false){
+    //         $link = str_replace("stage=Live&", "", $link);
+    //         $link = str_replace("stage=Live", "", $link);
+    //     }
+    //     return $link;
+    // }
 
     public function Link($action = null)
     {
-        $holder = JobListingHolder::get()->First();
+       $holder = JobListingHolder::get()->First();
 
-        return $holder->Link('show/'.$this->ID);
+
+
+       $link = $holder->Link('show/'.$this->ID);
+
+       //Needed for caching due to some weird session switching thing that appends stage to URL
+        if(strpos($link, '?stage=Stage') !== false){
+            $link = str_replace("stage=Stage&", "", $link);
+            $link = str_replace("stage=Stage", "", $link);
+        }
+        if(strpos($link, '?stage=Live') !== false){
+            $link = str_replace("stage=Live&", "", $link);
+            $link = str_replace("stage=Live", "", $link);
+        }
+
+        return $link;
     }
 
-	public function parseFromFeed($rawJob) {
+    public function parseFromFeed($rawJob) {
 
-		$this->ID = $rawJob['id'];
-		$this->Title = $rawJob['title'];
+        $this->ID = $rawJob['id'];
+        $this->Title = $rawJob['title'];
 
 
-		if(isset($rawJob['category_id'])){
-			$this->Category = new JobListingCategory();
-			$this->Category = $this->Category->getByID($rawJob['category_id']);
+        if(isset($rawJob['category_id'])){
+            $this->Category = new JobListingCategory();
+            $this->Category = $this->Category->getByID($rawJob['category_id']);
 
-		}
-		if(isset($rawJob['department_id'])){
-			$this->Department = new JobListingDepartment();
-			$this->Department = $this->Department->getByID($rawJob['department_id']);
-		}
+        }
+        if(isset($rawJob['department_id'])){
+            $this->Department = new JobListingDepartment();
+            $this->Department = $this->Department->getByID($rawJob['department_id']);
+        }
 
-		if(isset($rawJob['training_requirements'])) $this->TrainingRequirements = $rawJob['training_requirements'];
-		if(isset($rawJob['responsibilities'])) $this->Responsibilities = $rawJob['responsibilities'];
-		if(isset($rawJob['qualifications'])) $this->Qualifications = $rawJob['qualifications'];
-		if(isset($rawJob['basic_job_function'])) $this->BasicJobFunction = $rawJob['basic_job_function'];
-		if(isset($rawJob['what_you_will_learn'])) $this->LearningOutcomes = $rawJob['what_you_will_learn'];
-		if(isset($rawJob['work_location'])) $this->Location = $rawJob['work_location'];
-		if(isset($rawJob['work_hours'])) $this->WorkHours = $rawJob['work_hours'];
-		if(isset($rawJob['rate_of_pay'])) $this->PayRate = $rawJob['rate_of_pay'];
-		if(isset($rawJob['active'])) $this->Active = $rawJob['active'];
-		
-		return $this;
+        if(isset($rawJob['training_requirements'])) $this->TrainingRequirements = $rawJob['training_requirements'];
+        if(isset($rawJob['responsibilities'])) $this->Responsibilities = $rawJob['responsibilities'];
+        if(isset($rawJob['qualifications'])) $this->Qualifications = $rawJob['qualifications'];
+        if(isset($rawJob['basic_job_function'])) $this->BasicJobFunction = $rawJob['basic_job_function'];
+        if(isset($rawJob['what_you_will_learn'])) $this->LearningOutcomes = $rawJob['what_you_will_learn'];
+        if(isset($rawJob['work_location'])) $this->Location = $rawJob['work_location'];
+        if(isset($rawJob['work_hours'])) $this->WorkHours = $rawJob['work_hours'];
+        if(isset($rawJob['rate_of_pay'])) $this->PayRate = $rawJob['rate_of_pay'];
+        if(isset($rawJob['active'])) $this->Active = $rawJob['active'];
 
-	}
+        return $this;
 
-	public function Related(){
-		// $holder = $this->Parent();
-		// $tags = $this->Categories()->limit(6);
-		// $entries = new ArrayList();
+    }
 
-		// foreach($tags as $tag){
-		// 	$taggedEntries = $tag->BlogPosts()->exclude(array("ID"=>$this->owner->ID))->sort('PublishDate', 'ASC')->Limit(3);
-		// 	if($taggedEntries){
-		// 		foreach($taggedEntries as $taggedEntry){
-		// 			if($taggedEntry->ID){
-		// 				$entries->push($taggedEntry);
-		// 			}
-		// 		}
-		// 	}
+    public function Related(){
+        // $holder = $this->Parent();
+        // $tags = $this->Categories()->limit(6);
+        // $entries = new ArrayList();
 
-		// }
-		// $thisEntry = $entries->filter(array('ID' => $this->ID))->First();
+        // foreach($tags as $tag){
+        //  $taggedEntries = $tag->BlogPosts()->exclude(array("ID"=>$this->owner->ID))->sort('PublishDate', 'ASC')->Limit(3);
+        //  if($taggedEntries){
+        //      foreach($taggedEntries as $taggedEntry){
+        //          if($taggedEntry->ID){
+        //              $entries->push($taggedEntry);
+        //          }
+        //      }
+        //  }
 
-		// $entries->remove($thisEntry);
-		// if($entries->count() > 1){
-		// 	$entries->removeDuplicates();
-		// }
-		// return $entries;
-	}
+        // }
+        // $thisEntry = $entries->filter(array('ID' => $this->ID))->First();
 
-	public function NextStepDomain(){
-		$url = $this->NextStepLink;
+        // $entries->remove($thisEntry);
+        // if($entries->count() > 1){
+        //  $entries->removeDuplicates();
+        // }
+        // return $entries;
+    }
 
-		$parsedUrl = parse_url($url);
-		if(isset($parsedUrl['host'])){
-			$domain = $parsedUrl['host'];
-			return $domain;
-		}
+    public function NextStepDomain(){
+        $url = $this->NextStepLink;
 
-	}
+        $parsedUrl = parse_url($url);
+        if(isset($parsedUrl['host'])){
+            $domain = $parsedUrl['host'];
+            return $domain;
+        }
+
+    }
 }

@@ -1,10 +1,10 @@
 <?php
 use SilverStripe\CMS\Controllers\ContentController;
 use SilverStripe\View\ArrayData;
-
+use SilverStripe\Core\Environment;
 class JobListingHolderController extends PageController{
-	
-	private static $allowed_actions = array(
+
+    private static $allowed_actions = array(
         'show',
         'department',
         'category'
@@ -18,7 +18,7 @@ class JobListingHolderController extends PageController{
 
 // https://apps-test.housing.uiowa.edu/seo/feed/positions.json
 
-    
+
 //  You can query positions with parameters, like so…
 
 // feed/positions.json (all positions)
@@ -47,6 +47,15 @@ class JobListingHolderController extends PageController{
 // Aquatic Equipment Technician I, Recreational Services, CRWC, Aquatics, open
 // Dining Associate, University Housing and Dining, Burge Residence Hall, Food Service, closed
 
+    public function TopicSearchFormSized($size = "large"){
+
+        return $this->TopicSearchForm($this, 'SearchForm', null, null, $size);
+    }
+
+    public function TopicSearchForm($request, $name, $fields, $actions, $size = "large") {
+        return new TopicSearchForm($this, 'SearchForm', null, null, $size);
+    }
+
 
     public function show(){
         $id = $this->urlParams['ID'];
@@ -57,8 +66,12 @@ class JobListingHolderController extends PageController{
 
         $job = $this->singleJob($id);
 
+        if($job){
+            return $this->customise($job)->renderWith(array('JobListing', 'Page'));
+        }
+
         // print_r($job);
-        return $this->customise($job)->renderWith(array('JobListing', 'Page'));  
+
     }
 
     public function department(){
@@ -74,9 +87,9 @@ class JobListingHolderController extends PageController{
             $data = new ArrayData([
                 'FilterType' => 'Department',
                 'FilterTitle' => $department->Title,
-                'FilteredList' => $department->JobListings()
+                'FilterList' => $department->JobListings()
             ]);
-        
+
             return $this->customise($data)->renderWith(array('JobListingHolder', 'Page'));
         }
 
@@ -97,9 +110,9 @@ class JobListingHolderController extends PageController{
             $data = new ArrayData([
                 'FilterType' => 'Category',
                 'FilterTitle' => $category->Title,
-                'FilteredList' => $category->JobListings()
+                'FilterList' => $category->JobListings()
             ]);
-        
+
             return $this->customise($data)->renderWith(array('JobListingHolder', 'Page'));
         }
 
@@ -122,7 +135,7 @@ class JobListingHolderController extends PageController{
                 'FilterTitle' => $location->Title,
                 'FilteredList' => $location->JobListings()
             ]);
-        
+
             return $this->customise($data)->renderWith(array('JobListingHolder', 'Page'));
         }
 

@@ -9,6 +9,7 @@ use SilverStripe\Security\Permission;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Blog\Model\CategorisationObject;
 use SilverStripe\ORM\ArrayList;
+use SilverStripe\Core\Environment;
 
 /**
  * A department for keyword descriptions of a job listing location.
@@ -25,9 +26,11 @@ use SilverStripe\ORM\ArrayList;
 
 class JobListingDepartment extends JobListingCategorisationObject
 {
+    protected static $primaryTerm = 'department';
+    protected static $primaryTermPlural = 'departments';
 
     public function listingFeedURL(){
-       return JOBFEED_BASE.'positions.json?department_id='.$this->ID;
+       return Environment::getEnv('JOBFEED_BASE').'positions.json?department_id='.$this->ID;
     }
     public function Parent(){
         $holder = JobListingHolder::get()->First();

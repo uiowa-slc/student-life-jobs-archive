@@ -1,12 +1,12 @@
 <?php
 
 use SilverStripe\Dev\BuildTask;
-
+use SilverStripe\Core\Environment;
 class JobListingRemoveDeptFromTitleTask extends BuildTask{
 
 	protected $title = 'Job Listings - remove "IMU - "ish text from titles ';
 
-	protected $enabled = true;
+	protected $enabled = false;
 
 	function run($request){
 		increase_time_limit_to();
@@ -31,7 +31,7 @@ class JobListingRemoveDeptFromTitleTask extends BuildTask{
 			if($page->isPublished()){
 				$page->publish('Stage', 'Live');
 			}
-					
+
 		}
 		echo '</ul>';
 

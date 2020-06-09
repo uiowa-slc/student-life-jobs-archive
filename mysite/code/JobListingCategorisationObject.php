@@ -9,7 +9,8 @@ use SilverStripe\Security\Permission;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Blog\Model\CategorisationObject;
 use SilverStripe\ORM\ArrayList;
-
+use SilverStripe\Core\Environment;
+use quamsta\ApiCacher\FeedHelper;
 /**
  * A department for keyword descriptions of a job listing location.
  *
@@ -31,38 +32,26 @@ class JobListingCategorisationObject extends DataObject implements Categorisatio
         'Content' => 'HTMLText'
     );
 
-    private static $primaryTerm;
-    private static $primaryTermPlural;
+    protected static $primaryTerm;
+    protected static $primaryTermPlural;
 
     private static $feedURL;
 
-    public function listingFeedURL(){
-        print_r(JOBFEED_BASE.'positions.json?'.self::$primaryTerm.'_id='.$this->ID);
-       return JOBFEED_BASE.'positions.json?'.self::$primaryTerm.'_id='.$this->ID;
-    }
 
-    public function getJson($feedURL) {
-        $cache = new SimpleCache();
-        if ($rawFeed = $cache->get_data($feedURL, $feedURL)) {
-            $eventsDecoded = json_decode($rawFeed, TRUE);
-        } else {
-            $rawFeed = $cache->do_curl($feedURL);
-            $cache->set_cache($feedURL, $rawFeed);
-            $eventsDecoded = json_decode($rawFeed, TRUE);
+
+    public function JobListings($status = 'open'){
+
+        $feedURL = Environment::getEnv('JOBFEED_BASE').'positions.json?'.static::$primaryTerm.'_id='.$this->ID;
+
+        if($status == 'open'){
+            $feedURL .= '&open=true';
+        }elseif($status == 'closed'){
+            $feedURL .= '&closed=true';
         }
 
-        if (!empty($eventsDecoded)) {
-            return $eventsDecoded;
-        } else {
-            return false;
-        }
-    }
-
-    public function JobListings(){
-        $feedURL = $this->listingFeedURL();
 
         $jobList = new ArrayList();
-        $jobFeed = $this->getJson($feedURL);
+        $jobFeed = FeedHelper::getJson($feedURL);
 
         if (isset($jobFeed['positions'])) {
             $jobArray = $jobFeed['positions'];

@@ -77,28 +77,28 @@ class JobDepartmentsWidget extends Widget
         return parent::getCMSFields();
     }
 
-    /**
-     * @return DataList
-     */
-    public function getDepartments()
-    {
-        $blog = $this->Blog();
+    // /**
+    //  * @return DataList
+    //  */
+    // public function getDepartments()
+    // {
+    //     $blog = $this->Blog();
 
-        if (!$blog) {
-            return array();
-        }
+    //     if (!$blog) {
+    //         return array();
+    //     }
 
-        $query = $blog->Departments();
+    //     $query = $blog->Departments();
 
-        if ($this->Limit) {
-            $query = $query->limit(Convert::raw2sql($this->Limit));
-        }
+    //     if ($this->Limit) {
+    //         $query = $query->limit(Convert::raw2sql($this->Limit));
+    //     }
 
-        if ($this->Order && $this->Direction) {
-            $query = $query->sort(Convert::raw2sql($this->Order), Convert::raw2sql($this->Direction));
-        }
+    //     if ($this->Order && $this->Direction) {
+    //         $query = $query->sort(Convert::raw2sql($this->Order), Convert::raw2sql($this->Direction));
+    //     }
 
-        return $query;
-    }
+    //     return $query;
+    // }
 }
 

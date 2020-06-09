@@ -1,4 +1,5 @@
 <?php
-class JobListingController extends PageController{
-	
+use SilverStripe\Core\Environment;
+class JobListingController extends TopicController{
+
 }
