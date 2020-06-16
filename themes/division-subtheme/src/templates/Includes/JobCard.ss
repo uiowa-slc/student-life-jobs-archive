@@ -20,6 +20,8 @@
 
         <% if $NextStepLink %>
         <p><a href="$NextStepLink" target="_blank" class="button small">Apply for this job <i class="fa fa-external-link" aria-hidden="true"></i></a></p>
+        <% else %>
+        <p><strong>Status: </strong>Not currently hiring</p>
         <% end_if %>
 
         <% if $Categories.exists %>
