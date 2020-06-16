@@ -147,7 +147,7 @@ class JobListing extends Page {
 
         $this->ID = $rawJob['id'];
         $this->Title = $rawJob['title'];
-
+       // print_r($rawJob);
 
         if(isset($rawJob['category_id'])){
             $this->Category = new JobListingCategory();
@@ -168,8 +168,29 @@ class JobListing extends Page {
         if(isset($rawJob['work_hours'])) $this->WorkHours = $rawJob['work_hours'];
         if(isset($rawJob['rate_of_pay'])) $this->PayRate = $rawJob['rate_of_pay'];
         if(isset($rawJob['active'])) $this->Active = $rawJob['active'];
+        if(isset($rawJob['job_posting_url'])) $this->NextStepLink = $rawJob['job_posting_url'];
 
         return $this;
+
+    }
+
+    public function SearchListing($keywords){
+
+        $haystack = $this->Title.' '.$this->Responsibilities.' '.$this->Location;
+
+        if(stripos($haystack, $keywords) !== false){
+            return true;
+        }
+
+
+    }
+
+    public function getStatus(){
+        if($this->Active){
+            return 'Active (Currently hiring)';
+        }else{
+            return 'Closed (Not currently hiring)';
+        }
 
     }
 

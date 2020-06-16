@@ -12,34 +12,16 @@
         </h3>
 
 
-	<% if $Parent.ShowFullTopicBody %>
-			<div class="blogcard__desc">
-				$ContentDemotedHeadings.RAW
-			</div>
-		<% else %>
-			<% if $Summary %>
-				<div class="blogcard__desc">$Summary</div>
-			<% else %>
-				<p class="blogcard__desc">$Content.LimitCharacters(150) <a href="$Link">Continue reading</a></p>
-			<% end_if %>
-		<% end_if %>
+
+    		<p class="blogcard__desc"><strong>Location:</strong> $Location<br /><strong>Basic Job Function: </strong>$BasicJobFunction.LimitCharacters(150) <a href="$Link">Continue reading</a></p>
 
 
 
-        <% if $WebsiteLink %>
-        <p><a href="$WebsiteLink" target="_blank" class="button small">Visit Website <i class="fa fa-external-link" aria-hidden="true"></i></a></p>
+
+        <% if $NextStepLink %>
+        <p><a href="$NextStepLink" target="_blank" class="button small">Apply for this job <i class="fa fa-external-link" aria-hidden="true"></i></a></p>
         <% end_if %>
 
-        <% if $Parent.ShowLastUpdated && $LastEdited.TimeDiff < 604800 %>
-			<div class="byline">
-
-				
-				<p><em class="byline__on">Updated </em><span class="byline__on">on </span><time datetime="$LastEdited.format(c)" itemprop="datePublished">$LastEdited.format("MMMM d, y")</time></p>
-				
-
-
-			</div>
-		<% end_if %>
         <% if $Categories.exists %>
             <p class="topic-card__category">
                 <% loop $Categories %>

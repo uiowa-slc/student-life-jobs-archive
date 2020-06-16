@@ -47,9 +47,11 @@ class JobListingCategorisationObject extends DataObject implements Categorisatio
             $feedURL .= '&open=true';
         }elseif($status == 'closed'){
             $feedURL .= '&closed=true';
+        }elseif($status == 'all'){
+
         }
 
-
+        // print_r($feedURL);
         $jobList = new ArrayList();
         $jobFeed = FeedHelper::getJson($feedURL);
 
@@ -71,6 +73,11 @@ class JobListingCategorisationObject extends DataObject implements Categorisatio
 
         $this->ID = $rawDept['id'];
         $this->Title = $rawDept['name'];
+
+        if(isset($rawDept['active_job_postings'])){
+            $this->ActiveJobListings = $rawDept['active_job_postings'];
+        }
+
         return $this;
     }
 
@@ -91,15 +98,7 @@ class JobListingCategorisationObject extends DataObject implements Categorisatio
         return $fields;
     }
 
-    /**
-     * Returns a relative URL for the tag link.
-     *
-     * @return string
-     */
-    public function getLink(){
 
-        return Controller::join_links($this->Blog()->Link(), 'department', $this->URLSegment);
-    }
 
 
 }

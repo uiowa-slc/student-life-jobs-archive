@@ -25,8 +25,10 @@ $Header
 
 			<div class="content">
 				<div class="blogmeta">
+
                     <% loop $Departments.Limit(1) %><a href="$Link" class="topic-single__byline-cat">$Title</a><% end_loop %>
                     <ul class="social-icons">
+                        <li><span>Share:</span></li>
                         <li><a href="javascript:window.open('http://www.facebook.com/sharer/sharer.php?u=$AbsoluteLink', '_blank', 'width=400,height=500');void(0);"  title="Share on Facebook"><img src="{$ThemeDir}/dist/images/icon_facebook.png" alt="Share on Facebook"></a>
                         </li>
                         <li><a href="https://twitter.com/intent/tweet?text=$AbsoluteLink" title="Share on Twitter" target="_blank"><img src="{$ThemeDir}/dist/images/icon_twitter.png" alt="Share on Twitter"></a></li>
@@ -34,8 +36,17 @@ $Header
                     </ul>
                 </div>
 				<div class="job-single__basic-info">
+
 				<% if $PayRate %><p><span class="job-single__descriptor">Rate of pay:</span> $PayRate</p><% end_if %>
 				<% if $Location %><p><span class="job-single__descriptor">Work location:</span> $Location</p><% end_if %>
+                <p><span class="job-single__descriptor">Status:</span> $Status</span></p>
+                <% if $Active && $NextStepLink %>
+                <p><a href="$NextStepLink" target="_blank" rel="noopener" class="button">Apply for this job</a></p>
+                <% if $TrainingRequirements || $Qualifications %>
+                    <p style="font-size: 16px;">Before applying for this job, please check the <% if $Qualifications %><a href="#qualifications">qualifications</a> <% end_if %><% if $TrainingRequirements && $Qualifications %>and <% end_if %><% if $TrainingRequirements %><a href="#training-requirements">training requirements</a> <% end_if %>for this position.</p>
+                <% end_if %>
+                <% end_if %>
+
 				</div>
 					<% if $LearningOutcomes %>
 
@@ -56,12 +67,7 @@ $Header
 						$Responsibilities
 
 					<% end_if %>
-				<% if $Qualifications %>
 
-						<h2>Qualifications</h2>
-						$Qualifications
-
-				<% end_if %>
 
 				<% if $WorkHours %>
 
@@ -69,16 +75,21 @@ $Header
 						$WorkHours
 
 				<% end_if %>
+                <% if $Qualifications %>
 
+                        <h2 id="qualifications">Qualifications</h2>
+                        $Qualifications
+
+                <% end_if %>
 				<% if $TrainingRequirements %>
 
-						<h2>Training requirements</h2>
+						<h2 id="training-requirements">Training requirements</h2>
 						$TrainingRequirements
 
 				<% end_if %>
 				<% if $NextStepLink %>
 					<div class="apply__container">
-						<a href="$NextStepLink" class="button apply__button" target="_blank"><% if $NextStepTitle %>$NextStepTitle<% else %>Next step<% end_if %></a>
+						<a href="$NextStepLink" class="button apply__button" target="_blank">Apply for this job</a>
 						<div class="apply__content">
 							<% if $Content %>
 							$Content
@@ -87,8 +98,6 @@ $Header
 							<% end_if %>
 						</div>
 					</div>
-					<hr />
-					<p>Jobs listed on this website do not reflect current openings. To view availability and apply for this position, <a href="$NextStepLink" target="_blank">visit this website</a>.</p>
 				<% end_if %>
 
 				<% if $Links %>
@@ -122,14 +131,14 @@ $Header
 				<% end_if %>
 			</div>
 
-<%-- 			<% include JobListingRelated %>
-
+ 			<%-- <% include JobListingRelated %> --%>
+            <hr />
 			<h2>More job listings:</h2>
 
 			<% with $Parent %>
-			<% include JobListingHolderAllTopics %>
+			<% include JobBrowseByFilterFull %>
 			<% end_with %>
-			<% include JobListingStatement %> --%>
+			<%-- <% include JobListingStatement %> --%>
 			$BlockArea(AfterContentConstrained)
 			$Form
 

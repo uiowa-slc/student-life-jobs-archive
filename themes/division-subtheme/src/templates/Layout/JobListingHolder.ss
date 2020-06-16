@@ -1,23 +1,19 @@
 $Header
 <main class="main-content__container" id="main-content__container">
 
-
 <% if $Action == "index" %>
-<%--   <% include FeaturedImage %> --%>
-<% with $BackgroundImage %>
-  <div style="background-repeat: no-repeat; background-size: cover;" data-interchange="[$FocusFill(600,400).URL, small], [$FocusFill(1600,500).URL, medium]">
-<% end_with %>
+    <% with $BackgroundImage %>
+      <div style="background-repeat: no-repeat; background-size: cover;" data-interchange="[$FocusFill(600,400).URL, small], [$FocusFill(1600,500).URL, medium]">
+    <% end_with %>
     <div class="topic-search-bg background-image" style="background-position: {$PercentageX}% {$PercentageY}%;  display: flex;
     align-items: center; background: rgba(0,0,0,0.4);">
-
-
-        <div style="max-width: 700px; margin: auto; text-align: center; z-index:1; position: relative;">
+        <div style="width: 100%; max-width: 700px; margin: auto; text-align: center; z-index:1; position: relative;">
           <h1 class="background-image__title" style="margin-bottom: 20px;"><a href="$Link" style="color: white;">$Title</a></h1>
           $TopicSearchFormSized
 
           <p style="color: white; font-size: 16px; line-height: 2">
-            <span class="topic-search-minicats__heading">Browse open positions by category:</span>
-            <% loop $Categories.Sort('Title') %>
+            <span class="topic-search-minicats__heading">Browse currently hiring jobs by category:</span>
+            <% loop $Categories(true).Sort('Title') %>
             <span style="display: inline-block; margin: 0 2px; "><a href="$Link" style="color: white; text-decoration: underline;">$Title</a><% if not $Last %>,</span><% end_if %>
             <% end_loop %>
 
@@ -27,8 +23,6 @@ $Header
 
             </p>
         </div>
-
-
     </div>
   </div>
 <% else_if $FilterType %>
@@ -43,7 +37,7 @@ $Header
           <% end_if %>
         <% else %>
           <% if $FilterType %>
-              <h1>Jobs listed under &ldquo;{$FilterTitle}&rdquo;: </h1>
+              <h1>Currently hiring jobs under &ldquo;{$FilterTitle}&rdquo;: </h1>
           <% end_if %>
         <% end_if %>
         </div>
@@ -55,14 +49,14 @@ $Header
 
 $BeforeContent
 
-
+<%-- if we aren't filtering, eg, the main/home view --%>
 <% if not $FilterType %>
   <% if $Content %>
     <div class="grid-container">
       <div class="grid-x grid-padding-x">
           <article class="cell medium-8 large-
 
-          6">
+          6 medium-centered">
             $BeforeContentConstrained
 
 
@@ -109,35 +103,38 @@ $BeforeContent
         <% end_if %>
 
 
+
     </article>
-<%--       <div class="cell small-12 large-1 show-for-large">
+      <div class="cell small-12 large-1 show-for-large">
 
       </div>
 
-      <div class="cell medium-4">
+      <div class="cell large-10 large-centered">
         <div class="dp-sticky dp-sticky--medium">
           <div style="padding-top: 20px;">
             $TopicSearchFormSized("small")
-            <% include JobBrowseByFilter %>
+            <% include JobBrowseByFilterFull %>
           </div>
       </div>
-    </div> --%>
+    </div>
 
 
   </div>
+
+
 </div>
 
-<% end_if %>
-<%--
 
-  <% include JobBrowseAllFull %>
-  <% include JobFooterFull %>
+<% end_if %>
+
+
+  <%--<% include JobFooterFull %> --%>
 
     $AfterContentConstrained
     $Form
 
 
 
-$AfterContent --%>
+$AfterContent
 
 </main>

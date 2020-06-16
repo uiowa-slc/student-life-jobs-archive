@@ -50,12 +50,15 @@ feed/locations.json */
 
     public function JobListings($status = 'open'){
 
-        $feedURL = Environment::getEnv('JOBFEED_BASE').'positions.json';
+        $feedURL = Environment::getEnv('JOBFEED_BASE').'positions.json?';
 
         if($status == 'open'){
             $feedURL .= '&open=true';
         }elseif($status == 'closed'){
             $feedURL .= '&closed=true';
+        }
+        elseif($status == 'any'){
+
         }
 
         $jobList = new ArrayList();
@@ -77,26 +80,37 @@ feed/locations.json */
 
     }
 
+
     public function CategorisationObjects($term, $termPlural, $filterByOpen = false){
 
         $feedURL = Environment::getEnv('JOBFEED_BASE').$termPlural.'.json';
 
         $catList = new ArrayList();
         $catFeed= FeedHelper::getJson($feedURL);
-
+       // print_r($feedURL);
         //print_r($catFeed);
 
         if (isset($catFeed[$termPlural])) {
             $catArray = $catFeed[$termPlural];
             foreach ($catArray as $cat) {
                 if (isset($cat)) {
-                    $catObj = new JobListingCategory();
+
+                    //THIS NEEDS TO BE FIXED TO ACCOUNT FOR DEPTS OR OTHER CAT OBJECTS.
+
+                    $catObjName = "JobListing".ucfirst($term);
+                    $catObj = new $catObjName;
 
                     if($filterByOpen == true){
                         $catObj = $catObj->parseFromFeed($cat[$term]);
-                        if($catObj->JobListings()->First()){
-                            $catList->push($catObj);
+
+                        if($catObj->ActiveJobListings > 0){
+                             $catList->push($catObj);
                         }
+
+                        //TODO: Replace with check for active_job_postings instead of checking through JobListings()
+                        // if($catObj->JobListings()->First()){
+                        //     $catList->push($catObj);
+                        // }
 
 
                     }else{

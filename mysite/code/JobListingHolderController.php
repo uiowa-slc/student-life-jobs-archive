@@ -2,12 +2,22 @@
 use SilverStripe\CMS\Controllers\ContentController;
 use SilverStripe\View\ArrayData;
 use SilverStripe\Core\Environment;
+use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\Control\HTTPRequest;
+use SilverStripe\Core\Extension;
+use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\FormAction;
+use SilverStripe\ORM\Search\FulltextSearchable;
+use SilverStripe\CMS\Search\SearchForm;
 class JobListingHolderController extends PageController{
 
     private static $allowed_actions = array(
         'show',
         'department',
-        'category'
+        'category',
+        'results',
+        'SearchForm',
     );
 
     // private static $url_handlers = array(
@@ -48,12 +58,18 @@ class JobListingHolderController extends PageController{
 // Dining Associate, University Housing and Dining, Burge Residence Hall, Food Service, closed
 
     public function TopicSearchFormSized($size = "large"){
+        $form = $this->TopicSearchForm($this, 'SearchForm', null, null, $size);
 
-        return $this->TopicSearchForm($this, 'SearchForm', null, null, $size);
+
+        return $form;
     }
 
     public function TopicSearchForm($request, $name, $fields, $actions, $size = "large") {
-        return new TopicSearchForm($this, 'SearchForm', null, null, $size);
+        $form = new TopicSearchForm($request, $name, $fields, $actions, $size = "large");
+        $field = $form->Fields()->First();
+
+        $field->setAttribute('placeholder', 'Search for currently open jobs');
+        return $form;
     }
 
 
@@ -73,6 +89,7 @@ class JobListingHolderController extends PageController{
         // print_r($job);
 
     }
+
 
     public function department(){
         // $department = new JobListingDepartment();
@@ -98,19 +115,28 @@ class JobListingHolderController extends PageController{
         return null;
     }
     public function category(){
+
         // $department = new JobListingDepartment();
         // $department->ID = 8;
         // $department->Title = 'Test';
         $category = $this->getCurrentCategory();
+        $openClosed = $this->request->param('OtherID');
 
         //print_r($department);
 
         if ($category) {
 
+            if($openClosed == 'all'){
+                $jobList = $category->JobListings('all');
+            }else{
+                $jobList = $category->JobListings();
+            }
+
+
             $data = new ArrayData([
                 'FilterType' => 'Category',
                 'FilterTitle' => $category->Title,
-                'FilterList' => $category->JobListings()
+                'FilterList' => $jobList
             ]);
 
             return $this->customise($data)->renderWith(array('JobListingHolder', 'Page'));
@@ -179,4 +205,76 @@ class JobListingHolderController extends PageController{
         parent::init();
 
     }
+    /**
+     * Site search form
+     *
+     * @return SearchForm
+     */
+    public function SearchForm()
+    {
+        $searchText = '';
+        if ($this->owner->getRequest() && $this->owner->getRequest()->getVar('Search')) {
+            $searchText = $this->owner->getRequest()->getVar('Search');
+        }
+
+        $placeholder = _t('SilverStripe\\CMS\\Search\\SearchForm.SEARCH', 'Search');
+        $fields = FieldList::create(
+            TextField::create('Search', false, $searchText)
+                ->setAttribute('placeholder', $placeholder)
+        );
+        $actions = FieldList::create(
+            FormAction::create('results', _t('SilverStripe\\CMS\\Search\\SearchForm.GO', 'Go'))
+        );
+        /** @skipUpgrade */
+        $form = SearchForm::create($this->owner, 'SearchForm', $fields, $actions);
+        $form->classesToSearch(FulltextSearchable::get_searchable_classes());
+        return $form;
+    }
+    /**
+     * Process and render search results.
+     *
+     * @param array $data The raw request data submitted by user
+     * @param SearchForm $form The form instance that was submitted
+     * @param SS_HTTPRequest $request Request generated for this action
+     */
+    public function results($data, $form) {
+
+        $results = $this->getSearchResults();
+
+        //print_r($results);
+
+        //$resultsFiltered = $results->filter(array('ParentID' => $this->owner->ID));
+
+        $data = array(
+            'Results' => $results,
+            'Query' => DBField::create_field('Text', $form->getSearchQuery()),
+            'Title' => _t('SearchForm.SearchResults', 'Search Results'),
+            'Holder' => $this->owner
+        );
+
+
+        return $this->owner->customise($data)->renderWith(array($this->owner->ClassName.'_results', 'TopicHolder_results', 'Page'));
+    }
+
+    private function getSearchResults(){
+       // Get request data from request handler
+        $request = $this->request;
+        $keywords = $request->requestVar('Search');
+
+        //TODO: apply basic search term filtering
+        $allJobs = $this->JobListings('open');
+
+       //print_r($allJobs->First());
+
+        //$filteredJobs = $allJobs->filter(array('Title:PartialMatch' => 'Accommodation Assistant - Level 1'));
+        $filteredJobs = $allJobs->filterByCallback(function($item, $list) use ($keywords) {
+            return $item->SearchListing($keywords);
+            });
+        //print_r($filteredJobs);
+
+        return $filteredJobs;
+
+
+    }
+
 }

@@ -5,7 +5,7 @@
             <div class="cell small-12 large-1 show-for-medium"></div>
             <div class="cell large-11">
 
-                  <h2 class="topicholder-section__heading">Browse all open positions by category</h2>
+                  <h2 class="topicholder-section__heading">Browse all open jobs by category</h2>
 
 
                  <ul class="topicholder-all-list">
@@ -34,7 +34,7 @@
             <div class="cell small-12 medium-1 hide-for-large"></div>
             <div class="cell medium-11">
 
-                  <h2 class="topicholder-section__heading">Browse all open positions by department</h2>
+                  <h2 class="topicholder-section__heading">Browse all open jobs by department</h2>
 
 
                  <ul class="topicholder-all-list">

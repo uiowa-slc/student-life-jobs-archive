@@ -42,8 +42,9 @@ class JobListingDepartment extends JobListingCategorisationObject
      *
      * @return string
      */
-    public function getLink()
+    public function Link()
     {
+
 
         $holder = JobListingHolder::get()->First();
         return $holder->Link('department/'.$this->ID);
@@ -52,12 +53,15 @@ class JobListingDepartment extends JobListingCategorisationObject
     public static function getByID($id){
         //TODO: Request categories.json?id=xx from Mark P
         $holder = JobListingHolder::get()->First();
+        $deps = new ArrayList();
         $deps = $holder->Departments();
-
-        foreach($deps as $dep){
-            if($dep->ID == $id){
-                return $dep;
+        if($deps){
+            foreach($deps as $dep){
+                if($dep->ID == $id){
+                    return $dep;
+                }
             }
         }
     }
+
 }

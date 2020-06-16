@@ -4,7 +4,7 @@
         <div class="grid-x grid-padding-x">
             <div class="cell small-12 large-1 show-for-medium"></div>
             <div class="cell large-11">
-                  <h2 class="topicholder-section__heading">Recently updated positions</h2>
+                  <h2 class="topicholder-section__heading">Recently updated jobs</h2>
                 <% end_if %>
 
                 <div class="grid-x grid-padding-x small-up-2">

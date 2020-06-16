@@ -1,69 +1,75 @@
 $Header
 <main class="main-content__container" id="main-content__container">
 
-  <!-- Background Image Feature -->
-  <% if $BackgroundImage %>
-    <% include FeaturedImage %>
-  <% end_if %>
-  $Breadcrumbs
 
-<% if not $BackgroundImage %>
-  <div class="column row">
-    <div class="main-content__header">
-      <h1>$Title</h1>
+   $Breadcrumbs
+  <div class="grid-container">
+    <div class="grid-x align-center grid-padding-x">
+      <div class="cell">
+        <div class="main-content__header">
+          <h1>Search results</h1>
+        </div>
+      </div>
     </div>
   </div>
-<% end_if %>
 
-$BlockArea(BeforeContent)
 
-<div class="row">
 
-  <article role="main" class="main-content main-content--with-padding <% if $Children || $Menu(2) || $SidebarBlocks ||  $SidebarView.Widgets %>main-content--with-sidebar<% else %>main-content--full-width<% end_if %>">
-    $BlockArea(BeforeContentConstrained)
-    <div class="main-content__text">
-        <% if $Query %>
-          <h2>Search results for "<em>{$Query}</em>"</h2>
-          <% if $Results %>
-          <ul class="topic-list">
-              <% loop $Results %>
-                <li class="topic-list__item">
-                  <a href="$Link">
-                    <h3><i class="fa fa-file"></i> $Title</h3>
-                    <p class="bloglistitem__category">
-                      <% loop $Categories.Limit(1) %><span href="$URL" class="bloglistitem__category">$Title</span><% end_loop %>
-                      <% loop $Departments.Limit(1) %><span href="$URL" class="bloglistitem__category">$Title</span><% end_loop %>
-                    </p>
-                  </a>
-                </li>
-              <% end_loop %>
-          </ul>
-          <% else %>
-            <p>No results found for "<em>{$Query}</em>."</p>
-          <% end_if %>
+$BeforeContent
+
+
+
+
+<div class="grid-container">
+
+  <div class="grid-x grid-padding-x">
+    <div class="cell small-12 large-1 show-for-medium"></div>
+      <article class="cell medium-8 large-6">
+          <div style="padding-top: 20px;">
+            $TopicSearchFormSized("medium")
+          </div>
+        $BeforeContentConstrained
+
+        <% if $Results %>
+          <% loop $Results %>
+              <% include JobCard %>
+          <% end_loop %>
+
         <% else %>
-          <p>No search term specified, please type one in below:</p>
+              <% if $Query %>
+                <p style="margin-top: 20px; font-weight: bold;">Sorry, there are no open jobs that matched this search term.</p>
+              <% else %>
+                <p style="margin-top: 20px; font-weight: bold;">No search term specified. Please specify a search term and try searching again.</p>
+              <% end_if %>
+
         <% end_if %>
-        <hr />
-        $TopicSearchForm
-        <% with $Holder %>
-          <% include JobListingHolderAllTopics %>
-        <% end_with %>
-    </div>
-    $BlockArea(AfterContentConstrained)
-    $Form
-    <% if $ShowChildPages %>
-      <% include ChildPages %>
-    <% end_if %>
-  </article>
-  <aside class="sidebar">
-    <% include SideNav %>
-    <% if $SideBarView %>
-      $SideBarView
-    <% end_if %>
-    $BlockArea(Sidebar)
-  </aside>
+
+<%--         <% include JobFeedback %> --%>
+
+      </article>
+
+      <div class="cell small-12 large-1 show-for-large">
+
+      </div>
+
+      <div class="cell medium-4">
+        <div class="dp-sticky dp-sticky--medium">
+
+
+
+          <% include JobBrowseByFilter %>
+        </div>
+      </div>
+  </div>
 </div>
-$BlockArea(AfterContent)
+
+<%--   <% include JobFooterFull %>
+ --%>
+    $AfterContentConstrained
+    $Form
+
+
+
+$AfterContent
 
 </main>
