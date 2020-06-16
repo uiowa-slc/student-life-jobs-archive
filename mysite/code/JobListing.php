@@ -186,6 +186,7 @@ class JobListing extends Page {
     }
 
     public function getStatus(){
+
         if($this->Active){
             return 'Active (Currently hiring)';
         }else{

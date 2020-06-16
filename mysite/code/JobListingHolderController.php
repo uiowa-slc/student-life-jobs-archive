@@ -104,7 +104,8 @@ class JobListingHolderController extends PageController{
             $data = new ArrayData([
                 'FilterType' => 'Department',
                 'FilterTitle' => $department->Title,
-                'FilterList' => $department->JobListings()
+                'FilterList' => $department->JobListings(),
+                'FilterObject' => $department
             ]);
 
             return $this->customise($data)->renderWith(array('JobListingHolder', 'Page'));
@@ -120,7 +121,7 @@ class JobListingHolderController extends PageController{
         // $department->ID = 8;
         // $department->Title = 'Test';
         $category = $this->getCurrentCategory();
-        $openClosed = $this->request->param('OtherID');
+        $openClosed = $this->getFilterOpenClosed();
 
         //print_r($department);
 
@@ -128,7 +129,7 @@ class JobListingHolderController extends PageController{
 
             if($openClosed == 'all'){
                 $jobList = $category->JobListings('all');
-                $filterTitle = 'All jobs (hiring or not) listed under '.$category->Title;
+                $filterTitle = 'All jobs listed under "'.$category->Title.'":';
             }else{
                 $jobList = $category->JobListings();
                 $filterTitle = 'All currently hiring jobs listed under '.$category->Title;
@@ -138,7 +139,8 @@ class JobListingHolderController extends PageController{
             $data = new ArrayData([
                 'FilterType' => 'Category',
                 'FilterTitle' => $filterTitle,
-                'FilterList' => $jobList
+                'FilterList' => $jobList,
+                'FilterObject' => $category
             ]);
 
             return $this->customise($data)->renderWith(array('JobListingHolder', 'Page'));
@@ -171,6 +173,12 @@ class JobListingHolderController extends PageController{
 
         return null;
     }
+
+    public function getFilterOpenClosed(){
+        $openClosed = $this->request->param('OtherID');
+        return $openClosed;
+    }
+
     public function IsFilterActive(){
         if($this->getCurrentCategory() || $this->getCurrentDepartment()){
             return true;

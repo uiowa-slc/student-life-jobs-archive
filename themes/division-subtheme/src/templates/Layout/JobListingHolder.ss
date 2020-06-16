@@ -16,11 +16,6 @@ $Header
             <% loop $Categories(true).Sort('Title') %>
             <span style="display: inline-block; margin: 0 2px; "><a href="$Link" style="color: white; text-decoration: underline;">$Title</a><% if not $Last %>,</span><% end_if %>
             <% end_loop %>
-
-<%--             <% if $Categories.Count > 20 %>
-              <span class="topic-search-minicats__heading"><a href="#browse-categories" style="color: white; text-decoration: underline;">and more...</a></span>
-            <% end_if %> --%>
-
             </p>
         </div>
     </div>
@@ -91,7 +86,7 @@ $BeforeContent
 
   <div class="grid-x grid-padding-x">
     <div class="cell small-12 large-1 show-for-large"></div>
-    <article class="cell medium-8 large-6">
+    <article class="cell medium-8">
 
       $BeforeContentConstrained
 

@@ -9,7 +9,9 @@
 
 
   <% end_if %>
-
+    <% if $FilterOpenClosed == "all" %>
+        <p>The following is a list of all jobs in this category and some jobs may not currently be hiring. <a href="{$FilterObject.Link}">See only the currently hiring jobs in this category.</a></p>
+    <% end_if %>
   <% if $FilterList %>
     <% loop $FilterList.Sort('LastEdited') %>
 
@@ -17,5 +19,11 @@
     <% end_loop %>
   <% else %>
       <p style="margin-top: 20px;">There currently aren't any open jobs listed under this category.</p>
+
+
   <% end_if %>
+
+      <% if $FilterOpenClosed != "all" %>
+        <p><a href="{$FilterObject.Link}/all">See all jobs in this category (hiring or not).</a></p>
+      <% end_if %>
 </article>
