@@ -128,14 +128,16 @@ class JobListingHolderController extends PageController{
 
             if($openClosed == 'all'){
                 $jobList = $category->JobListings('all');
+                $filterTitle = 'All jobs (hiring or not) listed under '.$category->Title;
             }else{
                 $jobList = $category->JobListings();
+                $filterTitle = 'All currently hiring jobs listed under '.$category->Title;
             }
 
 
             $data = new ArrayData([
                 'FilterType' => 'Category',
-                'FilterTitle' => $category->Title,
+                'FilterTitle' => $filterTitle,
                 'FilterList' => $jobList
             ]);
 

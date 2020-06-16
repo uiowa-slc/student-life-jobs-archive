@@ -33,11 +33,11 @@ $Header
         <div class="main-content__header">
         <% if $FilterType.Content || $CurrentTag.Content %>
           <% if $FilterType %>
-            <h1>$FilterType.Title</h1>
+            <h1>$Title</h1>
           <% end_if %>
         <% else %>
           <% if $FilterType %>
-              <h1>Currently hiring jobs under &ldquo;{$FilterTitle}&rdquo;: </h1>
+              <h1>{$FilterTitle}</h1>
           <% end_if %>
         <% end_if %>
         </div>
