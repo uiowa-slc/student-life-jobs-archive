@@ -186,8 +186,8 @@ class JobListing extends Page {
     }
 
     public function getStatus(){
-
-        if($this->Active){
+        //TODO: Have Mark Fix the status coming out of api
+        if($this->NextStepsLink){
             return 'Active (Currently hiring)';
         }else{
             return 'Closed (Not currently hiring)';

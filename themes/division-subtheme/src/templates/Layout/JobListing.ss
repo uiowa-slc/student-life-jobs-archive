@@ -39,6 +39,7 @@ $Header
 
 				<% if $PayRate %><p><span class="job-single__descriptor">Rate of pay:</span> $PayRate</p><% end_if %>
 				<% if $Location %><p><span class="job-single__descriptor">Work location:</span> $Location</p><% end_if %>
+
                 <p><span class="job-single__descriptor">Status:</span> $Status</span></p>
                 <% if $Active && $NextStepLink %>
                 <p><a href="$NextStepLink" target="_blank" rel="noopener" class="button">Apply for this job</a></p>
