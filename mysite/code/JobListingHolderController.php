@@ -16,6 +16,7 @@ class JobListingHolderController extends PageController{
         'show',
         'department',
         'category',
+        'location',
         'results',
         'SearchForm',
     );

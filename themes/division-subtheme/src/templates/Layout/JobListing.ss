@@ -38,7 +38,7 @@ $Header
 				<div class="job-single__basic-info">
 
 				<% if $PayRate %><p><span class="job-single__descriptor">Rate of pay:</span> $PayRate</p><% end_if %>
-				<% if $Location %><p><span class="job-single__descriptor">Work location:</span> $Location</p><% end_if %>
+				<% if $Location %><p><span class="job-single__descriptor">Work location:</span><a href="$Location.Link">$Location.Title</a></p><% end_if %>
 
                 <p><span class="job-single__descriptor">Status:</span> $Status</span></p>
                 <% if $Active && $NextStepLink %>

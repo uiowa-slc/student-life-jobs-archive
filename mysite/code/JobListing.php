@@ -17,7 +17,6 @@ class JobListing extends Page {
         'LearningOutcomes' => 'HTMLText',
         'NextStepTitle' => 'HTMLText',
         'NextStepLink' => 'HTMLText',
-        'Location' => 'Text',
         'Qualifications' => 'HTMLText',
         'Responsibilities' => 'HTMLText',
         'WorkHours' => 'HTMLText',
@@ -146,7 +145,7 @@ class JobListing extends Page {
     public function parseFromFeed($rawJob) {
 
         $this->ID = $rawJob['id'];
-        $this->Title = $rawJob['title'];
+        $this->Title = $rawJob['posting_title'];
        // print_r($rawJob);
 
         if(isset($rawJob['category_id'])){
@@ -158,13 +157,16 @@ class JobListing extends Page {
             $this->Department = new JobListingDepartment();
             $this->Department = $this->Department->getByID($rawJob['department_id']);
         }
-
+        if(isset($rawJob['location_id'])){
+            $this->Location = new JobListingLocation();
+            $this->Location = $this->Location->getByID($rawJob['location_id']);
+        }
         if(isset($rawJob['training_requirements'])) $this->TrainingRequirements = $rawJob['training_requirements'];
         if(isset($rawJob['responsibilities'])) $this->Responsibilities = $rawJob['responsibilities'];
         if(isset($rawJob['qualifications'])) $this->Qualifications = $rawJob['qualifications'];
         if(isset($rawJob['basic_job_function'])) $this->BasicJobFunction = $rawJob['basic_job_function'];
         if(isset($rawJob['what_you_will_learn'])) $this->LearningOutcomes = $rawJob['what_you_will_learn'];
-        if(isset($rawJob['work_location'])) $this->Location = $rawJob['work_location'];
+        // if(isset($rawJob['work_location'])) $this->Location = $rawJob['work_location'];
         if(isset($rawJob['work_hours'])) $this->WorkHours = $rawJob['work_hours'];
         if(isset($rawJob['rate_of_pay'])) $this->PayRate = $rawJob['rate_of_pay'];
         if(isset($rawJob['active'])) $this->Active = $rawJob['active'];

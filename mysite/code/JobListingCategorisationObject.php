@@ -11,6 +11,7 @@ use SilverStripe\Blog\Model\CategorisationObject;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\Core\Environment;
 use quamsta\ApiCacher\FeedHelper;
+use SilverStripe\View\ArrayData;
 /**
  * A department for keyword descriptions of a job listing location.
  *
@@ -38,6 +39,22 @@ class JobListingCategorisationObject extends DataObject implements Categorisatio
     private static $feedURL;
 
 
+    public static function getByID($id, $term, $termPlural){
+       $feedURL = Environment::getEnv('JOBFEED_BASE').''.$termPlural.'.json?id='.$id;
+       $catObjName = "JobListing".ucfirst($term);
+       $catObj = new $catObjName;
+       $catFeed = FeedHelper::getJson($feedURL);
+
+       if(isset($catFeed[$termPlural][0])){
+            //print_r($catFeed[$termPlural][0]['location']);
+            $catObj = $catObj->parseFromFeed($catFeed[$termPlural][0][$term]);
+           // print_r($catObj);
+            return $catObj;
+
+       }
+
+
+    }
 
     public function JobListings($status = 'open'){
 

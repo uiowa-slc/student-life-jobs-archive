@@ -92,6 +92,7 @@ feed/locations.json */
 
         if (isset($catFeed[$termPlural])) {
             $catArray = $catFeed[$termPlural];
+
             foreach ($catArray as $cat) {
                 if (isset($cat)) {
 
@@ -120,7 +121,7 @@ feed/locations.json */
 
                 }
             }
-            //print_r($jobList);
+            // if($term == 'location')print_r($feedURL);
             return $catList;
 
 
@@ -141,29 +142,11 @@ feed/locations.json */
     }
 
 
-    public function Locations(){
-        $feedURL = Environment::getEnv('JOBFEED_BASE').'locations.json';
-
-        $locationList = new ArrayList();
-        $locationFeed= FeedHelper::getJson($feedURL);
-
-       // print_r($locationFeed);
-
-        if (isset($locationFeed['locations'])) {
-            $locationArray = $locationFeed['locations'];
-            foreach ($locationArray as $location) {
-                if (isset($location)) {
-                    $locationObj = new JobListingLocation();
-
-                    $locationList->push($locationObj->parseFromFeed($location['location']));
-                }
-            }
-            //print_r($jobList);
-            return $locationList;
-
-
-        }
+    public function Locations($filterByOpen = false){
+        $locations = $this->CategorisationObjects('location', 'locations', $filterByOpen);
+        return $locations;
     }
+
 
     public function singleJob($id) {
 

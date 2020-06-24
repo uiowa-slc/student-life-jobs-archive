@@ -26,6 +26,9 @@ use SilverStripe\Core\Environment;
 class JobListingLocation extends JobListingCategorisationObject
 {
 
+    protected static $primaryTerm = 'location';
+    protected static $primaryTermPlural = 'locations';
+
     public function listingFeedURL(){
        return Environment::getEnv('JOBFEED_BASE').'positions.json?location_id='.$this->ID;
     }
@@ -38,12 +41,16 @@ class JobListingLocation extends JobListingCategorisationObject
      * Returns a relative URL for the tag link.
      *
      * @return string
-     */
-    public function getLink()
-    {
 
-        return Controller::join_links($this->JobListing()->Link(), 'location', $this->URLSegment);
+     */
+    public function Link()
+    {
+        $holder = JobListingHolder::get()->First();
+        return $holder->Link('location/'.$this->ID);
     }
 
 
+    public static function getByID($id, $term = 'location', $termPlural = 'locations'){
+        return parent::getByID($id, $term, $termPlural);
+    }
 }

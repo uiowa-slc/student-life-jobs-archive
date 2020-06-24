@@ -13,7 +13,7 @@
 
 
 
-    		<p class="blogcard__desc"><strong>Location:</strong> $Location<br /><strong>Basic Job Function: </strong>$BasicJobFunction.LimitCharacters(150) <a href="$Link">Continue reading</a></p>
+    		<p class="blogcard__desc"><strong>Location:</strong> $Location.Title<br /><strong>Basic Job Function: </strong>$BasicJobFunction.LimitCharacters(150) <a href="$Link">Continue reading</a></p>
 
 
 
