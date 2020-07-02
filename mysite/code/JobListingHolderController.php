@@ -78,7 +78,7 @@ class JobListingHolderController extends PageController{
         $id = $this->urlParams['ID'];
 
         if (!is_numeric($id)) {
-            //return $this->httpError( 404);
+            return $this->httpError( 404);
         }
 
         $job = $this->singleJob($id);
@@ -97,6 +97,11 @@ class JobListingHolderController extends PageController{
         // $department->ID = 8;
         // $department->Title = 'Test';
         $department = $this->getCurrentDepartment();
+
+        if(!$department){
+            return $this->httpError(404);
+        }
+
         $openClosed = $this->getFilterOpenClosed();
 
         //print_r($department);
@@ -130,6 +135,11 @@ class JobListingHolderController extends PageController{
         // $department->ID = 8;
         // $department->Title = 'Test';
         $category = $this->getCurrentCategory();
+
+        if(!$category){
+            return $this->httpError(404);
+        }
+
         $openClosed = $this->getFilterOpenClosed();
 
         //print_r($department);
@@ -164,8 +174,11 @@ class JobListingHolderController extends PageController{
         // $department->ID = 8;
         // $department->Title = 'Test';
         $location = $this->getCurrentLocation();
-        $openClosed = $this->getFilterOpenClosed();
 
+        if(!$location){
+            return $this->httpError(404);
+        }
+        $openClosed = $this->getFilterOpenClosed();
         //print_r($department);
         if($openClosed == 'all'){
 
