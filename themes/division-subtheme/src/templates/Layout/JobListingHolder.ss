@@ -26,7 +26,7 @@ $Header
     <div class="grid-x align-center grid-padding-x">
       <div class="cell">
         <div class="main-content__header">
-        <% if $FilterType.Content || $CurrentTag.Content %>
+        <% if $Filter.Content || $CurrentTag.Content %>
           <% if $FilterType %>
             <h1>$Title</h1>
           <% end_if %>
@@ -44,7 +44,7 @@ $Header
 
 $BeforeContent
 
-<%-- if we aren't filtering, eg, the main/home view --%>
+<%-- if we aren't filtering, eg, the main/home view, show the bubble filters --%>
 <% if not $FilterType %>
   <% if $Content %>
     <div class="grid-container">
@@ -80,6 +80,7 @@ $BeforeContent
     </div>
   <% end_if %><%-- end if content --%>
 
+<%-- if we are filtering by something: --%>
 <% else_if $FilterType %>
 
 <div class="grid-container">
@@ -93,7 +94,14 @@ $BeforeContent
 
         <% if $FilterType %>
 
-            <% include JobFilterContent %>
+                <% if $FilterOpenClosed == "all" %>
+
+                    <% include JobFilterContent_all %>
+                <% else %>
+                    <% include JobFilterContent %>
+                <% end_if %>
+
+
 
         <% end_if %>
 

@@ -86,7 +86,7 @@ feed/locations.json */
         $feedURL = Environment::getEnv('JOBFEED_BASE').$termPlural.'.json';
 
         $catList = new ArrayList();
-        $catFeed= FeedHelper::getJson($feedURL);
+        $catFeed = FeedHelper::getJson($feedURL);
        // print_r($feedURL);
         //print_r($catFeed);
 

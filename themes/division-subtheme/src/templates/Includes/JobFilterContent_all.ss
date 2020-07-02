@@ -1,15 +1,19 @@
 <article class="topic-content">
 
-<%-- do unique markup when we're filtering by location because we don't need "By Location" in the location filter --%>
+        <p>The following is a list of all jobs in this category and some jobs may not currently be hiring.</p>
+        <p><a href="{$Filter.Link}" class="button button--green hollow"><i class="fa fa-list" aria-hidden="true"></i> See only the <strong>currently hiring jobs</strong> in this category.</a></p>
+
+    <%-- do special markup when we're filtering by location because we don't need "By Location" in the location filte --%>
     <% if $FilterType == "Location" %>
 
         <% with $Filter %>
-            <% if $JobListings %>
-                <% loop $JobListings %>
+
+            <% if $JobListings("all") %>
+                <% loop $JobListings("all") %>
                     <% include JobCard %>
                 <% end_loop %>
             <% else %>
-                <p>There currently aren't any hiring jobs listed at {$Title}.</p>
+                <p>Sorry, there currently aren't any jobs at this location.</p>
             <% end_if %>
         <% end_with %>
 
@@ -20,6 +24,7 @@
             <% if $Locations %>
                 <h3  class="topicholder-section__heading">By Location</h3>
 
+
                 <ul class="accordion" data-accordion data-multi-expand="true" data-allow-all-closed="true">
 
                 <% loop $Locations %>
@@ -29,7 +34,7 @@
 
                     <!-- Accordion tab content: it would start in the open state due to using the `is-active` state class. -->
 
-                    <% loop $JobListingsByFilter %>
+                    <% loop $JobListingsByFilter("all") %>
                         <div class="accordion-content " data-tab-content style="border-bottom: 1px solid #e5e5e5;">
                         <% include JobCard %>
                         </div>
@@ -39,15 +44,12 @@
                   <!-- ... -->
                 </ul>
             <% else %>
-                <p>There currently aren't any hiring jobs listed under "{$Title}."</p>
+
+            <p>Sorry, there currently aren't any jobs listed under this category.</p>
 
             <% end_if %>
         <% end_with %>
 
     <% end_if %>
 
-
-      <% if $FilterOpenClosed != "all" %>
-        <p><a href="{$Filter.Link}/all" class="button button--red hollow"><i class="fa fa-list" aria-hidden="true"></i> See all jobs in this category (hiring or not).</a></p>
-      <% end_if %>
 </article>

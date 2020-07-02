@@ -43,3 +43,26 @@
 .font-weight-bold{
     font-weight: bold !important;
 }
+
+.text-red{
+    color: red !important;
+
+}
+
+.text-green{
+    color: green !important;
+}
+
+.button.hollow.button--red{
+    border-color: red;
+    color: red;
+}
+.button.hollow.button--green{
+    border-color: green;
+    color: green;
+}
+
+.text-small{
+    font-size: 15px !important;
+}
+

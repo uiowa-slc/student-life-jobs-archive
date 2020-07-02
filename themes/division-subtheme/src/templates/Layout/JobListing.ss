@@ -38,9 +38,9 @@ $Header
 				<div class="job-single__basic-info">
 
 				<% if $PayRate %><p><span class="job-single__descriptor">Rate of pay:</span> $PayRate</p><% end_if %>
-				<% if $Location %><p><span class="job-single__descriptor">Work location:</span><a href="$Location.Link">$Location.Title</a></p><% end_if %>
-
-                <p><span class="job-single__descriptor">Status:</span> $Status</span></p>
+				<% if $Location %><p><span class="job-single__descriptor">Work location:</span> <a href="$Location.Link">$Location.Title</a></p><% end_if %>
+                <% if $Department %><p><span class="job-single__descriptor">Department:</span> <a href="$Department.Link">$Department.Title</a></p><% end_if %>
+                <p><span class="job-single__descriptor">Status:</span> <% if $Active %><span class="text-green font-weight-bold">Currently hiring</span><% else %><span class="text-red font-weight-bold">Not currently hiring</span><% end_if %></span></p>
                 <% if $Active && $NextStepLink %>
                 <p><a href="$NextStepLink" target="_blank" rel="noopener" class="button">Apply for this job</a></p>
                 <% if $TrainingRequirements || $Qualifications %>
@@ -110,26 +110,7 @@ $Header
 					</ul>
 				<% end_if %>
 
-				<% if $Category.exists || $Department.exists %>
 
-					<div class="blog-post-meta">
-						<% if $Category.exists %>
-							<p class="tags">Category:
-							<% with $Category %>
-								<a href="$Link">$Title</a><% if not Last %><% else %><% end_if %>
-							<% end_with %>
-							</p>
-						<% end_if %>
-
-						<% if $Department.exists %>
-							<p class="tags">Department:
-							<% with $Department %>
-								<a href="$Link">$Title</a><% if not Last %><% else %><% end_if %>
-							<% end_with %>
-							</p>
-						<% end_if %>
-					</div>
-				<% end_if %>
 			</div>
 
  			<%-- <% include JobListingRelated %> --%>
@@ -137,7 +118,7 @@ $Header
 			<h2>More job listings:</h2>
 
 			<% with $Parent %>
-			<% include JobBrowseByFilterFull %>
+			 <% include JobBrowseByFilterFull %>
 			<% end_with %>
 			<%-- <% include JobListingStatement %> --%>
 			$BlockArea(AfterContentConstrained)

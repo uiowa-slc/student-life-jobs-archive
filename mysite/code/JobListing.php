@@ -145,7 +145,17 @@ class JobListing extends Page {
     public function parseFromFeed($rawJob) {
 
         $this->ID = $rawJob['id'];
-        $this->Title = $rawJob['posting_title'];
+
+        if(isset($rawJob['posting_title'])){
+            $this->Title = $rawJob['posting_title'];
+
+        }else{
+            $this->Title = $rawJob['title'];
+        }
+
+        // maybe fallback to this:
+        //$this->Title = $rawJob['title'];
+
        // print_r($rawJob);
 
         if(isset($rawJob['category_id'])){
@@ -169,9 +179,9 @@ class JobListing extends Page {
         // if(isset($rawJob['work_location'])) $this->Location = $rawJob['work_location'];
         if(isset($rawJob['work_hours'])) $this->WorkHours = $rawJob['work_hours'];
         if(isset($rawJob['rate_of_pay'])) $this->PayRate = $rawJob['rate_of_pay'];
-        if(isset($rawJob['active'])) $this->Active = $rawJob['active'];
+        if(isset($rawJob['has_open_job_posting'])) $this->Active = filter_var($rawJob['has_open_job_posting'], FILTER_VALIDATE_BOOLEAN);
         if(isset($rawJob['job_posting_url'])) $this->NextStepLink = $rawJob['job_posting_url'];
-
+        // print_r($this);
         return $this;
 
     }
@@ -189,7 +199,7 @@ class JobListing extends Page {
 
     public function getStatus(){
         //TODO: Have Mark Fix the status coming out of api
-        if($this->NextStepsLink){
+        if($this->Active){
             return 'Active (Currently hiring)';
         }else{
             return 'Closed (Not currently hiring)';

@@ -48,5 +48,20 @@ class JobListingCategory extends JobListingCategorisationObject
         return parent::getByID($id, $term, $termPlural);
     }
 
+    public function Locations(){
+
+        $jobList = $this->JobListings();
+        $locations = new ArrayList();
+
+        foreach($jobList as $job){
+            if($job->Location){
+                $locations->push($job->Location);
+            }
+        }
+
+        return $locations;
+
+
+    }
 
 }

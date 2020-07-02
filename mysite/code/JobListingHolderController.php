@@ -97,16 +97,24 @@ class JobListingHolderController extends PageController{
         // $department->ID = 8;
         // $department->Title = 'Test';
         $department = $this->getCurrentDepartment();
+        $openClosed = $this->getFilterOpenClosed();
 
         //print_r($department);
+        if($openClosed == 'all'){
+            $jobList = $department->JobListings('all');
+            $filterTitle = 'All jobs listed under "'.$department->Title.'":';
+        }else{
+            $jobList = $department->JobListings();
+            $filterTitle = 'Currently hiring jobs listed under "'.$department->Title.'":';
+        }
 
         if ($department) {
 
             $data = new ArrayData([
+                'Filter' => $department,
                 'FilterType' => 'Department',
                 'FilterTitle' => $department->Title,
-                'FilterList' => $department->JobListings(),
-                'FilterObject' => $department
+                'FilterList' => $jobList
             ]);
 
             return $this->customise($data)->renderWith(array('JobListingHolder', 'Page'));
@@ -133,15 +141,15 @@ class JobListingHolderController extends PageController{
                 $filterTitle = 'All jobs listed under "'.$category->Title.'":';
             }else{
                 $jobList = $category->JobListings();
-                $filterTitle = 'All currently hiring jobs listed under '.$category->Title;
+                $filterTitle = 'Currently hiring jobs listed under "'.$category->Title.'":';
             }
 
 
             $data = new ArrayData([
+                'Filter' => $category,
                 'FilterType' => 'Category',
                 'FilterTitle' => $filterTitle,
                 'FilterList' => $jobList,
-                'FilterObject' => $category
             ]);
 
             return $this->customise($data)->renderWith(array('JobListingHolder', 'Page'));
@@ -156,15 +164,23 @@ class JobListingHolderController extends PageController{
         // $department->ID = 8;
         // $department->Title = 'Test';
         $location = $this->getCurrentLocation();
+        $openClosed = $this->getFilterOpenClosed();
 
         //print_r($department);
+        if($openClosed == 'all'){
+
+            $filterTitle = 'All jobs listed at '.$location->Title.':';
+        }else{
+
+            $filterTitle = 'Currently hiring jobs listed at '.$location->Title.':';
+        }
 
         if ($location) {
 
             $data = new ArrayData([
+                'Filter' => $location,
                 'FilterType' => 'Location',
-                'FilterTitle' => $location->Title,
-                'FilteredList' => $location->JobListings()
+                'FilterTitle' => $filterTitle
             ]);
 
             return $this->customise($data)->renderWith(array('JobListingHolder', 'Page'));

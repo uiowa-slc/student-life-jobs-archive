@@ -68,10 +68,10 @@ class JobListingCategorisationObject extends DataObject implements Categorisatio
 
         }
 
-        // print_r($feedURL);
+        // print_r($feedURL.'<br />');
         $jobList = new ArrayList();
         $jobFeed = FeedHelper::getJson($feedURL);
-
+        //print_r($feedURL);
         if (isset($jobFeed['positions'])) {
             $jobArray = $jobFeed['positions'];
             foreach ($jobArray as $job) {
@@ -116,6 +116,20 @@ class JobListingCategorisationObject extends DataObject implements Categorisatio
     }
 
 
+    public function Locations(){
 
+        $jobList = $this->JobListings();
+        $locations = new ArrayList();
+
+        foreach($jobList as $job){
+            if($job->Location){
+                $locations->push($job->Location);
+            }
+        }
+
+        return $locations;
+
+
+    }
 
 }
