@@ -100,9 +100,9 @@ feed/locations.json */
 
                     $catObjName = "JobListing".ucfirst($term);
                     $catObj = new $catObjName;
-
+                    $catObj = $catObj->parseFromFeed($cat[$term]);
                     if($filterByOpen == true){
-                        $catObj = $catObj->parseFromFeed($cat[$term]);
+
 
                         if($catObj->ActiveJobListings > 0){
                              $catList->push($catObj);
@@ -115,7 +115,15 @@ feed/locations.json */
 
 
                     }else{
-                        $catList->push($catObj->parseFromFeed($cat[$term]));
+
+                        if($catObj->ActiveJobListings > 0){
+
+                            $catList->unshift($catObj);
+
+                        }else{
+
+                            $catList->push($catObj);
+                        }
                     }
 
 
@@ -145,6 +153,14 @@ feed/locations.json */
     public function Locations($filterByOpen = false){
         $locations = $this->CategorisationObjects('location', 'locations', $filterByOpen);
         return $locations;
+    }
+
+    public function CatObjects($filterByOpen = false){
+        $catObjs = new ArrayList();
+        $catObjs->merge($this->Departments($filterByOpen));
+        $catObjs->merge($this->Categories($filterByOpen));
+        $catObjs->merge($this->Locations($filterByOpen));
+        return $catObjs;
     }
 
 

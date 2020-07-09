@@ -55,7 +55,16 @@ class JobListingCategorisationObject extends DataObject implements Categorisatio
 
 
     }
+    public function SearchObj($keywords){
 
+        $haystack = $this->Title.' '.$this->Content;
+
+        if(stripos($haystack, $keywords) !== false){
+            return true;
+        }
+
+
+    }
     public function JobListings($status = 'open'){
 
         $feedURL = Environment::getEnv('JOBFEED_BASE').'positions.json?'.static::$primaryTerm.'_id='.$this->ID;
@@ -77,8 +86,15 @@ class JobListingCategorisationObject extends DataObject implements Categorisatio
             foreach ($jobArray as $job) {
                 if (isset($job)) {
                     $jobObj = new JobListing();
+                    $jobObj = $jobObj->parseFromFeed($job['position']);
+                    //If the job is active, shift it to the top of the arraylist to show it first. Otherwise add to end of list.
+                    if($jobObj->Active){
+                        //echo $jobObj->Title.'<br />';
+                        $jobList->unshift($jobObj);
+                    }else{
+                        $jobList->push($jobObj);
+                    }
 
-                    $jobList->push($jobObj->parseFromFeed($job['position']));
                 }
             }
             //print_r($jobList);

@@ -80,8 +80,16 @@ class JobListingLocation extends JobListingCategorisationObject
             foreach ($jobArray as $job) {
                 if (isset($job)) {
                     $jobObj = new JobListing();
+                    $jobObj = $jobObj->parseFromFeed($job['position']);
 
-                    $jobList->push($jobObj->parseFromFeed($job['position']));
+                //If the job is active, shift it to the top of the arraylist to show it first. Otherwise add to end of list.
+                   if($jobObj->Active){
+
+                        $jobList->unshift($jobObj);
+                    }else{
+                        $jobList->push($jobObj);
+                    }
+
                 }
             }
             //print_r($jobList);

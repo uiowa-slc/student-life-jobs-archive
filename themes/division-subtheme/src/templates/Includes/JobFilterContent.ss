@@ -25,12 +25,12 @@
                 <% loop $Locations %>
                   <li class="accordion-item count <%if $Up.Locations.Count == 1 %>is-active<% end_if %>" data-accordion-item>
                     <!-- Accordion tab title -->
-                    <a href="#" class="accordion-title" style="border-bottom: 1px solid #e5e5e5;">$Title ($JobListingsByFilter.Count)</a>
+                    <a href="#" class="accordion-title" style="">$Title <span class="<% if $ActiveJobListings > 0 %>font-weight-bold<% end_if %>">($JobListingsByFilter.Count)</span></a>
 
                     <!-- Accordion tab content: it would start in the open state due to using the `is-active` state class. -->
 
                     <% loop $JobListingsByFilter %>
-                        <div class="accordion-content " data-tab-content style="border-bottom: 1px solid #e5e5e5;">
+                        <div class="accordion-content " data-tab-content>
                         <% include JobCard %>
                         </div>
                     <% end_loop %>

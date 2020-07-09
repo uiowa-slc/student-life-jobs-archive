@@ -66,3 +66,35 @@
     font-size: 15px !important;
 }
 
+.accordion-title{
+    border-bottom: none;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-color: #6e6e6e;
+    font-weight: normal;
+    color: #6e6e6e;
+}
+
+.accordion-item{
+    border-bottom: 1px solid #6e6e6e;
+}
+.accordion-item:first-child>:first-child {
+    border-radius: 1px 1px 0 0;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+:last-child:not(.is-active)>.accordion-title{
+    border-bottom: none;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+
+.accordion-content{
+    border-color: #6e6e6e;
+}
+:last-child>.accordion-content:last-child{
+    border-bottom: none;
+}
+

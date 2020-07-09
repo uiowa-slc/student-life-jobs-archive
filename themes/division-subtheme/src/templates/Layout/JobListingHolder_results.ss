@@ -23,17 +23,28 @@ $BeforeContent
 <div class="grid-container">
 
   <div class="grid-x grid-padding-x">
-    <div class="cell small-12 large-1 show-for-medium"></div>
-      <article class="cell medium-8 large-6">
+      <article class="cell medium-8 large-6 large-centered">
           <div style="padding-top: 20px;">
             $TopicSearchFormSized("medium")
           </div>
         $BeforeContentConstrained
 
-        <% if $Results %>
-          <% loop $Results %>
-              <% include JobCard %>
-          <% end_loop %>
+
+        <% if $JobCats || $JobListings %>
+            <% if $JobCats %>
+                <div class="topic-browse-by-filter__grid topic-browse-by-filter__grid--large"  data-equalizer>
+                    <% loop $JobCats %>
+                        <div class="topic-browse-by-filter__item margin-bottom-1" data-equalizer-watch><a href="$Link" class="button hollow secondary button--flex-full button--skinny"><span class="topicholder-cat-inner <% if $ActiveJobListings > 0 %>font-weight-bold <% end_if %>"
+                            >$Title&nbsp;<% if $ActiveJobListings > 0 %><span style="topicholder-cat-inner__count">({$ActiveJobListings})</span><% end_if %></span></a></div>
+                    <% end_loop %>
+                </div>
+            <% end_if %>
+
+            <% if $JobListings %>
+              <% loop $JobListings %>
+                  <% include JobCard %>
+              <% end_loop %>
+            <% end_if %>
 
         <% else %>
               <% if $Query %>
@@ -44,27 +55,12 @@ $BeforeContent
 
         <% end_if %>
 
-<%--         <% include JobFeedback %> --%>
 
       </article>
 
-      <div class="cell small-12 large-1 show-for-large">
-
-      </div>
-
-      <div class="cell medium-4">
-        <div class="dp-sticky dp-sticky--medium">
-
-
-
-          <% include JobBrowseByFilter %>
-        </div>
-      </div>
   </div>
 </div>
 
-<%--   <% include JobFooterFull %>
- --%>
     $AfterContentConstrained
     $Form
 

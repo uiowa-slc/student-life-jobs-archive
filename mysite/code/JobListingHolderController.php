@@ -10,6 +10,7 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\FormAction;
 use SilverStripe\ORM\Search\FulltextSearchable;
 use SilverStripe\CMS\Search\SearchForm;
+
 class JobListingHolderController extends PageController{
 
     private static $allowed_actions = array(
@@ -286,7 +287,8 @@ class JobListingHolderController extends PageController{
         //$resultsFiltered = $results->filter(array('ParentID' => $this->owner->ID));
 
         $data = array(
-            'Results' => $results,
+            'JobListings' => $results->JobListings,
+            'JobCats' => $results->JobCats,
             'Query' => DBField::create_field('Text', $form->getSearchQuery()),
             'Title' => _t('SearchForm.SearchResults', 'Search Results'),
             'Holder' => $this->owner
@@ -304,15 +306,28 @@ class JobListingHolderController extends PageController{
         //TODO: apply basic search term filtering
         $allJobs = $this->JobListings('open');
 
+        $allCats = $this->CatObjects('open');
+       // print_r($allCats);
+
        //print_r($allJobs->First());
 
         //$filteredJobs = $allJobs->filter(array('Title:PartialMatch' => 'Accommodation Assistant - Level 1'));
         $filteredJobs = $allJobs->filterByCallback(function($item, $list) use ($keywords) {
             return $item->SearchListing($keywords);
             });
-        //print_r($filteredJobs);
+        $filteredCats = $allCats->filterByCallback(function($item, $list) use ($keywords) {
+            return $item->SearchObj($keywords);
+            });
 
-        return $filteredJobs;
+        $data = new ArrayData(array(
+            'JobListings' => $filteredJobs,
+            'JobCats' => $filteredCats
+
+        ));
+
+      // print_r($data);
+
+        return $data;
 
 
     }
