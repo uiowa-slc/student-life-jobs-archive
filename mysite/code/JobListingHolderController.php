@@ -280,7 +280,11 @@ class JobListingHolderController extends PageController{
      */
     public function results($data, $form) {
 
+
+
         $results = $this->getSearchResults();
+
+
 
         //print_r($results);
 
@@ -290,6 +294,7 @@ class JobListingHolderController extends PageController{
             'JobListings' => $results->JobListings,
             'JobCats' => $results->JobCats,
             'Query' => DBField::create_field('Text', $form->getSearchQuery()),
+            'AllResultsLink' => 'jobs/SearchForm?Search='.$form->getSearchQuery().'&status=all',
             'Title' => _t('SearchForm.SearchResults', 'Search Results'),
             'Holder' => $this->owner
         );
@@ -301,12 +306,21 @@ class JobListingHolderController extends PageController{
     private function getSearchResults(){
        // Get request data from request handler
         $request = $this->request;
+
+        if($request->requestVar('status')){
+            $status = $request->requestVar('status');
+        }else{
+            $status ='open';
+        }
+
+
+
         $keywords = $request->requestVar('Search');
 
         //TODO: apply basic search term filtering
-        $allJobs = $this->JobListings('open');
+        $allJobs = $this->JobListings($status);
 
-        $allCats = $this->CatObjects('open');
+        $allCats = $this->CatObjects($status);
        // print_r($allCats);
 
        //print_r($allJobs->First());

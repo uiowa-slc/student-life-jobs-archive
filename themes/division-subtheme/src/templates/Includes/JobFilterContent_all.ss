@@ -21,13 +21,14 @@
     <% else %>
 
         <% with $Filter %>
-            <% if $Locations %>
+
+            <% if $Locations("all") %>
                 <h3  class="topicholder-section__heading">By Location</h3>
 
 
                 <ul class="accordion" data-accordion data-multi-expand="true" data-allow-all-closed="true">
 
-                <% loop $Locations %>
+                <% loop $Locations("all") %>
                   <li class="accordion-item count <%if $Up.Locations.Count == 1 %>is-active<% end_if %>" data-accordion-item>
                     <!-- Accordion tab title -->
                     <a href="#" class="accordion-title" style="border-bottom: 1px solid #e5e5e5;">$Title <span class="<% if $ActiveJobListings > 0 %>font-weight-bold<% end_if %>">($JobListingsByFilter("all").Count)</span></a>
@@ -43,6 +44,10 @@
                   <% end_loop %>
                   <!-- ... -->
                 </ul>
+            <% else_if $JobListings("all") %>
+                <% loop $JobListings("all") %>
+                    <% include JobCard %>
+                <% end_loop %>
             <% else %>
 
             <p>Sorry, there currently aren't any jobs listed under this category.</p>

@@ -96,8 +96,6 @@ feed/locations.json */
             foreach ($catArray as $cat) {
                 if (isset($cat)) {
 
-                    //THIS NEEDS TO BE FIXED TO ACCOUNT FOR DEPTS OR OTHER CAT OBJECTS.
-
                     $catObjName = "JobListing".ucfirst($term);
                     $catObj = new $catObjName;
                     $catObj = $catObj->parseFromFeed($cat[$term]);
@@ -107,12 +105,6 @@ feed/locations.json */
                         if($catObj->ActiveJobListings > 0){
                              $catList->push($catObj);
                         }
-
-                        //TODO: Replace with check for active_job_postings instead of checking through JobListings()
-                        // if($catObj->JobListings()->First()){
-                        //     $catList->push($catObj);
-                        // }
-
 
                     }else{
 
@@ -126,15 +118,12 @@ feed/locations.json */
                         }
                     }
 
-
                 }
             }
             // if($term == 'location')print_r($feedURL);
             return $catList;
 
-
         }
-
 
 
     }
@@ -190,7 +179,7 @@ feed/locations.json */
         return false;
     }
 
-/*
+
     public function urlsToCache() {
         $jobHolder = $this;
         $abs = Director::absoluteBaseURL();
@@ -212,6 +201,6 @@ feed/locations.json */
        //return [Director::absoluteURL($this->getOwner()->Link()) => 0];
     }
 
-*/
+
 
 }

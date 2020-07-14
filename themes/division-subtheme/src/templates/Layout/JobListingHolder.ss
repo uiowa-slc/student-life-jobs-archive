@@ -11,12 +11,14 @@ $Header
           <h1 class="background-image__title" style="margin-bottom: 20px;"><a href="$Link" style="color: white;">$Title</a></h1>
           $TopicSearchFormSized
 
+          <% if $Categories(true) %>
           <p style="color: white; font-size: 16px; line-height: 2">
             <span class="topic-search-minicats__heading">Browse currently hiring jobs by category:</span>
             <% loop $Categories(true).Sort('Title') %>
             <span style="display: inline-block; margin: 0 2px; "><a href="$Link" style="color: white; text-decoration: underline;">$Title</a><% if not $Last %>,</span><% end_if %>
             <% end_loop %>
             </p>
+            <% end_if %>
         </div>
     </div>
   </div>
@@ -26,15 +28,9 @@ $Header
     <div class="grid-x align-center grid-padding-x">
       <div class="cell">
         <div class="main-content__header">
-        <% if $Filter.Content || $CurrentTag.Content %>
-          <% if $FilterType %>
-            <h1>$Title</h1>
-          <% end_if %>
-        <% else %>
-          <% if $FilterType %>
+
               <h1>{$FilterTitle}</h1>
-          <% end_if %>
-        <% end_if %>
+
         </div>
       </div>
     </div>

@@ -49,12 +49,16 @@ $BeforeContent
         <% else %>
               <% if $Query %>
                 <p style="margin-top: 20px; font-weight: bold;">Sorry, there are no open jobs that matched this search term.</p>
+
               <% else %>
                 <p style="margin-top: 20px; font-weight: bold;">No search term specified. Please specify a search term and try searching again.</p>
               <% end_if %>
 
         <% end_if %>
 
+        <% if $Query %>
+            <p><a href="{$AllResultsLink}" class="button button--red hollow"><i class="fa fa-list" aria-hidden="true"></i> Search all jobs using this term (hiring or not).</a></p>
+        <% end_if %>
 
       </article>
 
