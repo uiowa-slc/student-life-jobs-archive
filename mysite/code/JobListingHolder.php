@@ -75,8 +75,10 @@ feed/locations.json */
                 }
             }
             //print_r($jobList);
-            return $jobList;
+
         }
+
+        return $jobList;
 
     }
 
