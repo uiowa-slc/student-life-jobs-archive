@@ -171,9 +171,13 @@ class JobListing extends Page {
             $this->Location = new JobListingLocation();
             $this->Location = $this->Location->getByID($rawJob['location_id']);
         }
+        // if(isset($rawJob['training_requirements'])) $this->TrainingRequirements = $this->convertSemicolons($rawJob['training_requirements']);
         if(isset($rawJob['training_requirements'])) $this->TrainingRequirements = $rawJob['training_requirements'];
-        if(isset($rawJob['responsibilities'])) $this->Responsibilities = $this->convertSentences($rawJob['responsibilities']);
 
+
+        // if(isset($rawJob['responsibilities'])) $this->Responsibilities = $this->convertSentences($rawJob['responsibilities']);
+
+        if(isset($rawJob['responsibilities'])) $this->Responsibilities = $rawJob['responsibilities'];
 
         if(isset($rawJob['qualifications'])) $this->Qualifications = $this->convertSentences($rawJob['qualifications']);
         if(isset($rawJob['basic_job_function'])) $this->BasicJobFunction = $rawJob['basic_job_function'];
@@ -191,12 +195,22 @@ class JobListing extends Page {
     }
 
     private function convertSentences($string){
-        $arr = explode('.',$string);
+        $arr = explode('•',$string);
         $converted = "<ul><li>" . implode("</li><li>", array_filter($arr)) . "</li></ul>";
 
         return $converted;
     }
+    private function convertSemicolons($string){
+        $arr = array();
+        $arr = explode(';',$string);
+        if(count($arr) > 1 ){
+            $converted = "<ul><li>" . implode("</li><li>", array_filter($arr)) . "</li></ul>";
+        }else{
+            $converted = $string;
+        }
 
+        return $converted;
+    }
     public function SearchListing($keywords){
 
         $haystack = $this->Title.' '.$this->Responsibilities.' '.$this->Location;

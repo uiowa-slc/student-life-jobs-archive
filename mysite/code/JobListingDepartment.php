@@ -52,18 +52,5 @@ class JobListingDepartment extends JobListingCategorisationObject
     public static function getByID($id, $term = 'department', $termPlural = 'departments'){
         return parent::getByID($id, $term, $termPlural);
     }
-    // public static function getByID($id){
-    //     //TODO: Request categories.json?id=xx from Mark P
-    //     $holder = JobListingHolder::get()->First();
-    //     $deps = new ArrayList();
-    //     $deps = $holder->Departments();
-    //     if($deps){
-    //         foreach($deps as $dep){
-    //             if($dep->ID == $id){
-    //                 return $dep;
-    //             }
-    //         }
-    //     }
-    // }
 
 }

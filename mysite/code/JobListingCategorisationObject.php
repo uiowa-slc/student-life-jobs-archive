@@ -114,10 +114,6 @@ class JobListingCategorisationObject extends DataObject implements Categorisatio
         return $this;
     }
 
-    public function BlogPosts(){
-        // return $this->JobListings();
-    }
-
     /**
      * {@inheritdoc}
      */
