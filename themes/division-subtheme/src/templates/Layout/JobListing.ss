@@ -90,7 +90,7 @@ $Header
                 <% end_if %>
                 <% if $NextStepLink %>
                     <div class="apply__container">
-                        <a href="$NextStepLink" class="button apply__button" target="_blank">Apply for this job</a>
+                        <a href="$NextStepLink" class="button apply__button" target="_blank">Apply for this job  <i class="fa fa-external-link" aria-hidden="true"></a>
                         <div class="apply__content">
                             <% if $Content %>
                             $Content
