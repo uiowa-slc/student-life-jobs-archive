@@ -178,8 +178,8 @@ class JobListing extends Page {
         // if(isset($rawJob['responsibilities'])) $this->Responsibilities = $this->convertSentences($rawJob['responsibilities']);
 
         if(isset($rawJob['responsibilities'])) $this->Responsibilities = $rawJob['responsibilities'];
-
-        if(isset($rawJob['qualifications'])) $this->Qualifications = $this->convertSentences($rawJob['qualifications']);
+        if(isset($rawJob['qualifications'])) $this->Qualifications = $rawJob['qualifications'];
+        //if(isset($rawJob['qualifications'])) $this->Qualifications = $this->convertSentences($rawJob['qualifications']);
         if(isset($rawJob['basic_job_function'])) $this->BasicJobFunction = $rawJob['basic_job_function'];
 
 
