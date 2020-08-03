@@ -140,6 +140,8 @@ class JobListingCategorisationObject extends DataObject implements Categorisatio
             }
         }
 
+        $locations->removeDuplicates();
+
         return $locations;
 
 
