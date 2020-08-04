@@ -19,6 +19,7 @@ class JobListing extends Page {
         'NextStepLink' => 'HTMLText',
         'Qualifications' => 'HTMLText',
         'Responsibilities' => 'HTMLText',
+        'WorkLocation' => 'Text',
         'WorkHours' => 'HTMLText',
         'TrainingRequirements' => 'HTMLText',
         'CategoryID' => 'Int'
@@ -178,13 +179,15 @@ class JobListing extends Page {
         // if(isset($rawJob['responsibilities'])) $this->Responsibilities = $this->convertSentences($rawJob['responsibilities']);
 
         if(isset($rawJob['responsibilities'])) $this->Responsibilities = $rawJob['responsibilities'];
+
+        // if(isset($rawJob['qualifications'])) $this->Qualifications = $this->convertSentences($rawJob['qualifications']);
+
         if(isset($rawJob['qualifications'])) $this->Qualifications = $rawJob['qualifications'];
-        //if(isset($rawJob['qualifications'])) $this->Qualifications = $this->convertSentences($rawJob['qualifications']);
         if(isset($rawJob['basic_job_function'])) $this->BasicJobFunction = $rawJob['basic_job_function'];
 
 
         if(isset($rawJob['what_you_will_learn'])) $this->LearningOutcomes = $rawJob['what_you_will_learn'];
-        // if(isset($rawJob['work_location'])) $this->Location = $rawJob['work_location'];
+        if(isset($rawJob['work_location'])) $this->WorkLocation = $rawJob['work_location'];
         if(isset($rawJob['work_hours'])) $this->WorkHours = $rawJob['work_hours'];
         if(isset($rawJob['rate_of_pay'])) $this->PayRate = $rawJob['rate_of_pay'];
         if(isset($rawJob['has_open_job_posting'])) $this->Active = filter_var($rawJob['has_open_job_posting'], FILTER_VALIDATE_BOOLEAN);

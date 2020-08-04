@@ -8,7 +8,7 @@
 		<h3 class="topic-card__heading topic-card__heading--lighter">
             <a href="$Link" style="color: #005994;">$Title</a>
         </h3>
-		<p class="blogcard__desc"><strong>Location:</strong> $Location.Title<br /><strong>Basic Job Function: </strong>$BasicJobFunction.LimitCharacters(150) <a href="$Link">Continue reading</a><br />
+		<p class="blogcard__desc"><strong>Location:</strong> <% if $WorkLocation %>{$WorkLocation}, <% end_if %> $Location.Title<br /><strong>Basic Job Function: </strong>$BasicJobFunction.LimitCharacters(150) <a href="$Link">Continue reading</a><br />
 
 
         <strong>Status: </strong><% if $Active %><span class="text-green font-weight-bold">Currently hiring</span><% else %><span class="text-red font-weight-bold">Not currently hiring</span><% end_if %>
