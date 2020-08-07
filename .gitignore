@@ -18,8 +18,5 @@ smtp.yml
 /node_modules/
 /npm-debug.log
 /cache
-<<<<<<< HEAD
-.phpintel
-=======
 /.phpintel
->>>>>>> develop
+/public/cache

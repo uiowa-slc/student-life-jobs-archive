@@ -194,7 +194,13 @@ feed/locations.json */
         $jobs = $jobHolder->JobListings();
 
         foreach($jobs as $job){
-            $urls[$job->Link()] = 0;
+            $urls[Director::absoluteURL($job->Link())] = 0;
+        }
+
+        $cats = $jobHolder->CatObjects();
+
+        foreach($cats as $cat){
+            $urls[Director::absoluteURL($cat->Link())] = 0;
         }
 
 

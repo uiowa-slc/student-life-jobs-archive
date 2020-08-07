@@ -41,7 +41,19 @@ class JobListingCategory extends JobListingCategorisationObject
 
     public function Link(){
         $holder = JobListingHolder::get()->First();
-        return $holder->Link('category/'.$this->ID);
+
+        $link = $holder->Link('category/'.$this->ID);
+
+        if(strpos($link, '?stage=Stage') !== false){
+            $link = str_replace("stage=Stage&", "", $link);
+            $link = str_replace("stage=Stage", "", $link);
+        }
+        if(strpos($link, '?stage=Live') !== false){
+            $link = str_replace("stage=Live&", "", $link);
+            $link = str_replace("stage=Live", "", $link);
+        }
+
+        return $link;
     }
 
     public static function getByID($id, $term = 'category', $termPlural = 'categories'){

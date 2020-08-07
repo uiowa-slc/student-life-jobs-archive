@@ -47,7 +47,19 @@ class JobListingDepartment extends JobListingCategorisationObject
 
 
         $holder = JobListingHolder::get()->First();
-        return $holder->Link('department/'.$this->ID);
+
+        $link = $holder->Link('department/'.$this->ID);
+
+        if(strpos($link, '?stage=Stage') !== false){
+            $link = str_replace("stage=Stage&", "", $link);
+            $link = str_replace("stage=Stage", "", $link);
+        }
+        if(strpos($link, '?stage=Live') !== false){
+            $link = str_replace("stage=Live&", "", $link);
+            $link = str_replace("stage=Live", "", $link);
+        }
+
+        return $link;
     }
     public static function getByID($id, $term = 'department', $termPlural = 'departments'){
         return parent::getByID($id, $term, $termPlural);

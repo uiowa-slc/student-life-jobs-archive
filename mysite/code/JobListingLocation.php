@@ -48,7 +48,18 @@ class JobListingLocation extends JobListingCategorisationObject
     public function Link()
     {
         $holder = JobListingHolder::get()->First();
-        return $holder->Link('location/'.$this->ID);
+        $link = $holder->Link('location/'.$this->ID);
+
+        if(strpos($link, '?stage=Stage') !== false){
+            $link = str_replace("stage=Stage&", "", $link);
+            $link = str_replace("stage=Stage", "", $link);
+        }
+        if(strpos($link, '?stage=Live') !== false){
+            $link = str_replace("stage=Live&", "", $link);
+            $link = str_replace("stage=Live", "", $link);
+        }
+
+        return $link;
     }
 
 
