@@ -1,4 +1,4 @@
-<article class="topic-card <% if $Last %>topic-card--no-border<% end_if %> clearfix">
+<article class="topic-card topic-card--no-border clearfix">
 	<% if $FeaturedImage %>
 		<a href="$Link" class="topic-card__img">
 			<img class="dp-lazy" data-original="$FeaturedImage.FocusFill(500,333).URL" width="500" height="333" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="$Title">

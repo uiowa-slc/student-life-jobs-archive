@@ -201,8 +201,10 @@ feed/locations.json */
 
         foreach($cats as $cat){
             $urls[Director::absoluteURL($cat->Link())] = 0;
-        }
 
+            //This works, but it's really slow, don't want to slam the API, will remain uncached for now:
+            //$urls[Director::absoluteURL($cat->Link()).'/all'] = 0;
+        }
 
         //print_r($urls);
         return $urls;

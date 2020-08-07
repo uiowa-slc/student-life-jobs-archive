@@ -119,7 +119,7 @@ class JobListingHolderController extends PageController{
             $data = new ArrayData([
                 'Filter' => $department,
                 'FilterType' => 'Department',
-                'FilterTitle' => $department->Title,
+                'FilterTitle' => $filterTitle,
                 'FilterList' => $jobList
             ]);
 
