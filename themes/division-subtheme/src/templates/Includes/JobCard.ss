@@ -16,7 +16,7 @@
         <% if $Active %>
             <p><a href="$Link" class="button small">Learn more</a> <a href="$NextStepLink" target="_blank" rel="noopener" class="button small">Apply for this job <i class="fa fa-external-link" aria-hidden="true"></i></a></p>
             <p class="text-small">
-                Before applying for this job, please check the <% if $Qualifications %><a href="{$Link}#qualifications">qualifications</a> <% end_if %><% if $TrainingRequirements && $Qualifications %>and <% end_if %><% if $TrainingRequirements %><a href="#training-requirements">training requirements</a> <% end_if %>for this position.</p>
+                Before applying for this job, please check the <% if $Qualifications %><a href="{$Link}#qualifications">qualifications</a> <% end_if %><% if $TrainingRequirements && $Qualifications %>and <% end_if %><% if $TrainingRequirements %><a href="{$Link}#training-requirements">training requirements</a> <% end_if %>for this position.</p>
         <% else %>
 
         <% end_if %>
