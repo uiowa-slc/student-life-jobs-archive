@@ -187,7 +187,20 @@ class JobListing extends Page {
 
 
         if(isset($rawJob['what_you_will_learn'])) $this->LearningOutcomes = $rawJob['what_you_will_learn'];
-        if(isset($rawJob['work_location'])) $this->WorkLocation = $rawJob['work_location'];
+
+        //If work location and location are the same, don't set WorkLocation because it's redundant
+        if(isset($rawJob['work_location']) && $this->Location){
+            //print_r($this->Location->Title.' '.$rawJob['work_location']);
+            if($rawJob['work_location'] != $this->Location->Title){
+               $this->WorkLocation = $rawJob['work_location'];
+            }
+
+        }elseif($rawJob['work_location']){
+                $this->WorkLocation = $rawJob['work_location'];
+            }
+
+
+
         if(isset($rawJob['work_hours'])) $this->WorkHours = $rawJob['work_hours'];
         if(isset($rawJob['rate_of_pay'])) $this->PayRate = $rawJob['rate_of_pay'];
         if(isset($rawJob['has_open_job_posting'])) $this->Active = filter_var($rawJob['has_open_job_posting'], FILTER_VALIDATE_BOOLEAN);
