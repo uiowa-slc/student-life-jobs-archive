@@ -221,10 +221,23 @@ class JobListing extends Page {
         $stringReplaced = str_replace('<p>', '', $stringTrimmed);
         $stringReplaced = str_replace('</p>', '', $stringReplaced);
         $stringReplaced = str_replace('<br>', '', $stringReplaced);
+        $stringReplaced = str_replace('<br/>', '', $stringReplaced);
+        $stringReplaced = str_replace('<br />', '', $stringReplaced);
 
         $arr = explode('•',$stringReplaced);
+
+        foreach($arr as $item){
+            $item = trim($item);
+            $item = rtrim($item);
+        }
+
         $converted = "<ul><li>" . implode("</li><li>", array_filter($arr)) . "</li></ul>";
-        return $converted;
+
+        $convertedReplaced = str_replace('<li></li>', '', $converted);
+        $convertedReplaced = str_replace('<li> </li>', '', $convertedReplaced);
+        //print_r($convertedReplaced);
+
+        return $convertedReplaced;
 
     }
 
