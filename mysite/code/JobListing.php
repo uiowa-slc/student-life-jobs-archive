@@ -172,28 +172,72 @@ class JobListing extends Page {
             $this->Location = new JobListingLocation();
             $this->Location = $this->Location->getByID($rawJob['location_id']);
         }
-        // if(isset($rawJob['training_requirements'])) $this->TrainingRequirements = $this->convertSemicolons($rawJob['training_requirements']);
-        if(isset($rawJob['training_requirements'])) $this->TrainingRequirements = $rawJob['training_requirements'];
+        if(isset($rawJob['training_requirements'])) $this->TrainingRequirements = $this->convertBullets($rawJob['training_requirements']);
+        // if(isset($rawJob['training_requirements'])) $this->TrainingRequirements = $rawJob['training_requirements'];
 
 
-        // if(isset($rawJob['responsibilities'])) $this->Responsibilities = $this->convertSentences($rawJob['responsibilities']);
+        if(isset($rawJob['responsibilities'])) $this->Responsibilities = $this->convertBullets($rawJob['responsibilities']);
 
-        if(isset($rawJob['responsibilities'])) $this->Responsibilities = $rawJob['responsibilities'];
+        // if(isset($rawJob['responsibilities'])) $this->Responsibilities = $rawJob['responsibilities'];
 
-        // if(isset($rawJob['qualifications'])) $this->Qualifications = $this->convertSentences($rawJob['qualifications']);
+        if(isset($rawJob['qualifications'])) $this->Qualifications = $this->convertBullets($rawJob['qualifications']);
 
-        if(isset($rawJob['qualifications'])) $this->Qualifications = $rawJob['qualifications'];
+        //if(isset($rawJob['qualifications'])) $this->Qualifications = $rawJob['qualifications'];
         if(isset($rawJob['basic_job_function'])) $this->BasicJobFunction = $rawJob['basic_job_function'];
 
 
         if(isset($rawJob['what_you_will_learn'])) $this->LearningOutcomes = $rawJob['what_you_will_learn'];
-        if(isset($rawJob['work_location'])) $this->WorkLocation = $rawJob['work_location'];
-        if(isset($rawJob['work_hours'])) $this->WorkHours = $rawJob['work_hours'];
+
+        //If work location and location are the same, don't set WorkLocation because it's redundant
+        if(isset($rawJob['work_location']) && $this->Location){
+            //print_r($this->Location->Title.' '.$rawJob['work_location']);
+            if($rawJob['work_location'] != $this->Location->Title){
+               $this->WorkLocation = $rawJob['work_location'];
+            }
+
+        }elseif($rawJob['work_location']){
+                $this->WorkLocation = $rawJob['work_location'];
+            }
+
+
+
+        //if(isset($rawJob['work_hours'])) $this->WorkHours = $rawJob['work_hours'];
+
+        if(isset($rawJob['work_hours'])) $this->WorkHours = $this->convertBullets($rawJob['work_hours']);
+
+
         if(isset($rawJob['rate_of_pay'])) $this->PayRate = $rawJob['rate_of_pay'];
         if(isset($rawJob['has_open_job_posting'])) $this->Active = filter_var($rawJob['has_open_job_posting'], FILTER_VALIDATE_BOOLEAN);
         if(isset($rawJob['job_posting_url'])) $this->NextStepLink = $rawJob['job_posting_url'];
         // print_r($this);
         return $this;
+
+    }
+
+    private function convertBullets($string){
+        //print_r($string);
+        $stringTrimmed = trim($string);
+        $stringTrimmed = rtrim($string);
+        $stringReplaced = str_replace('<p>', '', $stringTrimmed);
+        $stringReplaced = str_replace('</p>', '', $stringReplaced);
+        $stringReplaced = str_replace('<br>', '', $stringReplaced);
+        $stringReplaced = str_replace('<br/>', '', $stringReplaced);
+        $stringReplaced = str_replace('<br />', '', $stringReplaced);
+
+        $arr = explode('•',$stringReplaced);
+
+        foreach($arr as $item){
+            $item = trim($item);
+            $item = rtrim($item);
+        }
+
+        $converted = "<ul><li>" . implode("</li><li>", array_filter($arr)) . "</li></ul>";
+
+        $convertedReplaced = str_replace('<li></li>', '', $converted);
+        $convertedReplaced = str_replace('<li> </li>', '', $convertedReplaced);
+        //print_r($convertedReplaced);
+
+        return $convertedReplaced;
 
     }
 

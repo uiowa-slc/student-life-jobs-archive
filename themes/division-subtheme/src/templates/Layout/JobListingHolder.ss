@@ -83,7 +83,7 @@ $BeforeContent
 
   <div class="grid-x grid-padding-x">
     <div class="cell small-12 large-1 show-for-large"></div>
-    <article class="cell medium-8">
+    <article class="cell medium-10">
 
       $BeforeContentConstrained
 

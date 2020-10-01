@@ -1,214 +1,203 @@
 <?php
 
-use SilverStripe\Blog\Admin\GridFieldCategorisationConfig;
-use SilverStripe\Forms\GridField\GridField;
-use SilverStripe\ORM\ArrayList;
+use quamsta\ApiCacher\FeedHelper;
 use SilverStripe\Control\Director;
 use SilverStripe\Core\Environment;
-use quamsta\ApiCacher\FeedHelper;
+use SilverStripe\ORM\ArrayList;
+
 class JobListingHolder extends Page {
 
-    private static $db = array(
-        'MoreInfoText' => 'HTMLText'
-    );
+	private static $db = array(
+		'MoreInfoText' => 'HTMLText',
+	);
 
-    // private static $has_many = array(
-    //     'Departments' => 'JobListingDepartment',
-    // );
+	// private static $has_many = array(
+	//     'Departments' => 'JobListingDepartment',
+	// );
 
-    private static $allowed_children = array('JobListing');
+	private static $allowed_children = array('JobListing');
 
-    public function getLumberjackTitle() {
-        return 'Job Listings';
-    }
+	public function getLumberjackTitle() {
+		return 'Job Listings';
+	}
 
-    public function getCMSFields(){
-        $fields = parent::getCMSFields();
+	public function getCMSFields() {
+		$fields = parent::getCMSFields();
 
-        return $fields;
-    }
+		return $fields;
+	}
 
+	/*feed/positions.json (all positions)
+		feed/positions.json?open=true
+		feed/positions.json?closed=true
+		feed/positions.json?department_id=14
+		feed/positions.json?department=University+Housing+and+Dining
+		feed/positions.json?category_id=1
+		feed/positions.json?category=Food+Service
+		feed/positions.json?location_id=21
+		feed/positions.json?location=CRWC
+		feed/positions.json?category_id=1&location_id=8
+		feed/positions.json?category_id&location_id=8&open=true
+		etc.
 
-    /*feed/positions.json (all positions)
-feed/positions.json?open=true
-feed/positions.json?closed=true
-feed/positions.json?department_id=14
-feed/positions.json?department=University+Housing+and+Dining
-feed/positions.json?category_id=1
-feed/positions.json?category=Food+Service
-feed/positions.json?location_id=21
-feed/positions.json?location=CRWC
-feed/positions.json?category_id=1&location_id=8
-feed/positions.json?category_id&location_id=8&open=true
-etc.
+		Also,
+		feed/departments.json
+		feed/categories.json
+	*/
 
-Also,
-feed/departments.json
-feed/categories.json
-feed/locations.json */
+	public function JobListings($status = 'open') {
 
+		$feedURL = Environment::getEnv('JOBFEED_BASE') . 'positions.json?';
 
-    public function JobListings($status = 'open'){
+		if ($status == 'open') {
+			$feedURL .= '&open=true';
+		} elseif ($status == 'closed') {
+			$feedURL .= '&closed=true';
+		} elseif ($status == 'any') {
 
-        $feedURL = Environment::getEnv('JOBFEED_BASE').'positions.json?';
+		}
 
-        if($status == 'open'){
-            $feedURL .= '&open=true';
-        }elseif($status == 'closed'){
-            $feedURL .= '&closed=true';
-        }
-        elseif($status == 'any'){
+		$jobList = new ArrayList();
+		$jobFeed = FeedHelper::getJson($feedURL);
 
-        }
+		if (isset($jobFeed['positions'])) {
+			$jobArray = $jobFeed['positions'];
+			foreach ($jobArray as $job) {
+				if (isset($job)) {
+					$jobObj = new JobListing();
 
-        $jobList = new ArrayList();
-        $jobFeed = FeedHelper::getJson($feedURL);
+					$jobList->push($jobObj->parseFromFeed($job['position']));
+				}
+			}
+			//print_r($jobList);
 
+		}
 
-        if (isset($jobFeed['positions'])) {
-            $jobArray = $jobFeed['positions'];
-            foreach ($jobArray as $job) {
-                if (isset($job)) {
-                    $jobObj = new JobListing();
+		return $jobList;
 
-                    $jobList->push($jobObj->parseFromFeed($job['position']));
-                }
-            }
-            //print_r($jobList);
+	}
 
-        }
+	public function CategorisationObjects($term, $termPlural, $filterByOpen = false) {
 
-        return $jobList;
+		$feedURL = Environment::getEnv('JOBFEED_BASE') . $termPlural . '.json';
 
-    }
+		$catList = new ArrayList();
+		$catFeed = FeedHelper::getJson($feedURL);
+		// print_r($feedURL);
+		//print_r($catFeed);
 
+		if (isset($catFeed[$termPlural])) {
+			$catArray = $catFeed[$termPlural];
 
-    public function CategorisationObjects($term, $termPlural, $filterByOpen = false){
+			foreach ($catArray as $cat) {
+				if (isset($cat)) {
 
-        $feedURL = Environment::getEnv('JOBFEED_BASE').$termPlural.'.json';
+					$catObjName = "JobListing" . ucfirst($term);
+					$catObj = new $catObjName;
+					$catObj = $catObj->parseFromFeed($cat[$term]);
+					if ($filterByOpen == true) {
 
-        $catList = new ArrayList();
-        $catFeed = FeedHelper::getJson($feedURL);
-       // print_r($feedURL);
-        //print_r($catFeed);
+						if ($catObj->ActiveJobListings > 0) {
+							$catList->push($catObj);
+						}
 
-        if (isset($catFeed[$termPlural])) {
-            $catArray = $catFeed[$termPlural];
+					} else {
 
-            foreach ($catArray as $cat) {
-                if (isset($cat)) {
+						if ($catObj->ActiveJobListings > 0) {
 
-                    $catObjName = "JobListing".ucfirst($term);
-                    $catObj = new $catObjName;
-                    $catObj = $catObj->parseFromFeed($cat[$term]);
-                    if($filterByOpen == true){
+							$catList->unshift($catObj);
 
+						} else {
 
-                        if($catObj->ActiveJobListings > 0){
-                             $catList->push($catObj);
-                        }
+							$catList->push($catObj);
+						}
+					}
 
-                    }else{
+				}
+			}
+			// if($term == 'location')print_r($feedURL);
+			return $catList;
 
-                        if($catObj->ActiveJobListings > 0){
+		}
 
-                            $catList->unshift($catObj);
+	}
 
-                        }else{
+	public function Departments($filterByOpen = false) {
+		$departments = $this->CategorisationObjects('department', 'departments', $filterByOpen);
+		return $departments;
+	}
 
-                            $catList->push($catObj);
-                        }
-                    }
+	public function Categories($filterByOpen = false) {
+		$categories = $this->CategorisationObjects('category', 'categories', $filterByOpen);
+		return $categories;
+	}
 
-                }
-            }
-            // if($term == 'location')print_r($feedURL);
-            return $catList;
+	public function Locations($filterByOpen = false) {
+		$locations = $this->CategorisationObjects('location', 'locations', $filterByOpen);
+		return $locations;
+	}
 
-        }
+	public function CatObjects($filterByOpen = false) {
+		$catObjs = new ArrayList();
+		$catObjs->merge($this->Departments($filterByOpen));
+		$catObjs->merge($this->Categories($filterByOpen));
+		$catObjs->merge($this->Locations($filterByOpen));
+		return $catObjs;
+	}
 
+	public function singleJob($id) {
 
-    }
+		if (!isset($id) || $id == 0) {
+			return false;
+		}
 
-    public function Departments($filterByOpen = false){
-        $departments = $this->CategorisationObjects('department', 'departments', $filterByOpen);
-        return $departments;
-    }
+		if (!is_numeric($id)) {
+			return false;
+		}
 
-    public function Categories($filterByOpen = false){
-        $categories = $this->CategorisationObjects('category', 'categories', $filterByOpen);
-        return $categories;
-    }
+		$feedURL = Environment::getEnv('JOBFEED_BASE') . 'positions.json?id=' . $id;
 
+		$jobFeed = FeedHelper::getJson($feedURL);
+		//print_r($feedURL);
+		if (isset($jobFeed['positions'][0])) {
+			$job = $jobFeed['positions'][0]['position'];
+		}
+		//print_r($job);
+		if (isset($job)) {
+			$jobObj = new JobListing();
+			$parsedJob = $jobObj->parseFromFeed($job);
+			return $parsedJob;
+		}
+		return false;
+	}
 
-    public function Locations($filterByOpen = false){
-        $locations = $this->CategorisationObjects('location', 'locations', $filterByOpen);
-        return $locations;
-    }
+	public function urlsToCache() {
+		$jobHolder = $this;
+		$abs = Director::absoluteBaseURL();
+		$jobHolderLink = Director::absoluteURL($jobHolder->Link());
 
-    public function CatObjects($filterByOpen = false){
-        $catObjs = new ArrayList();
-        $catObjs->merge($this->Departments($filterByOpen));
-        $catObjs->merge($this->Categories($filterByOpen));
-        $catObjs->merge($this->Locations($filterByOpen));
-        return $catObjs;
-    }
+		$urls[$jobHolderLink] = 0;
 
+		//Cache all current jobs from  job list
 
-    public function singleJob($id) {
+		$jobs = $jobHolder->JobListings();
 
-        if (!isset($id) || $id == 0) {
-            return false;
-        }
+		foreach ($jobs as $job) {
+			$urls[Director::absoluteURL($job->Link())] = 0;
+		}
 
-        if(!is_numeric($id)){
-            return false;
-        }
+		$cats = $jobHolder->CatObjects();
 
-        $feedURL = Environment::getEnv('JOBFEED_BASE').'positions.json?id='.$id;
+		foreach ($cats as $cat) {
+			$urls[Director::absoluteURL($cat->Link())] = 0;
 
-        $jobFeed = FeedHelper::getJson($feedURL);
-        //print_r($feedURL);
-        if(isset($jobFeed['positions'][0])){
-            $job = $jobFeed['positions'][0]['position'];
-        }
-        //print_r($job);
-        if (isset($job)) {
-            $jobObj = new JobListing();
-            $parsedJob  = $jobObj->parseFromFeed($job);
-            return $parsedJob;
-        }
-        return false;
-    }
+			//This works, but it's really slow, don't want to slam the API, will remain uncached for now:
+			$urls[Director::absoluteURL($cat->Link()) . '/all'] = 0;
+		}
 
-
-    public function urlsToCache() {
-        $jobHolder = $this;
-        $abs = Director::absoluteBaseURL();
-        $jobHolderLink = Director::absoluteURL($jobHolder->Link());
-
-        $urls[$jobHolderLink] = 0;
-
-        //Cache all current jobs from  job list
-
-        $jobs = $jobHolder->JobListings();
-
-        foreach($jobs as $job){
-            $urls[Director::absoluteURL($job->Link())] = 0;
-        }
-
-        $cats = $jobHolder->CatObjects();
-
-        foreach($cats as $cat){
-            $urls[Director::absoluteURL($cat->Link())] = 0;
-        }
-
-
-        //print_r($urls);
-        return $urls;
-       //return [Director::absoluteURL($this->getOwner()->Link()) => 0];
-    }
-
-
+		//print_r($urls);
+		return $urls;
+		//return [Director::absoluteURL($this->getOwner()->Link()) => 0];
+	}
 
 }
