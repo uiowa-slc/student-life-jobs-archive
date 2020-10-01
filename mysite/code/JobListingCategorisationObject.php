@@ -1,17 +1,15 @@
 <?php
 
-use SilverStripe\Forms\TextField;
-use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
-use SilverStripe\Forms\FieldList;
-use SilverStripe\Control\Controller;
-use SilverStripe\Blog\Model\Blog;
-use SilverStripe\Security\Permission;
-use SilverStripe\ORM\DataObject;
-use SilverStripe\Blog\Model\CategorisationObject;
-use SilverStripe\ORM\ArrayList;
-use SilverStripe\Core\Environment;
 use quamsta\ApiCacher\FeedHelper;
-use SilverStripe\View\ArrayData;
+use SilverStripe\Blog\Model\Blog;
+use SilverStripe\Blog\Model\CategorisationObject;
+use SilverStripe\Core\Environment;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+use SilverStripe\Forms\TextField;
+use SilverStripe\ORM\ArrayList;
+use SilverStripe\ORM\DataObject;
+
 /**
  * A department for keyword descriptions of a job listing location.
  *
@@ -25,126 +23,120 @@ use SilverStripe\View\ArrayData;
  * @property int $BlogID
  */
 
-class JobListingCategorisationObject extends DataObject implements CategorisationObject
-{
+class JobListingCategorisationObject extends DataObject implements CategorisationObject {
 
-    private static $db = array(
-        'Title' => 'Varchar(255)',
-        'Content' => 'HTMLText'
-    );
+	private static $db = array(
+		'Title' => 'Varchar(255)',
+		'Content' => 'HTMLText',
+	);
 
-    protected static $primaryTerm;
-    protected static $primaryTermPlural;
+	protected static $primaryTerm;
+	protected static $primaryTermPlural;
 
-    private static $feedURL;
+	private static $feedURL;
 
+	public static function getByID($id, $term, $termPlural) {
+		$feedURL = Environment::getEnv('JOBFEED_BASE') . '' . $termPlural . '.json?id=' . $id;
+		$catObjName = "JobListing" . ucfirst($term);
+		$catObj = new $catObjName;
+		$catFeed = FeedHelper::getJson($feedURL);
 
-    public static function getByID($id, $term, $termPlural){
-       $feedURL = Environment::getEnv('JOBFEED_BASE').''.$termPlural.'.json?id='.$id;
-       $catObjName = "JobListing".ucfirst($term);
-       $catObj = new $catObjName;
-       $catFeed = FeedHelper::getJson($feedURL);
+		if (isset($catFeed[$termPlural][0])) {
+			//print_r($catFeed[$termPlural][0]['location']);
+			$catObj = $catObj->parseFromFeed($catFeed[$termPlural][0][$term]);
+			// print_r($catObj);
+			return $catObj;
 
-       if(isset($catFeed[$termPlural][0])){
-            //print_r($catFeed[$termPlural][0]['location']);
-            $catObj = $catObj->parseFromFeed($catFeed[$termPlural][0][$term]);
-           // print_r($catObj);
-            return $catObj;
+		}
 
-       }
+	}
+	public function SearchObj($keywords) {
 
+		$haystack = $this->Title . ' ' . $this->Content;
 
-    }
-    public function SearchObj($keywords){
+		if (stripos($haystack, $keywords) !== false) {
+			return true;
+		}
 
-        $haystack = $this->Title.' '.$this->Content;
+	}
+	public function JobListings($status = 'open') {
 
-        if(stripos($haystack, $keywords) !== false){
-            return true;
-        }
+		$feedURL = Environment::getEnv('JOBFEED_BASE') . 'positions.json?' . static::$primaryTerm . '_id=' . $this->ID;
 
+		if ($status == 'open') {
+			$feedURL .= '&open=true';
+		} elseif ($status == 'closed') {
+			$feedURL .= '&closed=true';
+		} elseif ($status == 'all') {
 
-    }
-    public function JobListings($status = 'open'){
+		}
 
-        $feedURL = Environment::getEnv('JOBFEED_BASE').'positions.json?'.static::$primaryTerm.'_id='.$this->ID;
+		//print_r($feedURL.'<br />');
+		$jobList = new ArrayList();
+		$jobFeed = FeedHelper::getJson($feedURL);
+		// print_r($feedURL);
+		if (isset($jobFeed['positions'])) {
+			$jobArray = $jobFeed['positions'];
+			foreach ($jobArray as $job) {
+				if (isset($job)) {
+					$jobObj = new JobListing();
+					$jobObj = $jobObj->parseFromFeed($job['position']);
+					//If the job is active, shift it to the top of the arraylist to show it first. Otherwise add to end of list.
+					if ($jobObj->Active) {
+						//echo $jobObj->Title.'<br />';
+						$jobList->unshift($jobObj);
+					} else {
+						$jobList->push($jobObj);
+					}
 
-        if($status == 'open'){
-            $feedURL .= '&open=true';
-        }elseif($status == 'closed'){
-            $feedURL .= '&closed=true';
-        }elseif($status == 'all'){
+				}
+			}
+			//print_r($jobList);
+			return $jobList;
+		}
+	}
 
-        }
+	public function parseFromFeed($rawDept) {
 
-        //print_r($feedURL.'<br />');
-        $jobList = new ArrayList();
-        $jobFeed = FeedHelper::getJson($feedURL);
-        // print_r($feedURL);
-        if (isset($jobFeed['positions'])) {
-            $jobArray = $jobFeed['positions'];
-            foreach ($jobArray as $job) {
-                if (isset($job)) {
-                    $jobObj = new JobListing();
-                    $jobObj = $jobObj->parseFromFeed($job['position']);
-                    //If the job is active, shift it to the top of the arraylist to show it first. Otherwise add to end of list.
-                    if($jobObj->Active){
-                        //echo $jobObj->Title.'<br />';
-                        $jobList->unshift($jobObj);
-                    }else{
-                        $jobList->push($jobObj);
-                    }
+		$this->ID = $rawDept['id'];
+		$this->Title = $rawDept['name'];
 
-                }
-            }
-            //print_r($jobList);
-            return $jobList;
-        }
-    }
+		if (isset($rawDept['active_job_postings'])) {
+			$this->ActiveJobListings = $rawDept['active_job_postings'];
+		}
 
-    public function parseFromFeed($rawDept) {
+		return $this;
+	}
 
-        $this->ID = $rawDept['id'];
-        $this->Title = $rawDept['name'];
+	/**
+	 * {@inheritdoc}
+	 */
+	public function getCMSFields() {
+		$fields = new FieldList(
+			TextField::create('Title', _t('JobListingDepartment.Title', 'Title')),
+			HTMLEditorField::create('Content', 'Description of department')
+		);
 
-        if(isset($rawDept['active_job_postings'])){
-            $this->ActiveJobListings = $rawDept['active_job_postings'];
-        }
+		$this->extend('updateCMSFields', $fields);
+		return $fields;
+	}
 
-        return $this;
-    }
+	public function Locations($status = 'open') {
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getCMSFields(){
-        $fields = new FieldList(
-            TextField::create('Title', _t('JobListingDepartment.Title', 'Title')),
-            HTMLEditorField::create('Content', 'Description of department')
-        );
+		$jobList = $this->JobListings($status);
+		$locations = new ArrayList();
 
-        $this->extend('updateCMSFields', $fields);
-        return $fields;
-    }
+		foreach ($jobList as $job) {
+			//print_r($job.' Location: '.$job->Location.'<br />');
+			if ($job->Location) {
+				$locations->push($job->Location);
+			}
+		}
 
+		$locations->removeDuplicates();
 
-    public function Locations(){
+		return $locations;
 
-        $jobList = $this->JobListings();
-        $locations = new ArrayList();
-
-        foreach($jobList as $job){
-            //print_r($job.' Location: '.$job->Location.'<br />');
-            if($job->Location){
-                $locations->push($job->Location);
-            }
-        }
-
-        $locations->removeDuplicates();
-
-        return $locations;
-
-
-    }
+	}
 
 }

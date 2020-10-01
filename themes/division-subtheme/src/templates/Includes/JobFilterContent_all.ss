@@ -31,7 +31,7 @@
                 <% loop $Locations("all") %>
                   <li class="accordion-item count <%if $Up.Locations.Count == 1 %>is-active<% end_if %>" data-accordion-item>
                     <!-- Accordion tab title -->
-                    <a href="#" class="accordion-title" style="border-bottom: 1px solid #e5e5e5;">$Title <span class="<% if $ActiveJobListings > 0 %>font-weight-bold<% end_if %>">($JobListingsByFilter("all").Count)</span></a>
+                    <a href="#" class="accordion-title" style="border-bottom: 1px solid #e5e5e5;">$Title <span>($JobListingsByFilter("all").Count)</span></a>
 
                     <!-- Accordion tab content: it would start in the open state due to using the `is-active` state class. -->
 

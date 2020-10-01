@@ -1,100 +1,103 @@
-
 @font-face {
-  font-family: 'FontAwesome';
-  src: url('#{$fa-font-path}/fontawesome-webfont.eot?v=#{$fa-version}');
-  src: url('#{$fa-font-path}/fontawesome-webfont.eot?#iefix&v=#{$fa-version}') format('embedded-opentype'),
+    font-family: 'FontAwesome';
+    src: url('#{$fa-font-path}/fontawesome-webfont.eot?v=#{$fa-version}');
+    src: url('#{$fa-font-path}/fontawesome-webfont.eot?#iefix&v=#{$fa-version}') format('embedded-opentype'),
     url('#{$fa-font-path}/fontawesome-webfont.woff?v=#{$fa-version}') format('woff'),
     url('#{$fa-font-path}/fontawesome-webfont.ttf?v=#{$fa-version}') format('truetype'),
     url('#{$fa-font-path}/fontawesome-webfont.svg?v=#{$fa-version}#fontawesomeregular') format('svg');
-  font-weight: normal;
-  font-style: normal;
+    font-weight: normal;
+    font-style: normal;
 }
 
 .footer-logo-area {
-	border-top: 1px solid #ddd;
-	padding: 20px 0;
-	font-size: 15px;
-	p{
-		margin: 0.6667em 0;
-	}
+    border-top: 1px solid #ddd;
+    padding: 20px 0;
+    font-size: 15px;
+
+    p {
+        margin: 0.6667em 0;
+    }
 
 }
 
-.footer-logo-area__logo{
-	max-height: 160px;
-	display: block;
-	margin: auto;
+.footer-logo-area__logo {
+    max-height: 160px;
+    display: block;
+    margin: auto;
 }
 
 #mc_embed_signup form {
-	padding: 0;
-	width: 280px;
+    padding: 0;
+    width: 280px;
 }
 
 #mc_embed_signup input {
-	border-color: rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.25);
-}
-#mc_embed_signup .clear{
-	clear: none;
-	display: inline;
-	float: none;
+    border-color: rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.25);
 }
 
-.font-weight-bold{
+#mc_embed_signup .clear {
+    clear: none;
+    display: inline;
+    float: none;
+}
+
+.font-weight-bold {
     font-weight: bold !important;
 }
 
-.text-red{
+.text-red {
     color: red !important;
 
 }
 
-.text-green{
+.text-green {
     color: green !important;
 }
 
-.button.hollow.button--red{
+.button.hollow.button--red {
     border-color: red;
     color: red;
 }
-.button.hollow.button--green{
+
+.button.hollow.button--green {
     border-color: green;
     color: green;
 }
 
-.text-small{
+.text-small {
     font-size: 15px !important;
 }
 
-.accordion-title{
+.accordion-title {
     border-bottom: none;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
-    border-color: #6e6e6e;
+    border-color: #ccc;
     font-weight: normal;
     color: #6e6e6e;
 }
 
-.accordion-item{
-    border-bottom: 1px solid #6e6e6e;
+.accordion-content {
+    border-color: #ccc;
 }
+
+.accordion-item {
+    border-bottom: 1px solid #ccc;
+}
+
 .accordion-item:first-child>:first-child {
     border-radius: 1px 1px 0 0;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
 }
 
-:last-child:not(.is-active)>.accordion-title{
+:last-child:not(.is-active)>.accordion-title {
     border-bottom: none;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
 }
 
 
-.accordion-content{
-    border-color: #6e6e6e;
-}
-:last-child>.accordion-content:last-child{
+:last-child>.accordion-content:last-child {
     border-bottom: none;
 }
-
