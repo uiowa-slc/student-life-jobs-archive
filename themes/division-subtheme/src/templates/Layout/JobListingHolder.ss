@@ -5,17 +5,16 @@ $Header
     <% with $BackgroundImage %>
       <div style="background-repeat: no-repeat; background-size: cover;" data-interchange="[$FocusFill(600,400).URL, small], [$FocusFill(1600,500).URL, medium]">
     <% end_with %>
-    <div class="topic-search-bg background-image" style="background-position: {$PercentageX}% {$PercentageY}%;  display: flex;
-    align-items: center; background: rgba(0,0,0,0.4);">
-        <div style="width: 100%; max-width: 700px; margin: auto; text-align: center; z-index:1; position: relative;">
+    <div class="topic-search-bg background-image" style="background-position: {$PercentageX}% {$PercentageY}%;">
+        <div class="topic-search-container">
           <h1 class="background-image__title" style="margin-bottom: 20px;"><a href="$Link" style="color: white;">$Title</a></h1>
           $TopicSearchFormSized
 
           <% if $Categories(true) %>
-          <p style="color: white; font-size: 16px; line-height: 2">
+          <p class="topic-search-minicats">
             <span class="topic-search-minicats__heading">Browse currently hiring jobs by category:</span>
             <% loop $Categories(true).Sort('Title') %>
-            <span style="display: inline-block; margin: 0 2px; "><a href="$Link" style="color: white; text-decoration: underline;">$Title</a><% if not $Last %>,</span><% end_if %>
+            <span class="topic-search-minicats__cat"><a href="$Link">$Title</a><% if not $Last %>,</span><% end_if %>
             <% end_loop %>
             </p>
             <% end_if %>

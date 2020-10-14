@@ -17,7 +17,7 @@ $Header
 
     $BlockArea(BeforeContent)
 
-    <div class="row">
+    <div class="row column">
 
         <article role="main" class="main-content main-content--with-padding <% if $Children || $Menu(2) || $SidebarBlocks ||  $SidebarView.Widgets %>main-content--with-sidebar<% else %>main-content--full-width<% end_if %>">
             $BlockArea(BeforeContentConstrained)
@@ -42,7 +42,7 @@ $Header
                 <% if $Department %><p><span class="job-single__descriptor">Department:</span> <a href="$Department.Link">$Department.Title</a></p><% end_if %>
                 <p><span class="job-single__descriptor">Status:</span> <% if $Active %><span class="text-green font-weight-bold">Currently hiring</span><% else %><span class="text-red font-weight-bold">Not currently hiring</span><% end_if %></span></p>
                 <% if $Active && $NextStepLink %>
-                <p><a href="$NextStepLink" target="_blank" rel="noopener" class="button">Apply for this job <i class="fa fa-external-link" aria-hidden="true"></i></a></p>
+                <p><a href="$NextStepLink" target="_blank" rel="noopener" class="button">Apply for this job <i class="fa fa-external-link-alt" aria-hidden="true"></i></a></p>
                 <% if $TrainingRequirements || $Qualifications %>
                     <p style="font-size: 16px;">Before applying for this job, please check the <% if $Qualifications %><a href="#qualifications">qualifications</a> <% end_if %><% if $TrainingRequirements && $Qualifications %>and <% end_if %><% if $TrainingRequirements %><a href="#training-requirements">training requirements</a> <% end_if %>for this position.</p>
                 <% end_if %>
@@ -90,7 +90,7 @@ $Header
                 <% end_if %>
                 <% if $NextStepLink %>
                     <div class="apply__container">
-                        <a href="$NextStepLink" class="button apply__button" target="_blank">Apply for this job  <i class="fa fa-external-link" aria-hidden="true"></a>
+                        <a href="$NextStepLink" class="button apply__button" target="_blank">Apply for this job  <i class="fa fa-external-link-alt" aria-hidden="true"></a>
                         <div class="apply__content">
                             <% if $Content %>
                             $Content

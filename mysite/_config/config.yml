@@ -5,3 +5,9 @@ SilverStripe\Core\Manifest\ModuleManifest:
   project: mysite
 # Symbiote\QueuedJobs\Services\QueuedJobService\QueuedJobsService:
 #   memory_limit: 8096m
+HomePage:
+  extensions:
+    - HomePageExtension
+HomePageController:
+  extensions:
+    - HomePageControllerExtension

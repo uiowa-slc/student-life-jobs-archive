@@ -57,7 +57,7 @@ $BeforeContent
         <% end_if %>
 
         <% if $Query %>
-            <p><a href="{$AllResultsLink}" class="button button--red hollow"><i class="fa fa-list" aria-hidden="true"></i> Search all jobs using this term (hiring or not).</a></p>
+            <p><a href="{$AllResultsLink}" class="button  hollow"><i class="fa fa-list" aria-hidden="true"></i> Search all jobs using this term (hiring or not).</a></p>
         <% end_if %>
 
       </article>
