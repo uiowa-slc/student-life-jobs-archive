@@ -11,3 +11,5 @@ HomePage:
 HomePageController:
   extensions:
     - HomePageControllerExtension
+SilverStripe\View\SSViewer:
+  rewrite_hash_links: false
