@@ -44,7 +44,7 @@ $Header
                 <% if $Active && $NextStepLink %>
                 <p><a href="$NextStepLink" target="_blank" rel="noopener" class="button">Apply for this job <i class="fa fa-external-link-alt" aria-hidden="true"></i></a></p>
                 <% if $TrainingRequirements || $Qualifications %>
-                    <p style="font-size: 16px;">Before applying for this job, please check the <% if $Qualifications %><a href="#qualifications">qualifications</a> <% end_if %><% if $TrainingRequirements && $Qualifications %>and <% end_if %><% if $TrainingRequirements %><a href="#training-requirements">training requirements</a> <% end_if %>for this position.</p>
+                    <p style="font-size: 16px;">Before applying for this job, please check the <% if $Qualifications %><a href="{$Link}#qualifications">qualifications</a> <% end_if %><% if $TrainingRequirements && $Qualifications %>and <% end_if %><% if $TrainingRequirements %><a href="{$Link}#training-requirements">training requirements</a> <% end_if %>for this position.</p>
                 <% end_if %>
                 <% end_if %>
 
