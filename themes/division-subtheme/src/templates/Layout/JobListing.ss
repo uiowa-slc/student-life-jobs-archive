@@ -5,11 +5,12 @@ $Header
     <% if $BackgroundImage %>
         <% include FeaturedImage %>
     <% end_if %>
-    $Breadcrumbs
+
     <%-- <p><a href="{$Parent.Link}"><i class="fa fa-chevron-left" aria-hidden="true"></i> <span>See all job listings</span></a></p> --%>
     <% if not $BackgroundImage %>
         <div class="column row">
             <div class="main-content__header">
+                $Breadcrumbs
                 <h1>$Title</h1>
             </div>
         </div>

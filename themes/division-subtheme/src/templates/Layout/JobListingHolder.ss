@@ -22,12 +22,12 @@ $Header
     </div>
   </div>
 <% else_if $FilterType %>
-   $Breadcrumbs
+
   <div class="grid-container">
     <div class="grid-x align-center grid-padding-x">
       <div class="cell">
         <div class="main-content__header">
-
+            $Breadcrumbs
               <h1>{$FilterTitle}</h1>
 
         </div>
