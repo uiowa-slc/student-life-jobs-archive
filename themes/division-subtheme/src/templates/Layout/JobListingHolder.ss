@@ -58,14 +58,9 @@ $BeforeContent
 
           </article>
 
-          <div class="cell medium-4">
-            <div class="dp-sticky dp-sticky--medium">
-              <% include JobBrowseByFilter %>
-            </div>
-        </div>
       </div>
     </div>
-  <% else %>
+  <% end_if %><%-- end if content --%>
     <div class="grid-container grid-container--wpadding">
         <div class="grid-x grid-padding-x">
           <div class="cell large-12">
@@ -73,8 +68,6 @@ $BeforeContent
           </div>
         </div>
     </div>
-  <% end_if %><%-- end if content --%>
-
 <%-- if we are filtering by something: --%>
 <% else_if $FilterType %>
 
