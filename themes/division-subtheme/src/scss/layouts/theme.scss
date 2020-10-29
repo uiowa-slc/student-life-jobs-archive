@@ -1,3 +1,25 @@
+@font-face {
+    font-family: 'Font Awesome 5 Free';
+    font-style: normal;
+    font-weight: 400;
+    font-display: block;
+    src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/webfonts/fa-solid-900.eot");
+    src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/webfonts/fa-solid-900.eot?#iefix") format("embedded-opentype"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/webfonts/fa-solid-900.woff2") format("woff2"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/webfonts/fa-solid-900.woff") format("woff"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/webfonts/fa-solid-900.ttf") format("truetype"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/webfonts/fa-solid-900.svg#fontawesome") format("svg");
+}
+
+.accordion-title::before {
+    font-family: "Font Awesome 5 Free";
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    margin-top: -0.5rem;
+    content: "\f078";
+}
+
+.is-active>.accordion-title:before {
+    content: "\f077";
+}
+
 .footer-logo-area {
     border-top: 1px solid #ddd;
     padding: 20px 0;
@@ -62,36 +84,37 @@
     background: none;
 }
 
-.accordion-title {
-    border-bottom: none;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    border-color: #ccc;
-    font-weight: normal;
-    color: #6e6e6e;
-}
+// .accordion-title {
+//     border-bottom: none;
+//     border-top-left-radius: 3px;
+//     border-top-right-radius: 3px;
+//     border-color: #ccc;
+//     font-weight: normal;
+//     color: #6e6e6e;
+// }
 
-.accordion-content {
-    border-color: #ccc;
-}
+// .accordion-content {
+//     border-color: #ccc;
+// }
 
-.accordion-item {
-    border-bottom: 1px solid #ccc;
-}
-
-.accordion-item:first-child>:first-child {
-    border-radius: 1px 1px 0 0;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-}
-
-:last-child:not(.is-active)>.accordion-title {
-    border-bottom: none;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-}
+// .accordion-item {
+//     border-bottom: 1px solid #ebebeb;
+// }
 
 
-:last-child>.accordion-content:last-child {
-    border-bottom: none;
-}
+// .accordion-item:first-child>:first-child {
+//     border-radius: 1px 1px 0 0;
+//     border-top-left-radius: 3px;
+//     border-top-right-radius: 3px;
+// }
+
+// :last-child:not(.is-active)>.accordion-title {
+//     border-bottom: none;
+//     border-top-left-radius: 3px;
+//     border-top-right-radius: 3px;
+// }
+
+
+// :last-child>.accordion-content:last-child {
+//     border-bottom: none;
+// }

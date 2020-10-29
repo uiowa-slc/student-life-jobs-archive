@@ -5,8 +5,8 @@
 		</a>
 	<% end_if %>
 	<div class="topic-card__content<% if $FeaturedImage || $BackgroundImage || $YoutubeBackgroundEmbed %>--wimage<% end_if %>">
-		<h3 class="topic-card__heading topic-card__heading--lighter">
-            <a href="$Link" style="color: #005994;">$Title</a>
+		<h3 class="topic-card__heading">
+            <a href="$Link">$Title</a>
         </h3>
 		<p class="blogcard__desc"><strong>Location:</strong> <% if $WorkLocation %>{$WorkLocation}, <% end_if %> $Location.Title<br /><strong>Basic Job Function: </strong>$BasicJobFunction.LimitCharacters(150) <a href="$Link">Continue reading</a><br />
 

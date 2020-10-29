@@ -1,7 +1,7 @@
 <article class="topic-content">
 
-        <p>The following is a list of all jobs in this category and some jobs may not currently be hiring.</p>
-        <p><a href="{$Filter.Link}" class="button hollow"><i class="fa fa-list" aria-hidden="true"></i> Browse only the <strong class="text-green">currently hiring jobs</strong> in "{$Filter.Title}."</a></p>
+        <p>The following is a list of all jobs in this category and some positions may not currently be hiring.</p>
+
 
     <%-- do special markup when we're filtering by location because we don't need "By Location" in the location filte --%>
     <% if $FilterType == "Location" %>
@@ -25,25 +25,23 @@
             <% if $Locations("all") %>
                 <h3  class="topicholder-section__heading">By Location</h3>
 
-
-                <ul class="accordion" data-accordion data-multi-expand="true" data-allow-all-closed="true">
-
                 <% loop $Locations("all") %>
+                    <ul class="accordion" data-accordion data-multi-expand="true" data-allow-all-closed="true">
+
                   <li class="accordion-item count <%if $Up.Locations.Count == 1 %>is-active<% end_if %>" data-accordion-item>
                     <!-- Accordion tab title -->
-                    <a href="#" class="accordion-title" style="border-bottom: 1px solid #e5e5e5;">$Title <span>($JobListingsByFilter("all").Count)</span></a>
+                    <a href="#" class="accordion-title">$Title <span>($JobListingsByFilter("all").Count)</span></a>
 
                     <!-- Accordion tab content: it would start in the open state due to using the `is-active` state class. -->
 
                     <% loop $JobListingsByFilter("all") %>
-                        <div class="accordion-content " data-tab-content style="border-bottom: 1px solid #e5e5e5;">
+                        <div class="accordion-content " data-tab-content>
                         <% include JobCard %>
                         </div>
                     <% end_loop %>
                   </li>
+                  </ul>
                   <% end_loop %>
-                  <!-- ... -->
-                </ul>
             <% else_if $JobListings("all") %>
                 <% loop $JobListings("all") %>
                     <% include JobCard %>
@@ -56,5 +54,5 @@
         <% end_with %>
 
     <% end_if %>
-
+            <p><a href="{$Filter.Link}" class="button hollow">Browse only <strong>currently hiring jobs</strong> in "{$Filter.Title}" <i class="fa fa-arrow-right" aria-hidden="true"></i></a></p>
 </article>
