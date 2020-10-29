@@ -48,6 +48,6 @@
 
 
       <% if $FilterOpenClosed != "all" %>
-        <p><a href="{$Filter.Link}/all" class="button hollow"><i class="fa fa-list" aria-hidden="true"></i> See all jobs in this category (hiring or not).</a></p>
+        <p><a href="{$Filter.Link}/all" class="button hollow"><i class="fa fa-list" aria-hidden="true"></i> Browse <strong class="text-red">all jobs</strong> in "{$Filter.Title}."(hiring or not).</a></p>
       <% end_if %>
 </article>

@@ -6,7 +6,7 @@ $Header
         <% include FeaturedImage %>
     <% end_if %>
 
-    <%-- <p><a href="{$Parent.Link}"><i class="fa fa-chevron-left" aria-hidden="true"></i> <span>See all job listings</span></a></p> --%>
+    <%-- <p><a href="{$Parent.Link}"><i class="fa fa-chevron-left" aria-hidden="true"></i> <span>Browse all job listings</span></a></p> --%>
     <% if not $BackgroundImage %>
         <div class="column row">
             <div class="main-content__header">

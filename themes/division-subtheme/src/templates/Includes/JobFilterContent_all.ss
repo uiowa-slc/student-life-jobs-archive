@@ -1,7 +1,7 @@
 <article class="topic-content">
 
         <p>The following is a list of all jobs in this category and some jobs may not currently be hiring.</p>
-        <p><a href="{$Filter.Link}" class="button button--green hollow"><i class="fa fa-list" aria-hidden="true"></i> See only the <strong>currently hiring jobs</strong> in this category.</a></p>
+        <p><a href="{$Filter.Link}" class="button hollow"><i class="fa fa-list" aria-hidden="true"></i> Browse only the <strong class="text-green">currently hiring jobs</strong> in "{$Filter.Title}."</a></p>
 
     <%-- do special markup when we're filtering by location because we don't need "By Location" in the location filte --%>
     <% if $FilterType == "Location" %>

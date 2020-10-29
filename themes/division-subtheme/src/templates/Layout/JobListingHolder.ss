@@ -14,7 +14,7 @@ $Header
           <p class="topic-search-minicats">
             <span class="topic-search-minicats__heading">Browse currently hiring jobs by category:</span>
             <% loop $Categories(true).Sort('Title') %>
-            <span class="topic-search-minicats__cat"><a href="$Link">$Title</a><% if not $Last %>,</span><% end_if %>
+            <span class="topic-search-minicats__cat"><a href="$Link">$Title ({$ActiveJobListings})</a><% if not $Last %>,</span><% end_if %>
             <% end_loop %>
             </p>
             <% end_if %>
