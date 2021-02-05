@@ -18,7 +18,7 @@
                 <% if $AcceptsNonHawkIdApplicants %>
 
                     <a href="$NextStepLink" class="button small" target="_blank">Apply for this job <strong>(UI Students)</strong> <i class="fa fa-external-link-alt" aria-hidden="true"></a>
-                    <a href="$JobFeedBase" class="button small" target="_blank">Apply for this job <strong>(Non-UI Students)</strong> <i class="fa fa-external-link-alt" aria-hidden="true"></a>
+                    <a href="$JobFeedBase" class="button small" target="_blank">Not a UI Student? <strong>Apply for this job here</strong> <i class="fa fa-external-link-alt" aria-hidden="true"></a>
                     </i>
                 <% else %>
                    <a href="$NextStepLink" target="_blank" rel="noopener" class="button small">Apply for this job <i class="fa fa-external-link-alt" aria-hidden="true"></i></a>
