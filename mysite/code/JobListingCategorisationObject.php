@@ -36,7 +36,7 @@ class JobListingCategorisationObject extends DataObject implements Categorisatio
 	private static $feedURL;
 
 	public static function getByID($id, $term, $termPlural) {
-		$feedURL = Environment::getEnv('JOBFEED_BASE') . '' . $termPlural . '.json?id=' . $id;
+		$feedURL = Environment::getEnv('JOBFEED_BASE') . 'feed/' . $termPlural . '.json?id=' . $id;
 		$catObjName = "JobListing" . ucfirst($term);
 		$catObj = new $catObjName;
 		$catFeed = FeedHelper::getJson($feedURL);
@@ -61,7 +61,7 @@ class JobListingCategorisationObject extends DataObject implements Categorisatio
 	}
 	public function JobListings($status = 'open') {
 
-		$feedURL = Environment::getEnv('JOBFEED_BASE') . 'positions.json?' . static::$primaryTerm . '_id=' . $this->ID;
+		$feedURL = Environment::getEnv('JOBFEED_BASE') . 'feed/positions.json?' . static::$primaryTerm . '_id=' . $this->ID;
 
 		if ($status == 'open') {
 			$feedURL .= '&open=true';

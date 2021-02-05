@@ -43,7 +43,16 @@ $Header
                 <% if $Department %><p><span class="job-single__descriptor">Department:</span> <a href="$Department.Link">$Department.Title</a></p><% end_if %>
                 <p><span class="job-single__descriptor">Status:</span> <% if $Active %><span class="text-green font-weight-bold">Currently hiring</span><% else %><span class="text-red font-weight-bold">Not currently hiring</span><% end_if %></span></p>
                 <% if $Active && $NextStepLink %>
-                <p><a href="$NextStepLink" target="_blank" rel="noopener" class="button">Apply for this job <i class="fa fa-external-link-alt" aria-hidden="true"></i></a></p>
+
+                <% if $AcceptsNonHawkIdApplicants %>
+                <p>
+                    <a href="$NextStepLink" class="button" target="_blank">Apply for this job <strong>(UI Students)</strong> <i class="fa fa-external-link-alt" aria-hidden="true"></a>
+                    <a href="$JobFeedBase" class="button" target="_blank">Apply for this job <strong>(Non-UI Students)</strong> <i class="fa fa-external-link-alt" aria-hidden="true"></a>
+                    </i>
+                <% else %>
+                    <p><a href="$NextStepLink" target="_blank" rel="noopener" class="button">Apply for this job <i class="fa fa-external-link-alt" aria-hidden="true"></i></a></p>
+                <% end_if %>
+
                 <% if $TrainingRequirements || $Qualifications %>
                     <p style="font-size: 16px;">Before applying for this job, please check the <% if $Qualifications %><a href="{$Link}#qualifications">qualifications</a> <% end_if %><% if $TrainingRequirements && $Qualifications %>and <% end_if %><% if $TrainingRequirements %><a href="{$Link}#training-requirements">training requirements</a> <% end_if %>for this position.</p>
                 <% end_if %>
@@ -91,7 +100,14 @@ $Header
                 <% end_if %>
                 <% if $NextStepLink %>
                     <div class="apply__container">
-                        <a href="$NextStepLink" class="button apply__button" target="_blank">Apply for this job  <i class="fa fa-external-link-alt" aria-hidden="true"></a>
+
+                        <% if $AcceptsNonHawkIdApplicants %>
+                            <a href="$NextStepLink" class="button" target="_blank">Apply for this job <strong>(UI Students)</strong> <i class="fa fa-external-link-alt" aria-hidden="true"></a>
+                            <a href="$JobFeedBase" class="button" target="_blank">Apply for this job <strong>(Non-UI Students)</strong><i class="fa fa-external-link-alt" aria-hidden="true"></a>
+                        <% else %>
+                            <a href="$NextStepLink" class="button apply__button" target="_blank">Apply for this job  <i class="fa fa-external-link-alt" aria-hidden="true"></a>
+                        <% end_if %>
+
                         <div class="apply__content">
                             <% if $Content %>
                             $Content

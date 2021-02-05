@@ -1,15 +1,9 @@
 <?php
 
-use SilverStripe\Forms\TextField;
-use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
-use SilverStripe\Forms\FieldList;
-use SilverStripe\Control\Controller;
 use SilverStripe\Blog\Model\Blog;
-use SilverStripe\Security\Permission;
-use SilverStripe\ORM\DataObject;
-use SilverStripe\Blog\Model\CategorisationObject;
-use SilverStripe\ORM\ArrayList;
 use SilverStripe\Core\Environment;
+use SilverStripe\ORM\ArrayList;
+
 /**
  * A department for keyword descriptions of a job listing location.
  *
@@ -23,58 +17,56 @@ use SilverStripe\Core\Environment;
  * @property int $BlogID
  */
 
-class JobListingCategory extends JobListingCategorisationObject
-{
+class JobListingCategory extends JobListingCategorisationObject {
 
-    protected static $primaryTerm = 'category';
-    protected static $primaryTermPlural = 'categories';
+	protected static $primaryTerm = 'category';
+	protected static $primaryTermPlural = 'categories';
 
-    public function listingFeedURL(){
-       return Environment::getEnv('JOBFEED_BASE').'positions.json?category_id='.$this->ID;
-    }
+	public function listingFeedURL() {
+		return Environment::getEnv('JOBFEED_BASE') . 'feed/positions.json?category_id=' . $this->ID;
+	}
 
-    public function Parent(){
-        $holder = JobListingHolder::get()->First();
-        //echo 'hello'
-        return $holder;
-    }
+	public function Parent() {
+		$holder = JobListingHolder::get()->First();
+		//echo 'hello'
+		return $holder;
+	}
 
-    public function Link(){
-        $holder = JobListingHolder::get()->First();
+	public function Link() {
+		$holder = JobListingHolder::get()->First();
 
-        $link = $holder->Link('category/'.$this->ID);
+		$link = $holder->Link('category/' . $this->ID);
 
-        if(strpos($link, '?stage=Stage') !== false){
-            $link = str_replace("stage=Stage&", "", $link);
-            $link = str_replace("stage=Stage", "", $link);
-        }
-        if(strpos($link, '?stage=Live') !== false){
-            $link = str_replace("stage=Live&", "", $link);
-            $link = str_replace("stage=Live", "", $link);
-        }
+		if (strpos($link, '?stage=Stage') !== false) {
+			$link = str_replace("stage=Stage&", "", $link);
+			$link = str_replace("stage=Stage", "", $link);
+		}
+		if (strpos($link, '?stage=Live') !== false) {
+			$link = str_replace("stage=Live&", "", $link);
+			$link = str_replace("stage=Live", "", $link);
+		}
 
-        return $link;
-    }
+		return $link;
+	}
 
-    public static function getByID($id, $term = 'category', $termPlural = 'categories'){
-        return parent::getByID($id, $term, $termPlural);
-    }
+	public static function getByID($id, $term = 'category', $termPlural = 'categories') {
+		return parent::getByID($id, $term, $termPlural);
+	}
 
-    public function Locations($status = "open"){
-        $jobList = new ArrayList();
-        $jobList = $this->JobListings($status);
-        $locations = new ArrayList();
+	public function Locations($status = "open") {
+		$jobList = new ArrayList();
+		$jobList = $this->JobListings($status);
+		$locations = new ArrayList();
 
-        foreach($jobList as $job){
-             // print_r($job.' Location: '.$job->Location.'<br />');
-            if($job->Location && !($locations->byID($job->Location->ID))){
-                $locations->push($job->Location);
-            }
-        }
+		foreach ($jobList as $job) {
+			// print_r($job.' Location: '.$job->Location.'<br />');
+			if ($job->Location && !($locations->byID($job->Location->ID))) {
+				$locations->push($job->Location);
+			}
+		}
 
-        return $locations;
+		return $locations;
 
-
-    }
+	}
 
 }

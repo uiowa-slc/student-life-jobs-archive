@@ -47,7 +47,7 @@ class JobListingHolder extends Page {
 
 	public function JobListings($status = 'open') {
 
-		$feedURL = Environment::getEnv('JOBFEED_BASE') . 'positions.json?';
+		$feedURL = Environment::getEnv('JOBFEED_BASE') . 'feed/positions.json?';
 
 		if ($status == 'open') {
 			$feedURL .= '&open=true';
@@ -79,7 +79,7 @@ class JobListingHolder extends Page {
 
 	public function CategorisationObjects($term, $termPlural, $filterByOpen = false) {
 
-		$feedURL = Environment::getEnv('JOBFEED_BASE') . $termPlural . '.json';
+		$feedURL = Environment::getEnv('JOBFEED_BASE') . 'feed/' . $termPlural . '.json';
 
 		$catList = new ArrayList();
 		$catFeed = FeedHelper::getJson($feedURL);
@@ -155,7 +155,7 @@ class JobListingHolder extends Page {
 			return false;
 		}
 
-		$feedURL = Environment::getEnv('JOBFEED_BASE') . 'positions.json?id=' . $id;
+		$feedURL = Environment::getEnv('JOBFEED_BASE') . 'feed/positions.json?id=' . $id;
 
 		$jobFeed = FeedHelper::getJson($feedURL);
 		//print_r($feedURL);

@@ -14,7 +14,16 @@
         <strong>Status: </strong><% if $Active %><span class="text-green font-weight-bold">Currently hiring</span><% else %><span class="text-red font-weight-bold">Not currently hiring</span><% end_if %>
         </p>
         <% if $Active %>
-            <p><a href="$Link" class="button small">Learn more</a> <a href="$NextStepLink" target="_blank" rel="noopener" class="button small">Apply for this job <i class="fa fa-external-link-alt" aria-hidden="true"></i></a></p>
+            <p><a href="$Link" class="button small">Learn more</a>
+                <% if $AcceptsNonHawkIdApplicants %>
+
+                    <a href="$NextStepLink" class="button small" target="_blank">Apply for this job <strong>(UI Students)</strong> <i class="fa fa-external-link-alt" aria-hidden="true"></a>
+                    <a href="$JobFeedBase" class="button small" target="_blank">Apply for this job <strong>(Non-UI Students)</strong> <i class="fa fa-external-link-alt" aria-hidden="true"></a>
+                    </i>
+                <% else %>
+                   <a href="$NextStepLink" target="_blank" rel="noopener" class="button small">Apply for this job <i class="fa fa-external-link-alt" aria-hidden="true"></i></a>
+                <% end_if %>
+            </p>
    <%--          <p class="text-small">
                 Before applying for this job, please check the <% if $Qualifications %><a href="{$Link}#qualifications">qualifications</a> <% end_if %><% if $TrainingRequirements && $Qualifications %>and <% end_if %><% if $TrainingRequirements %><a href="{$Link}#training-requirements">training requirements</a> <% end_if %>for this position.</p> --%>
         <% else %>
