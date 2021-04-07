@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a9ed7535a46547797c088451db2efe58",
+    "content-hash": "f7c8216ae04f787a23931e91803762f2",
     "packages": [
         {
             "name": "asyncphp/doorman",
@@ -603,16 +603,16 @@
         },
         {
             "name": "embed/embed",
-            "version": "v3.4.13",
+            "version": "v3.4.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/oscarotero/Embed.git",
-                "reference": "99f6d95aebd94251573e4f4febf14bc6aba28697"
+                "reference": "5028323230da075d6f515448fe62dfb179b9bde8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/oscarotero/Embed/zipball/99f6d95aebd94251573e4f4febf14bc6aba28697",
-                "reference": "99f6d95aebd94251573e4f4febf14bc6aba28697",
+                "url": "https://api.github.com/repos/oscarotero/Embed/zipball/5028323230da075d6f515448fe62dfb179b9bde8",
+                "reference": "5028323230da075d6f515448fe62dfb179b9bde8",
                 "shasum": ""
             },
             "require": {
@@ -656,9 +656,9 @@
             "support": {
                 "email": "oom@oscarotero.com",
                 "issues": "https://github.com/oscarotero/Embed/issues",
-                "source": "https://github.com/oscarotero/Embed/tree/v3.4.13"
+                "source": "https://github.com/oscarotero/Embed/tree/v3.4.15"
             },
-            "time": "2020-12-24T09:42:20+00:00"
+            "time": "2021-04-02T10:59:24+00:00"
         },
         {
             "name": "gorriecoe/silverstripe-webfonts",
@@ -1507,12 +1507,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/StudentLifeMarketingAndDesign/division-project.git",
-                "reference": "878393d083d94ca3f4ffe0a0ad7671f63b2cf92d"
+                "reference": "33a53ea39175428b5156ba26cc41bfdcb9dded6d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/StudentLifeMarketingAndDesign/division-project/zipball/878393d083d94ca3f4ffe0a0ad7671f63b2cf92d",
-                "reference": "878393d083d94ca3f4ffe0a0ad7671f63b2cf92d",
+                "url": "https://api.github.com/repos/StudentLifeMarketingAndDesign/division-project/zipball/33a53ea39175428b5156ba26cc41bfdcb9dded6d",
+                "reference": "33a53ea39175428b5156ba26cc41bfdcb9dded6d",
                 "shasum": ""
             },
             "require": {
@@ -1527,6 +1527,7 @@
                 "md/division-analytics": "1.3.x",
                 "md/saml": "dev-md",
                 "md/silverstripe-maintenance-mode": "dev-master",
+                "md/silverstripe-migration-tools": "dev-main",
                 "md/uiowa-bar": "2.*",
                 "paquettg/php-html-parser": "^2.2",
                 "php": ">=5.5",
@@ -1561,7 +1562,7 @@
                 "source": "https://github.com/StudentLifeMarketingAndDesign/division-project/tree/3",
                 "issues": "https://github.com/StudentLifeMarketingAndDesign/division-project/issues"
             },
-            "time": "2021-02-26T21:52:06+00:00"
+            "time": "2021-04-05T14:13:04+00:00"
         },
         {
             "name": "md/saml",
@@ -1695,6 +1696,34 @@
                 "source": "https://github.com/StudentLifeMarketingAndDesign/silverstripe-maintenance-mode/tree/master"
             },
             "time": "2020-03-30T21:44:08+00:00"
+        },
+        {
+            "name": "md/silverstripe-migration-tools",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/StudentLifeMarketingAndDesign/silverstripe-migration-tools.git",
+                "reference": "096bd4707f7ae63aee0ca7914560e0bb7d7525ba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/StudentLifeMarketingAndDesign/silverstripe-migration-tools/zipball/096bd4707f7ae63aee0ca7914560e0bb7d7525ba",
+                "reference": "096bd4707f7ae63aee0ca7914560e0bb7d7525ba",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "silverstripe/cms": "4.*",
+                "silverstripe/framework": "4.*"
+            },
+            "default-branch": true,
+            "type": "silverstripe-vendormodule",
+            "description": "Exports SilverStripe content to WordPress eXtended RSS",
+            "support": {
+                "source": "https://github.com/StudentLifeMarketingAndDesign/silverstripe-migration-tools/tree/main",
+                "issues": "https://github.com/StudentLifeMarketingAndDesign/silverstripe-migration-tools/issues"
+            },
+            "time": "2021-04-07T16:08:44+00:00"
         },
         {
             "name": "md/uiowa-bar",
@@ -3190,12 +3219,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-mathspamprotection.git",
-                "reference": "570eec324c89578f299e2340681b74edb7b3c712"
+                "reference": "5dbb469c4cdc1ff261d4ce058407536256d388d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-mathspamprotection/zipball/570eec324c89578f299e2340681b74edb7b3c712",
-                "reference": "570eec324c89578f299e2340681b74edb7b3c712",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-mathspamprotection/zipball/5dbb469c4cdc1ff261d4ce058407536256d388d4",
+                "reference": "5dbb469c4cdc1ff261d4ce058407536256d388d4",
                 "shasum": ""
             },
             "require": {
@@ -3210,7 +3239,7 @@
             },
             "autoload": {
                 "psr-4": {
-                    "SilverStripe\\MathSpamProtection\\": "code/"
+                    "SilverStripe\\MathSpamProtection\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -3233,7 +3262,7 @@
                 "issues": "https://github.com/silverstripe/silverstripe-mathspamprotection/issues",
                 "source": "https://github.com/silverstripe/silverstripe-mathspamprotection/tree/master"
             },
-            "time": "2018-06-28T21:15:27+00:00"
+            "time": "2021-03-31T19:59:18+00:00"
         },
         {
             "name": "silverstripe/mimevalidator",
@@ -4537,16 +4566,16 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v4.4.20",
+            "version": "v4.4.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "715e7a531bdae109a828f9e91629e5b3b2926beb"
+                "reference": "940826c465be2690c9fae91b2793481e5cbd6834"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/715e7a531bdae109a828f9e91629e5b3b2926beb",
-                "reference": "715e7a531bdae109a828f9e91629e5b3b2926beb",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/940826c465be2690c9fae91b2793481e5cbd6834",
+                "reference": "940826c465be2690c9fae91b2793481e5cbd6834",
                 "shasum": ""
             },
             "require": {
@@ -4579,7 +4608,7 @@
             "description": "Provides basic utilities for the filesystem",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/filesystem/tree/v4.4.20"
+                "source": "https://github.com/symfony/filesystem/tree/v4.4.21"
             },
             "funding": [
                 {
@@ -4595,7 +4624,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-02-11T19:34:41+00:00"
+            "time": "2021-03-28T09:59:32+00:00"
         },
         {
             "name": "symfony/finder",
