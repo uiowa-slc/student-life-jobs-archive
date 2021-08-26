@@ -11,4 +11,4 @@ SilverStripe\Core\Injector\Injector:
   SilverStripe\Security\Security:
     properties:
       Authenticators:
-        default: %$SilverStripe\SAML\Authenticators\SAMLAuthenticator
+        default: '%$SilverStripe\SAML\Authenticators\SAMLAuthenticator'

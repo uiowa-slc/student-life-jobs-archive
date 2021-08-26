@@ -1,5 +1,7 @@
 
 $Header
+
+
 <div class="hero <% if $SubHeading || $ButtonTextOne %>hero--content<% end_if %> hero--$Position">
     <div class="hero__imgwrap hero__imgwrap--$Size hero__imgwrap--$Background"
         <% if $Background = "image" %>
@@ -23,10 +25,15 @@ $Header
 
     <% if $SubHeading || $ButtonUrlOne || $ButtonUrlTwo || $ButtonUrlThree %>
         <div class="hero__contentwrap grid-container">
+      
+       
+
             <div class="hero__content">
                 <% if $SubHeading %>
-                    <h2>$SubHeading</h2>
+                    <h2 class="hero__header">$SubHeading</h2>
                 <% end_if %>
+
+
                 <% if $ButtonUrlOne %>
                     <a href="$ButtonUrlOne" class="button">$ButtonTextOne <i class="fas fa-arrow-right"></i></a>
                 <% end_if %>
@@ -37,38 +44,32 @@ $Header
                     <a href="$ButtonUrlThree" class="button">$ButtonTextThree <i class="fas fa-arrow-right"></i></a>
                 <% end_if %>
             </div>
-        </div>
-    <% end_if %>
-</div>
 
-    <% with $HeroImage %>
-      <div style="background-repeat: no-repeat; background-size: cover;" data-interchange="[$FocusFill(600,400).URL, small], [$FocusFill(1600,500).URL, medium]">
-    <% end_with %>
-    <div class="topic-search-bg background-image" style="background-position: {$PercentageX}% {$PercentageY}%; min-height: 50vh;">
-        <div class="topic-search-container">
-
-          <h1 class="background-image__title" style="margin-bottom: 20px;"><a href="$Link" style="color: white;">$JobListingHolder.Title</a></h1>
-          $TopicSearchForm
-          <% with $JobListingHolder %>
+        <% with $Page("jobs") %>
           <% if $Categories(true) %>
-          <p class="topic-search-minicats">
+          <p class="topic-search-minicats topic-search-minicats--small-black-text">
             <span class="topic-search-minicats__heading">Browse currently hiring jobs by category:</span>
             <% loop $Categories(true).Sort('Title') %>
-            <span class="topic-search-minicats__cat"><a href="$Link">$Title</a><% if not $Last %>,</span><% end_if %>
+            <span class="topic-search-minicats__cat"><a href="$Link">$Title ({$ActiveJobListings})</a><% if not $Last %>,</span><% end_if %>
             <% end_loop %>
             </p>
             <% end_if %>
         <% end_with %>
+        <p class="text-center"><a href="jobs/" class="button small hollow" style="color: white">Browse all jobs by location &amp; Category</a></p>
         </div>
-    </div>
-  </div>
+    <% end_if %>
+
+
+
+
+</div>
 
 
 $BeforeContent
 
 <!-- Feature Sections -->
 <% if $NewHomePageHeroFeatures %>
-    <div class="homefeatures">
+    <div class="homefeatures <% if $DarkerFeatureBackground %>homefeatures--darker-bg<% end_if %>">
     <% loop NewHomePageHeroFeatures %>
             <div class="homefeatures__feature">
                 <div class="grid-container">
@@ -76,7 +77,7 @@ $BeforeContent
                         <% if $Image %>
                             <% with $Image %>
                                 <div class="cell small-12 medium-7 <% if $Up.Even %>medium-order-2<% end_if %>">
-                                    <img src="$FocusFill(800,500).URL" alt="$Title" loading="lazy">
+                                    <img src="$FocusFill(800,500).URL" alt="$Title" loading="lazy" width="800" height="500">
                                 </div>
                             <% end_with %>
                         <% end_if %>
