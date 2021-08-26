@@ -6,7 +6,7 @@
         "php": ">=5.6.0",
         "md/division-project": "3.*",
         "silverstripe/mathspamprotection": "dev-master",
-        "silverstripe/staticpublishqueue": "*"
+        "silverstripe/staticpublishqueue": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.7"
@@ -47,6 +47,10 @@
             "type": "vcs",
             "url": "https://github.com/StudentLifeMarketingAndDesign/silverstripe-migration-tools"
         },
+        "silverstripe-staticpublishqueue": {
+            "type": "vcs",
+            "url": "https://github.com/StudentLifeMarketingAndDesign/silverstripe-staticpublishqueue"
+        },
         "0": {
             "type": "vcs",
             "url": "https://github.com/StudentLifeMarketingAndDesign/division-project"
@@ -59,6 +63,7 @@
             "type": "vcs",
             "url": "https://github.com/StudentLifeMarketingAndDesign/silverstripe-maintenance-mode"
         },
+
         "3": {
             "type": "vcs",
             "url": "https://github.com/StudentLifeMarketingAndDesign/uiowa-bar"

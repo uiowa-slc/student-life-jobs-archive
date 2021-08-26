@@ -13,3 +13,5 @@ HomePageController:
     - HomePageControllerExtension
 SilverStripe\View\SSViewer:
   rewrite_hash_links: false
+Symbiote\QueuedJobs\Jobs\CleanupJob:
+  is_enabled: true

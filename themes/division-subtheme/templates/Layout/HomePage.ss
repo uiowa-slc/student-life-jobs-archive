@@ -55,7 +55,7 @@ $Header
             </p>
             <% end_if %>
         <% end_with %>
-        <p class="text-center"><a href="jobs/" class="button small hollow" style="color: white">Browse all jobs by location &amp; Category</a></p>
+        <p class="text-center"><a href="jobs/" class="button small hollow hollow--small-black-text">Browse all jobs by location &amp; Category</a></p>
         </div>
     <% end_if %>
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f7c8216ae04f787a23931e91803762f2",
+    "content-hash": "1b05788fc599c402c84fe3f2a66232ba",
     "packages": [
         {
             "name": "asyncphp/doorman",
@@ -3899,30 +3899,31 @@
         },
         {
             "name": "silverstripe/staticpublishqueue",
-            "version": "5.0.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/silverstripe/silverstripe-staticpublishqueue.git",
-                "reference": "0820f1e2e455dfc2164e23fe9942316ebfb511b0"
+                "url": "https://github.com/StudentLifeMarketingAndDesign/silverstripe-staticpublishqueue.git",
+                "reference": "facafda10f4783038211c5a12ed993e4b91c6609"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-staticpublishqueue/zipball/0820f1e2e455dfc2164e23fe9942316ebfb511b0",
-                "reference": "0820f1e2e455dfc2164e23fe9942316ebfb511b0",
+                "url": "https://api.github.com/repos/StudentLifeMarketingAndDesign/silverstripe-staticpublishqueue/zipball/facafda10f4783038211c5a12ed993e4b91c6609",
+                "reference": "facafda10f4783038211c5a12ed993e4b91c6609",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1",
                 "silverstripe/cms": "^4",
                 "silverstripe/config": "^1",
-                "silverstripe/framework": "^4.0.2",
-                "silverstripe/versioned": "^1.0.2",
+                "silverstripe/framework": "^4.6",
+                "silverstripe/versioned": "^1.6",
                 "symbiote/silverstripe-queuedjobs": "^4.5"
             },
             "require-dev": {
                 "phpunit/phpunit": "^5.7",
                 "squizlabs/php_codesniffer": "^3"
             },
+            "default-branch": true,
             "type": "silverstripe-vendormodule",
             "extra": {
                 "branch-alias": {
@@ -3938,10 +3939,17 @@
                     "includes/functions.php"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "include-path": [
                 "includes/"
             ],
+            "scripts": {
+                "lint": [
+                    "phpcs -s src/ tests/php/"
+                ],
+                "lint-clean": [
+                    "phpcbf src/ tests/php/"
+                ]
+            },
             "license": [
                 "BSD-3-Clause"
             ],
@@ -3961,10 +3969,9 @@
                 "static-publishing"
             ],
             "support": {
-                "issues": "https://github.com/silverstripe/silverstripe-staticpublishqueue/issues",
-                "source": "https://github.com/silverstripe/silverstripe-staticpublishqueue/tree/5.0.0"
+                "source": "https://github.com/StudentLifeMarketingAndDesign/silverstripe-staticpublishqueue/tree/master"
             },
-            "time": "2021-05-20T23:23:19+00:00"
+            "time": "2021-08-26T21:28:31+00:00"
         },
         {
             "name": "silverstripe/tagfield",
@@ -7921,7 +7928,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "silverstripe/mathspamprotection": 20
+        "silverstripe/mathspamprotection": 20,
+        "silverstripe/staticpublishqueue": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
