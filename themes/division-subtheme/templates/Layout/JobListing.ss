@@ -46,8 +46,8 @@ $Header
                 <% if $AcceptsNonHawkIdApplicants %>
                 <p>
                     <a href="$NextStepLink" class="button" target="_blank">Apply for this job <strong>(UI Students)</strong> <i class="fa fa-external-link-alt" aria-hidden="true"></a>
-                    <a href="$JobFeedBase" class="button" target="_blank">Not a UI Student? <strong>Apply for this job here</strong> <i class="fa fa-external-link-alt" aria-hidden="true"></a>
-                    </i>
+                    <a href="$JobFeedBase" class="button" target="_blank">Not a UI Student? <strong>Apply for this job here</strong> <i class="fa fa-external-link-alt" aria-hidden="true"></i></a>
+
                 <% else %>
                     <p><a href="$NextStepLink" target="_blank" rel="noopener" class="button">Apply for this job <i class="fa fa-external-link-alt" aria-hidden="true"></i></a></p>
                 <% end_if %>
@@ -104,7 +104,7 @@ $Header
                             <a href="$NextStepLink" class="button" target="_blank">Apply for this job <strong>(UI Students)</strong> <i class="fa fa-external-link-alt" aria-hidden="true"></a>
                             <a href="$JobFeedBase" class="button" target="_blank">Not a UI Student? <strong>Apply for this job here</strong><i class="fa fa-external-link-alt" aria-hidden="true"></a>
                         <% else %>
-                            <a href="$NextStepLink" class="button apply__button" target="_blank">Apply for this job  <i class="fa fa-external-link-alt" aria-hidden="true"></a>
+                            <a href="$NextStepLink" class="button apply__button" target="_blank">Apply for this job  <i class="fa fa-external-link-alt" aria-hidden="true"></i></a>
                         <% end_if %>
 
                         <div class="apply__content">
