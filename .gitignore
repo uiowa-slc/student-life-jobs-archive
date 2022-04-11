@@ -8,6 +8,7 @@
 /_resources/
 /public/_resources/
 /public/assets/
+/public/api/
 .sass-cache/*
 *.scssc
 .DS_Store

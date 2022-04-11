@@ -50,7 +50,7 @@ class JobListingHolder extends Page {
 		$feedURL = Environment::getEnv('JOBFEED_BASE') . 'feed/positions.json?';
 
 		if ($status == 'open') {
-			$feedURL .= '&open=true';
+			$feedURL = Director::absoluteBaseURL().'/public/api/open-jobs.json';
 		} elseif ($status == 'closed') {
 			$feedURL .= '&closed=true';
 		} elseif ($status == 'any') {
@@ -79,8 +79,8 @@ class JobListingHolder extends Page {
 
 	public function CategorisationObjects($term, $termPlural, $filterByOpen = false) {
 
-		$feedURL = Environment::getEnv('JOBFEED_BASE') . 'feed/' . $termPlural . '.json';
-
+		// $feedURL = Environment::getEnv('JOBFEED_BASE') . 'feed/' . $termPlural . '.json';
+        $feedURL = Director::absoluteBaseURL().'public/api/'.$termPlural.'.json';
 		$catList = new ArrayList();
 		$catFeed = FeedHelper::getJson($feedURL);
 		// print_r($feedURL);
@@ -116,6 +116,7 @@ class JobListingHolder extends Page {
 				}
 			}
 			// if($term == 'location')print_r($feedURL);
+            // print_r($feedURL);
 			return $catList;
 
 		}
