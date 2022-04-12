@@ -153,18 +153,20 @@ class JobListing extends Page {
 
 		// print_r($rawJob);
 
+        //THIS IS SUPER SLOW: MUST FIX. IT MAKES A TON OF CATEGORIES REQUESTS
+
 		if (isset($rawJob['category_id'])) {
 			$this->Category = new JobListingCategory();
-			$this->Category = $this->Category->getByID($rawJob['category_id']);
+			$this->Category = $this->Category->getByIDNoCount($rawJob['category_id']);
 
 		}
 		if (isset($rawJob['department_id'])) {
 			$this->Department = new JobListingDepartment();
-			$this->Department = $this->Department->getByID($rawJob['department_id']);
+			$this->Department = $this->Department->getByIDNoCount($rawJob['department_id']);
 		}
 		if (isset($rawJob['location_id'])) {
 			$this->Location = new JobListingLocation();
-			$this->Location = $this->Location->getByID($rawJob['location_id']);
+			$this->Location = $this->Location->getByIDNoCount($rawJob['location_id']);
 		}
 		if (isset($rawJob['training_requirements'])) {
 			$this->TrainingRequirements = $this->convertBullets($rawJob['training_requirements']);

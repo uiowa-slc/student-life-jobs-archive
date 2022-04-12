@@ -53,5 +53,7 @@ class JobListingDepartment extends JobListingCategorisationObject {
 	public static function getByID($id, $term = 'department', $termPlural = 'departments') {
 		return parent::getByID($id, $term, $termPlural);
 	}
-
+    public static function getByIDNoCount($id, $term = 'department', $termPlural = 'departments') {
+        return parent::getByIDNoCount($id, $term, $termPlural);
+    }
 }

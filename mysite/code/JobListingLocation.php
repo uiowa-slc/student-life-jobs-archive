@@ -126,4 +126,7 @@ class JobListingLocation extends JobListingCategorisationObject {
 	public static function getByID($id, $term = 'location', $termPlural = 'locations') {
 		return parent::getByID($id, $term, $termPlural);
 	}
+    public static function getByIDNoCount($id, $term = 'location', $termPlural = 'locations') {
+        return parent::getByIDNoCount($id, $term, $termPlural);
+    }
 }

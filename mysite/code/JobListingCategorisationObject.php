@@ -40,7 +40,6 @@ class JobListingCategorisationObject extends DataObject implements Categorisatio
 		$catObjName = "JobListing" . ucfirst($term);
 		$catObj = new $catObjName;
 		$catFeed = FeedHelper::getJson($feedURL);
-
 		if (isset($catFeed[$termPlural][0])) {
 			//print_r($catFeed[$termPlural][0]['location']);
 			$catObj = $catObj->parseFromFeed($catFeed[$termPlural][0][$term]);
@@ -48,8 +47,27 @@ class JobListingCategorisationObject extends DataObject implements Categorisatio
 			return $catObj;
 
 		}
-
 	}
+
+    // More efficient but we don't get counts, used in body of text and stuff:
+    public static function getByIDNoCount($id, $term, $termPlural){
+        // $feedURL = Environment::getEnv('JOBFEED_BASE') . 'feed/' . $termPlural . '.json';
+        $feedURL = 'https://spock.imu.uiowa.edu/student-life-jobs/api/'.$termPlural.'.json';
+
+        $catObjName = "JobListing" . ucfirst($term);
+        $catObj = new $catObjName;
+        $catFeed = FeedHelper::getJson($feedURL);
+
+        foreach($catFeed[$termPlural] as $cat){
+            if($cat[$term]["id"] == $id){
+                $catObj->ID = $cat[$term]["id"];
+                $catObj->Title = $cat[$term]["name"];
+                return $catObj;
+            }
+        }
+
+    }
+
 	public function SearchObj($keywords) {
 
 		$haystack = $this->Title . ' ' . $this->Content;
