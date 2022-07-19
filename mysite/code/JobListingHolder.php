@@ -48,14 +48,16 @@ class JobListingHolder extends Page {
 	public function JobListings($status = 'open') {
 
 		$feedURL = Environment::getEnv('JOBFEED_BASE') . 'feed/positions.json?';
-
+        //Experimental caching of jobs from spock since response times are so bad from original endpoint, if you're not Dustin and you're
+        //wondering where the heck the jobs are coming from, this is it. Check on spock.its.uiowa.edu:
 		if ($status == 'open') {
-			$feedURL .= '&open=true';
+			$feedURL = 'https://spock.imu.uiowa.edu/student-life-jobs/api/open-jobs.json';
 		} elseif ($status == 'closed') {
 			$feedURL .= '&closed=true';
 		} elseif ($status == 'any') {
 
 		}
+        //print_r($feedURL);
 
 		$jobList = new ArrayList();
 		$jobFeed = FeedHelper::getJson($feedURL);
@@ -79,8 +81,13 @@ class JobListingHolder extends Page {
 
 	public function CategorisationObjects($term, $termPlural, $filterByOpen = false) {
 
-		$feedURL = Environment::getEnv('JOBFEED_BASE') . 'feed/' . $termPlural . '.json';
 
+        // Get jobs from the original endpoint:
+		// $feedURL = Environment::getEnv('JOBFEED_BASE') . 'feed/' . $termPlural . '.json';
+
+        //Experimental caching of jobs from spock since response times are so bad from original endpoint, if you're not Dustin and you're
+        //wondering where the heck the jobs are coming from, this is it. Check on spock.its.uiowa.edu:
+        $feedURL = 'https://spock.imu.uiowa.edu/student-life-jobs/api/'.$termPlural.'.json';
 		$catList = new ArrayList();
 		$catFeed = FeedHelper::getJson($feedURL);
 		// print_r($feedURL);
@@ -116,6 +123,7 @@ class JobListingHolder extends Page {
 				}
 			}
 			// if($term == 'location')print_r($feedURL);
+            // print_r($feedURL);
 			return $catList;
 
 		}

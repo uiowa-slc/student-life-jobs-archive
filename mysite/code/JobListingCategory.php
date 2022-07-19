@@ -52,7 +52,9 @@ class JobListingCategory extends JobListingCategorisationObject {
 	public static function getByID($id, $term = 'category', $termPlural = 'categories') {
 		return parent::getByID($id, $term, $termPlural);
 	}
-
+    public static function getByIDNoCount($id, $term = 'category', $termPlural = 'categories') {
+        return parent::getByIDNoCount($id, $term, $termPlural);
+    }
 	public function Locations($status = "open") {
 		$jobList = new ArrayList();
 		$jobList = $this->JobListings($status);
