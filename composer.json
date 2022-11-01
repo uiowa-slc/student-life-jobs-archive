@@ -45,39 +45,39 @@
     "repositories": {
         "silverstripe-migration-tools": {
             "type": "vcs",
-            "url": "https://github.com/StudentLifeMarketingAndDesign/silverstripe-migration-tools"
+            "url": "https://github.com/uiowa-slc/silverstripe-migration-tools"
         },
         "silverstripe-staticpublishqueue": {
             "type": "vcs",
-            "url": "https://github.com/StudentLifeMarketingAndDesign/silverstripe-staticpublishqueue"
+            "url": "https://github.com/uiowa-slc/silverstripe-staticpublishqueue"
         },
         "0": {
             "type": "vcs",
-            "url": "https://github.com/StudentLifeMarketingAndDesign/division-project"
+            "url": "https://github.com/uiowa-slc/division-project"
         },
         "1": {
             "type": "vcs",
-            "url": "https://github.com/StudentLifeMarketingAndDesign/division-analytics"
+            "url": "https://github.com/uiowa-slc/division-analytics"
         },
         "2": {
             "type": "vcs",
-            "url": "https://github.com/StudentLifeMarketingAndDesign/silverstripe-maintenance-mode"
+            "url": "https://github.com/uiowa-slc/silverstripe-maintenance-mode"
         },
         "3": {
             "type": "vcs",
-            "url": "https://github.com/StudentLifeMarketingAndDesign/uiowa-bar"
+            "url": "https://github.com/uiowa-slc/uiowa-bar"
         },
         "4": {
             "type": "vcs",
-            "url": "https://github.com/StudentLifeMarketingAndDesign/ac-json-events"
+            "url": "https://github.com/uiowa-slc/ac-json-events"
         },
         "5": {
             "type": "vcs",
-            "url": "https://github.com/StudentLifeMarketingAndDesign/silverstripe-flickr"
+            "url": "https://github.com/uiowa-slc/silverstripe-flickr"
         },
         "6": {
             "type": "vcs",
-            "url": "https://github.com/StudentLifeMarketingAndDesign/silverstripe-saml"
+            "url": "https://github.com/uiowa-slc/silverstripe-saml"
         }
     },
     "config": {
